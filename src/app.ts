@@ -45,7 +45,7 @@ app.use(cors({
     origin: "*"
 }))
 
-app.all('*', (req, res, next) => {
+app.all('*', (req:any, res:any, next:any) => {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "X-Requested-With");
     res.header('Access-Control-Allow-Headers', 'Content-Type');
