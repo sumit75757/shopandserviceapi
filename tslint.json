@@ -6,13 +6,14 @@
     "jsRules": {},
     "rules": {
         "trailing-comma": [ false ],
-        "no-console":false,
+        "no-console": [true, "warning"],
         "no-trailing-whitespace":false,
         "no-shadowed-variable":false,
         "object-literal-shorthand":false,
         "variable-name": false,
-        "no-var-requires":false
-          
+        "no-var-requires":false,
+          "triple-equals":false,
+          "comment-format":false
     },
     "rulesDirectory": []
 }

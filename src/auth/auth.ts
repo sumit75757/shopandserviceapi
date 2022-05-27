@@ -3,7 +3,12 @@ import mongooss from 'mongoose'
 import auth from './auth.model';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
+import forgot from "./forgotPassword/forgotpassword";
 const route = express();
+require("dotenv").config();
+import email from "./otp/email";
+const jWT_SECRET: string | any = process.env.JWT_SECRET
+console.log("dfasdF", jWT_SECRET);
 
 route.post('/singup', (req: any, res: any, next: any) => {
     auth.find({
@@ -33,8 +38,8 @@ route.post('/singup', (req: any, res: any, next: any) => {
                             username: req.body.username,
                             email: req.body.email,
                             password: hase,
-                            crreatAt:Date(),
-                            lastLogin:''
+                            crreatAt: Date(),
+                            lastLogin: ''
                         })
                         data.save().then((result: any) => {
                             bcrypt.compare(req.body.password, hase, (err: any, logUSer: any) => {
@@ -47,12 +52,12 @@ route.post('/singup', (req: any, res: any, next: any) => {
                                 if (logUSer) {
 
                                     const token = jwt.sign({
-                                            email: req.body.email,
-                                            // userId: data._id
-                                        },
-                                        'fasfguh9h$%@EWRGW$^YQ#Q#$TGv0', {
-                                            expiresIn: '7d'
-                                        }
+                                        email: req.body.email,
+                                        // userId: data._id
+                                    },
+                                        jWT_SECRET, {
+                                        expiresIn: '7d'
+                                    }
                                     )
                                     const resData = {
                                         response: {
@@ -78,7 +83,7 @@ route.post('/singup', (req: any, res: any, next: any) => {
                             // console.log(result);
                         }).catch(
                             (err: any) => {
-                                
+
                                 console.log(err);
                             }
                         )
@@ -97,8 +102,8 @@ route.post('/singin', (req: any, res: any, next: any) => {
     auth.find({
         email: req.body.email
     }).exec().then(
-        (        result: any[]) => {
-            console.log("fasdfasdfasd",result);
+        (result: any[]) => {
+            console.log("fasdfasdfasd", result);
             if (result.length < 1) {
                 return res.status(401).json({
                     message: 'Anauthorais user'
@@ -111,27 +116,36 @@ route.post('/singin', (req: any, res: any, next: any) => {
                     })
                 }
                 if (logUSer) {
+
                     const token = jwt.sign({
-                            email: result[0].email,
-                            userId: result[0]._id
-                        },
-                        'fasfguh9h$%@EWRGW$^YQ#Q#$TGv0', {
-                            expiresIn: "7d"
-                        }
+                        email: result[0].email,
+                        userId: result[0]._id
+                    },
+                        jWT_SECRET, {
+                        expiresIn: "7d"
+                    }
                     )
-                     
-                    let data ;
-                    result.forEach((element: { _id: any; }) => {
+                    // tslint:disable-next-line:no-string-literal
+                    const rData = {
+                        _id: result[0]._id,
+                        username: result[0].username,
+                        email: result[0].email,
+                        crreatAt: result[0].crreatAt,
+                        lastLogin: result[0].lastLogin,
+                    }
+
+                    let data;
+                    result.forEach((element: any) => {
                         const obj = new auth({
                             lastLogin: Date()
                         })
                         auth.findByIdAndUpdate({
-                            _id :element._id
-                        },{
-                            $set:obj
+                            _id: element._id
+                        }, {
+                            $set: obj
                         }).exec().then((final: any) => {
-                            console.log("FasdfasdfAS",final);
-                        }).catch((err: any)=>{
+                            console.log("FasdfasdfAS", final);
+                        }).catch((err: any) => {
                             console.log(err);
                         })
                         data = {
@@ -140,7 +154,7 @@ route.post('/singin', (req: any, res: any, next: any) => {
                                 request: 'User Login',
                                 respons: 'succses',
                             },
-                            useData: element,
+                            useData: rData,
                             token: token,
                             logInTime: Date()
                         }
@@ -158,4 +172,8 @@ route.post('/singin', (req: any, res: any, next: any) => {
 
 
 });
+route.use('/varification' ,email)
+route.use('/forgot' ,forgot)
+
+
 export default route
