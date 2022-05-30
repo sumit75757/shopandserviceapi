@@ -25,4 +25,5 @@ const emailSchema = mongoos.Schema({
         type: String,
     }
 })
+
 module.exports = mongoos.model('email', emailSchema)
