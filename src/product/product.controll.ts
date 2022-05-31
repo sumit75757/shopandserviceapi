@@ -50,7 +50,7 @@ const product = {
             productInfo: req.body.productInfo,
             price: req.body.price,
             catogory: req.body.catogory,
-            productImage: '/uplode/' + req.file.filename,
+            productImage: '/productImage/' + req.file.filename,
             discrption: req.body.catogory,
             createAt: Date()
         });
@@ -152,7 +152,7 @@ const product = {
                 productInfo: req.body.productInfo,
                 price: req.body.price,
                 catogory: req.body.catogory,
-                productImage: '/uplode/' + req.file.filename,
+                productImage: '/productImage/' + req.file.filename,
                 discrption: req.body.catogory,
               }
         }else{

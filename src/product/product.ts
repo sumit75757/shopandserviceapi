@@ -7,7 +7,7 @@ import productModel from "./product.model";
 const route = expresss();
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
-        cb(null, './uplode/');
+        cb(null, './productImage/');
     },
     filename: (req, file, cb) => {
         cb(null, new Date().toISOString().replace(/:/g, '-') + '-' + file.originalname);

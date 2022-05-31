@@ -44,7 +44,7 @@ app.all('*', (req:any, res:any, next:any) => {
 app.use('/api/auth', auth)
 app.use('/api/catogory', cat)
 app.use('/api/product',product)
-app.use('/uplode',express.static('uplode'));
+app.use('/uplode',express.static('productImage'));
 
 app.use( authChack, (res,req,next)=>{
 
