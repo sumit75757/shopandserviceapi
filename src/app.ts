@@ -6,6 +6,7 @@ import auth from "./auth/auth";
 import cors from "cors"; 
 import cat  from "./addCategory/addCategory";
 import authChack from "./Middleware/chackauth";
+import product from "./product/product";
 const app = express();
 require("dotenv").config();
 
@@ -42,8 +43,8 @@ app.all('*', (req:any, res:any, next:any) => {
 
 app.use('/api/auth', auth)
 app.use('/api/catogory', cat)
-
-
+app.use('/api/product',product)
+app.use('/uplode',express.static('uplode'));
 
 app.use( authChack, (res,req,next)=>{
 

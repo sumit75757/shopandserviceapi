@@ -3,5 +3,11 @@
     "workbench.colorCustomizations": {
         "activityBar.background": "#80ab45",
         "statusBar.background": "#333"
-      }
+      },
+      // Set the default
+"editor.formatOnSave": false,
+// Enable per-language
+"[javascript]": {
+    "editor.formatOnSave": true
+}
 }
