@@ -139,6 +139,57 @@ const product = {
         });
     },
 
+    async  productupdate(req: any, res: any){
+        console.log("adasd",req.file);
+        const id = req.params.id;
+        console.log(req.file);
+        
+        let data:any;
+        if (req.file) {
+             data = {
+                sellerId:req.body.sellerId,
+                productName: req.body.productName,
+                productInfo: req.body.productInfo,
+                price: req.body.price,
+                catogory: req.body.catogory,
+                productImage: '/uplode/' + req.file.filename,
+                discrption: req.body.catogory,
+              }
+        }else{
+            data = {
+                sellerId: req.body.sellerId,
+                productName: req.body.productName,
+                productInfo: req.body.productInfo,
+                price: req.body.price,
+                catogory: req.body.catogory,
+                discrption: req.body.catogory,
+            }
+        }
+         
+        productModel.findByIdAndUpdate({
+          _id: id
+        }, {
+          $set: data
+        }).exec().then(result => {
+        console.log("fadfas",data,id);
+            console.log(result);
+          if (result) {
+            res.status(200).json({
+                success :true,
+                message :"data updated",
+                result
+                })
+            console.log(result)
+          } else { 
+              res.status(400).json(result)
+            console.log("error", result)
+          }
+        }).catch(err => {
+          res.status(500).json(err)
+        })
+    },
+
+
     removeProduct(req: any, res: any) {
         let userImages = false
         const id = req.params.id;

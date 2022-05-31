@@ -1,20 +1,15 @@
 
-import  expresss  from "express";
-
-import  authChack  from "../Middleware/chackauth";
+import expresss from "express";
+import authChack from "../Middleware/chackauth";
 import product from "./product.controll";
 import multer from "multer";
 import productModel from "./product.model";
 const route = expresss();
-
-
 const storage = multer.diskStorage({
-
     destination: (req, file, cb) => {
         cb(null, './uplode/');
     },
     filename: (req, file, cb) => {
-
         cb(null, new Date().toISOString().replace(/:/g, '-') + '-' + file.originalname);
     }
 })
@@ -35,14 +30,10 @@ const uplode = multer({
     fileFilter: fileFilter
 });
 
-
-
-route.get('/', authChack,product.getProduct );
-route.get('/:id', authChack,product.productgetbyid );
-route.post('/', authChack,uplode.single('productImage'),product.postProduct );
-route.delete('/:id', authChack,product.removeProduct );
-
-
-
+route.get('/', authChack, product.getProduct);
+route.get('/:id', authChack, product.productgetbyid);
+route.post('/', authChack, uplode.single('productImage'), product.postProduct);
+route.delete('/:id', authChack, product.removeProduct);
+route.put('/:id', authChack, uplode.single('productImage'), product.productupdate);
 
 export default route;
