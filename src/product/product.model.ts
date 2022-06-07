@@ -21,8 +21,12 @@ const product = new mongoos.Schema({
     type: String,
     required: true,
   },
+  inStock:{
+   type: Boolean,
+    required: true
+  },
   productImage: {
-    type: String,
+    type: Array,
   },
   discrption: {
     type: String,

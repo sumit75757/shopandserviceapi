@@ -26,22 +26,27 @@ const fileFilter = (req: any, file: any, cb: any) => {
 
 const uplode = multer({
   storage: storage,
-  limits: {
-    fieldSize: 1024 * 1024 * 5,
-  },
-  fileFilter: fileFilter,
-});
+  // limits: {
+  //   fieldSize: 1024 * 1024 * 5,
+  // },
+  // fileFilter: fileFilter,
+}).array("productImage", 7);
 
 const fs = require("fs");
 import { promisify } from "util";
 
 const unlinkAsync = promisify(fs.unlink);
 
+let imageArr :any[]=[]
 const product = {
   postProduct(req: any, res: any) {
     // console.log(req);
-    console.log(req.file);
-
+    console.log(req.files.length);
+    req.files.forEach((element:any) => {
+      imageArr.push("/productImage/"+element.filename);
+      console.log(element.filename);
+      
+    });
     const product = new productModel({
       _id: new mongoos.Types.ObjectId(),
       sellerId: req.body.sellerId,
@@ -49,21 +54,23 @@ const product = {
       productInfo: req.body.productInfo,
       price: req.body.price,
       catogory: req.body.catogory,
-      productImage: "/productImage/" + req.file.filename,
-      discrption: req.body.catogory,
+      inStock: req.body.inStock,
+      productImage: imageArr,
+      discrption: req.body.discrption,
       createAt: Date(),
     });
 
     product
-      .save()
-      .then((result: any) => {
-        res.status(201).json(result);
+    .save()
+    .then((result: any) => {
+      res.status(201).json(result);
+      imageArr = []
       })
       .catch((err: any) => {
-        // res.status(500).json(err.errors)
+        res.status(500).json(err);
         console.log("dfasdfaSDFASDFA", err);
       });
-  },
+    },
   getProduct(req: any, res: any) {
     // console.log(req.query.username);
     // const id = req.query.product;
@@ -141,31 +148,38 @@ const product = {
   },
 
   async productupdate(req: any, res: any) {
-    console.log("adasd", req.file);
+    req.files.forEach((element: any) => {
+      imageArr.push("/productImage/" + element.filename);
+      console.log(element.filename);
+    });
+    // console.log("adasd", req.file);
     const id = req.params.id;
-    console.log(req.file);
 
     let data: any;
-    if (req.file) {
+    if (req.files) {
       data = {
         sellerId: req.body.sellerId,
         productName: req.body.productName,
         productInfo: req.body.productInfo,
         price: req.body.price,
         catogory: req.body.catogory,
-        productImage: "/productImage/" + req.file.filename,
-        discrption: req.body.catogory,
+        inStock: req.body.inStock,
+        productImage: imageArr,
+        discrption: req.body.discrption,
       };
     } else {
+      
       data = {
         sellerId: req.body.sellerId,
         productName: req.body.productName,
         productInfo: req.body.productInfo,
         price: req.body.price,
         catogory: req.body.catogory,
-        discrption: req.body.catogory,
+        inStock: req.body.inStock,
+        discrption: req.body.discrption,
       };
     }
+    console.log(data);
 
     productModel
       .findByIdAndUpdate(
@@ -178,8 +192,6 @@ const product = {
       )
       .exec()
       .then((result) => {
-        console.log("fadfas", data, id);
-        console.log(result);
         if (result) {
           res.status(200).json({
             success: true,
@@ -189,12 +201,12 @@ const product = {
           console.log(result);
         } else {
           res.status(400).json(result);
-          console.log("error", result);
         }
       })
       .catch((err) => {
         res.status(500).json(err);
       });
+    imageArr = []
   },
 
   removeProduct(req: any, res: any) {

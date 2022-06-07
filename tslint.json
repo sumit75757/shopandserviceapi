@@ -13,7 +13,8 @@
         "variable-name": false,
         "no-var-requires":false,
           "triple-equals":false,
-          "comment-format":false
+          "comment-format":false,
+          "no-string-literal":false
     },
     "rulesDirectory": []
 }
