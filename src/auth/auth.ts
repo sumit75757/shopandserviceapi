@@ -38,6 +38,7 @@ route.post('/singup', (req: any, res: any, next: any) => {
                             username: req.body.username,
                             email: req.body.email,
                             password: hase,
+                            character:req.body.character,
                             crreatAt: Date(),
                             lastLogin: ''
                         })
@@ -60,19 +61,22 @@ route.post('/singup', (req: any, res: any, next: any) => {
                                     }
                                     )
                                     const resData = {
-                                        response: {
-                                            user: true,
-                                            request: 'User Login',
-                                            respons: 'succses',
-                                        },
-                                        useData: {
-                                            username: req.body.username,
-                                            email: req.body.email,
-                                            _id: data.id
-                                        },
-                                        token: token,
-                                        logInTime: new Date()
-                                    }
+                                      response: {
+                                        user: true,
+                                        request: "User Login",
+                                        respons: "succses",
+                                      },
+                                      useData: {
+                                        _id: data.id,
+                                        username: req.body.username,
+                                        email: req.body.email,
+                                          character: req.body.character,
+                                        
+                                          
+                                      },
+                                      token: token,
+                                      logInTime: new Date(),
+                                    };
 
                                     return res.status(200).send(resData)
                                 }
@@ -127,12 +131,13 @@ route.post('/singin', (req: any, res: any, next: any) => {
                     )
                     // tslint:disable-next-line:no-string-literal
                     const rData = {
-                        _id: result[0]._id,
-                        username: result[0].username,
-                        email: result[0].email,
-                        crreatAt: result[0].crreatAt,
-                        lastLogin: result[0].lastLogin,
-                    }
+                      _id: result[0]._id,
+                      username: result[0].username,
+                      email: result[0].email,
+                      character: result[0].character,
+                      crreatAt: result[0].crreatAt,
+                      lastLogin: result[0].lastLogin,
+                    };
 
                     let data;
                     result.forEach((element: any) => {

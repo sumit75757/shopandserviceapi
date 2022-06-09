@@ -9,6 +9,7 @@ import authChack from "./Middleware/chackauth";
 import product from "./product/product";
 import  admin  from "./admin/admin";
 import subCategory from "./addCategory/subCategory/subcategory";
+import seller from "./seller/seller";
 const app = express();
 require("dotenv").config();
 
@@ -45,6 +46,8 @@ app.use("/api/admin/auth",admin );
 
 app.use("/api/catogory", cat);
 app.use("/api/subcatogory", subCategory);
+app.use("/api/sellers", seller);
+
 
 app.use("/api/product", product);
 app.use("/uplode", express.static("productImage"));
