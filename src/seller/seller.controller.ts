@@ -6,11 +6,17 @@ const sellers = {
       .find({ character: "seller" })
         .then((result: any) => {
             const arr:any[] =[]
-            result.forEach((element:any) => {
-                delete element.password;
-                
-                
-                arr.push(element);
+          result.forEach((element:any) => {
+            console.log(element);
+            const obj = {
+              _id       : element._id,
+              username  : element.username ,
+              email     : element.email    ,
+              character : element.character,
+              crreatAt  : element.crreatAt ,
+              lastLogin : element.lastLogin,
+            };
+                arr.push(obj);
           });
         const responseData: any = {
           count: result.length,

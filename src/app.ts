@@ -10,6 +10,8 @@ import product from "./product/product";
 import  admin  from "./admin/admin";
 import subCategory from "./addCategory/subCategory/subcategory";
 import seller from "./seller/seller";
+import productSeller from "./seller/product/product";
+
 const app = express();
 require("dotenv").config();
 
@@ -34,27 +36,32 @@ app.use(
   })
 );
 
-app.all("*", (req: any, res: any, next: any) => {
+app.use( (req, res, next) =>{
   res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "X-Requested-With");
-  res.header("Access-Control-Allow-Headers", "Content-Type");
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept"
+  );
   next();
 });
 
 app.use("/api/auth", auth);
 app.use("/api/admin/auth",admin );
-
 app.use("/api/catogory", cat);
 app.use("/api/subcatogory", subCategory);
-app.use("/api/sellers", seller);
-
-
-app.use("/api/product", product);
 app.use("/uplode", express.static("productImage"));
+
+app.use("/api/sellers", seller);
+app.use("/api/product", product);
+
+app.use("/api/seller/product", productSeller);
 
 app.use(authChack, (res, req, next) => {
   const err: any = new Error("404 Not Found");
   err.status = 404;
+  err.message = "not found"
+  console.log(err);
+  
   next();
 });
 

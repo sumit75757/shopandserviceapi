@@ -7,11 +7,11 @@ require("dotenv").config();
 const emailservice = {
     email(req: any, res: any) {
         const mailTransporter = nodemailer.createTransport({
-            service: 'gmail',
-            auth: {
-                user: process.env.GMAIL,
-                pass: process.env.GMAIL_PASS
-            }
+          service: "gmail",
+          auth: {
+            user: process.env.GMAIL,
+            pass: process.env.GMAIL_PASS,
+          },
         });
         otp = otpGenerator.generate(6, { upperCaseAlphabets: false, specialChars: false, digits: true, lowerCaseAlphabets: false })
         console.log("otp is", otp);
@@ -27,9 +27,11 @@ const emailservice = {
             // amp: '',
             html: html,
         });
-
+    
         mailTransporter.sendMail(email, (err: any, data: any) => {
             if (err) {
+                console.log(err);
+                
                 res.status(400).json({
                     messge: 'email not sent',
                     err,

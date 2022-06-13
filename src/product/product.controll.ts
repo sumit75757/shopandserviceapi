@@ -40,11 +40,11 @@ const unlinkAsync = promisify(fs.unlink);
 let imageArr :any[]=[]
 const product = {
   postProduct(req: any, res: any) {
+    console.log(req);
+    
     // console.log(req);
-    console.log(req.files.length);
     req.files.forEach((element:any) => {
       imageArr.push("/productImage/"+element.filename);
-      console.log(element.filename);
       
     });
     const product = new productModel({
@@ -57,6 +57,8 @@ const product = {
       inStock: req.body.inStock,
       productImage: imageArr,
       discrption: req.body.discrption,
+      subCatogory:req.body.subCatogory,
+      delevery:req.body.delevery,
       createAt: Date(),
     });
 
@@ -72,6 +74,7 @@ const product = {
       });
     },
   getProduct(req: any, res: any) {
+    
     // console.log(req.query.username);
     // const id = req.query.product;
     // const fin = { _id: id }
@@ -93,7 +96,7 @@ const product = {
     // }
 
     productModel
-      .find()
+      .find({ skip: 10, limit: 5 })
       .exec()
       .then((result) => {
         if (result) {

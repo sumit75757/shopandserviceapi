@@ -31,6 +31,14 @@ const product = new mongoos.Schema({
   discrption: {
     type: String,
   },
+  subCatogory:{
+    type: String,
+    required: true
+  },
+  delevery: {
+     type: Number,
+    required: true
+  },
   createAt: String,
 });
 export default mongoos.model("product", product);
