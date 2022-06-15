@@ -49,14 +49,14 @@ app.use("/api/auth", auth);
 app.use("/api/admin/auth",admin );
 app.use("/api/catogory", cat);
 app.use("/api/subcatogory", subCategory);
-app.use("/uplode", express.static("productImage"));
+app.use("/productImage", express.static("productImage"));
 
 app.use("/api/sellers", seller);
 app.use("/api/product", product);
 
 app.use("/api/seller/product", productSeller);
 
-app.use(authChack, (res, req, next) => {
+app.use( (res, req, next) => {
   const err: any = new Error("404 Not Found");
   err.status = 404;
   err.message = "not found"

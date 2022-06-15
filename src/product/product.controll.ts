@@ -64,8 +64,14 @@ const product = {
 
     product
     .save()
-    .then((result: any) => {
-      res.status(201).json(result);
+      .then((result: any) => {
+        let data = {
+          success: true,
+          message: "Product added",
+          result,
+        };
+        
+      res.status(201).json(data);
       imageArr = []
       })
       .catch((err: any) => {
@@ -135,6 +141,7 @@ const product = {
       .exec()
       .then((result) => {
         if (result) {
+          
           res.status(200).json(result);
           console.log(result);
         } else {
