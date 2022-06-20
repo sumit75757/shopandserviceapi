@@ -7,16 +7,50 @@ import forgot from "./forgotPassword/forgotpassword";
 const route = express();
 require("dotenv").config();
 import email from "./otp/email";
+import multer from "multer";
 const jWT_SECRET: string | any = process.env.JWT_SECRET
-console.log("dfasdF", jWT_SECRET);
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, "./userImage/");
+  },
+  filename: (req, file, cb) => {
+    cb(
+      null,
+      new Date().toISOString().replace(/:/g, "-") + "-" + file.originalname
+    );
+  },
+});
+const fileFilter = (req:any, file:any, cb:any) => {
+  if (file.mimetype === "image/jpeg" || file.mimetype === "image/png") {
+    cb(null, true);
+  } else {
+    cb(null, false);
+  }
+};
+const uplode = multer({
+  storage: storage,
+  limits: {
+    fieldSize: 1024 * 1024 * 5,
+  },
+  fileFilter: fileFilter,
+});
 
-route.post('/singup', (req: any, res: any, next: any) => {
+
+
+const fs = require("fs");
+import { promisify } from "util";
+import authChack from "../Middleware/chackauth";
+
+const unlinkAsync = promisify(fs.unlink);
+
+// console.log("dfasdF", jWT_SECRET);
+
+route.post('/singup', uplode.single('userImage') ,(req: any, res: any, next: any) => {
     auth.find({
         email: req.body.email
     }).exec().then(
-        (result: string | any[]) => {
-            // tslint:disable-next-line: no-console
-            console.log(result);
+        (result: any) => {
+            console.log(req.body);
             if (result.length >= 1) {
                 return res.status(409).json({
                     code: '409',
@@ -29,19 +63,28 @@ route.post('/singup', (req: any, res: any, next: any) => {
                         return res.status(500).json({
                             code: '500',
                             message: err,
+                            dafsd:'dfas'
                         })
                     } else {
-                        console.log(hase);
+                        console.log(req);
 
                         const data = new auth({
-                            _id: new mongooss.Types.ObjectId(),
-                            username: req.body.username,
-                            email: req.body.email,
-                            password: hase,
-                            character:req.body.character,
-                            crreatAt: Date(),
-                            lastLogin: ''
-                        })
+                          _id: new mongooss.Types.ObjectId(),
+                          username: req.body.username,
+                          email: req.body.email,
+                          password: hase,
+                          character: req.body.character,
+                          phone: req.body.phone,
+                          address: req.body.address,
+                          city: req.body.city,
+                          state: req.body.state,
+                          zip: req.body.zip,
+                          userImage: "/userImage/" + req.file?.filename,
+                          age: req.body.age,
+                          zender: req.body.zender,
+                          crreatAt: Date(),
+                          lastLogin: "",
+                        });
                         data.save().then((result: any) => {
                             bcrypt.compare(req.body.password, hase, (err: any, logUSer: any) => {
                                 console.log(logUSer);
@@ -177,6 +220,78 @@ route.post('/singin', (req: any, res: any, next: any) => {
 
 
 });
+
+
+route.put(
+  "/userUpdate/:id",
+  authChack,
+  uplode.single("userImage"),
+    (req: any, res: any) => {
+    const _id = req.params.id;
+
+        let obj;
+      if (req.file) {
+          obj = {
+            username: req.body.username,
+            password: req.body.password,
+            phone: req.body.phone,
+            address: req.body.address,
+            city: req.body.city,
+            userImage: "/userImage/" + req.file.filename,
+            state: req.body.state,
+            zip: req.body.zip,
+            age: req.body.age,
+            character: req.body.character,
+            zender: req.body.zender,
+          };
+      } else {
+          obj = {
+            username: req.body.username,
+            password: req.body.password,
+            phone: req.body.phone,
+            address: req.body.address,
+            city: req.body.city,
+            state: req.body.state,
+            zip: req.body.zip,
+            age: req.body.age,
+            character: req.body.character,
+            zender: req.body.zender,
+          };
+      }
+   
+    auth
+      .findByIdAndUpdate(
+        {
+          _id: _id,
+        },
+        {
+          $set: obj,
+        }
+      )
+      .exec()
+      .then((result: any[]) => {
+        res.status(201).json(result);
+      });
+  }
+);
+
+
+route.delete("/seller/:id", (req, res) => {
+  const id = req.params.id;
+  auth
+    .remove({
+      _id: id,
+    })
+    .exec()
+    .then((result) => {
+      res.status(200).json(result);
+      console.log(result);
+    })
+    .catch((err) => {
+      res.status(500).json(err.errors);
+    });
+});
+
 route.use('/varification' ,email)
 route.use('/forgot' ,forgot)
 

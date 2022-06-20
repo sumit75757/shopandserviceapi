@@ -8,7 +8,7 @@ const route = express();
 require("dotenv").config();
 // import email from "./otp/email";
 const jWT_SECRET: string | any = process.env.JWT_SECRET
-console.log("dfasdF", jWT_SECRET);
+// console.log("dfasdF", jWT_SECRET);
 
 route.post('/singup', (req: any, res: any, next: any) => {
     auth.find({

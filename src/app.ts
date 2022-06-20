@@ -27,7 +27,7 @@ mongoos
   .catch((err: any) => {
     console.log("database not conected", err);
   });
-
+app.use(express.json());
 app.use(morgen("dev"));
 app.use(bodyParser.json());
 app.use(
@@ -50,6 +50,8 @@ app.use("/api/admin/auth",admin );
 app.use("/api/catogory", cat);
 app.use("/api/subcatogory", subCategory);
 app.use("/productImage", express.static("productImage"));
+app.use("/userImage", express.static("userImage"));
+
 
 app.use("/api/sellers", seller);
 app.use("/api/product", product);

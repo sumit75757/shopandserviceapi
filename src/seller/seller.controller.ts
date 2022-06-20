@@ -9,12 +9,20 @@ const sellers = {
           result.forEach((element:any) => {
             console.log(element);
             const obj = {
-              _id       : element._id,
-              username  : element.username ,
-              email     : element.email    ,
-              character : element.character,
-              crreatAt  : element.crreatAt ,
-              lastLogin : element.lastLogin,
+              _id: element._id,
+              username: element.username,
+              email: element.email,
+              character: element.character,
+              address: element.address,
+              city: element.city,
+              userImage: element.userImage,
+              state: element.state,
+              zip: element.zip,
+              age: element.age,
+              phone: element.phone,
+              zender: element.zender,
+              crreatAt: element.crreatAt,
+              lastLogin: element.lastLogin,
             };
                 arr.push(obj);
           });
