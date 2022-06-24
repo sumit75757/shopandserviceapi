@@ -66,8 +66,6 @@ route.post('/singup', uplode.single('userImage') ,(req: any, res: any, next: any
                             dafsd:'dfas'
                         })
                     } else {
-                        console.log(req);
-
                         const data = new auth({
                           _id: new mongooss.Types.ObjectId(),
                           username: req.body.username,
@@ -228,12 +226,13 @@ route.put(
   uplode.single("userImage"),
     (req: any, res: any) => {
     const _id = req.params.id;
-
+      console.log(req.body);
+      
         let obj;
       if (req.file) {
           obj = {
             username: req.body.username,
-            password: req.body.password,
+            // password: req.body.password,
             phone: req.body.phone,
             address: req.body.address,
             city: req.body.city,
@@ -247,7 +246,7 @@ route.put(
       } else {
           obj = {
             username: req.body.username,
-            password: req.body.password,
+            // password: req.body.password,
             phone: req.body.phone,
             address: req.body.address,
             city: req.body.city,

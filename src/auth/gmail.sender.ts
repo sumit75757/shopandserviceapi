@@ -2,19 +2,17 @@ const {
   google
 } = require('googleapis');
 const MailComposer = require("nodemailer/lib/mail-composer");
-import { installed } from "./client_secret_943529872288-r3l76j9f6v3fnkjek87l9crc4hd4p7ts.apps.googleusercontent.com.json"; 
+import { web } from "./cradansial.json"; 
 const tokens = require("./token.json");
 
 const getGmailService = () => {
   const {
     client_secret,
     client_id,
-    redirect_uris
-  } = installed;
+  } = web;
   const oAuth2Client = new google.auth.OAuth2(
     client_id,
     client_secret,
-    redirect_uris[0]
   );
   oAuth2Client.setCredentials(tokens);
   const gmail = google.gmail({

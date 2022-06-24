@@ -1,12 +1,9 @@
 // import cat from "./addCat.modal";
 // import subcatmoduel from "./subCategory/subCategory.modual";
-const { caetogory, subcaetogory } = require("./addCat.modal");
+import caetogory from "./addCat.modal";
 import mongoose from "mongoose";
 const catagory = {
   getCatagory(req: any, res: any) {
-    const catagorys: any[] = [];
-    const subcatagory: any[] = [];
-    const arr: any = [];
     caetogory
       .aggregate([
         {
@@ -20,7 +17,12 @@ const catagory = {
       ])
       .then((result: any) => {
         console.log(result);
-        res.status(200).json(result);
+        let obj = {
+          count:result.length,
+          response: 'sucsess',
+          data:result
+        }
+        res.status(200).json(obj);
       })
       .catch((err: any) => {
         console.log("ERROR", err);

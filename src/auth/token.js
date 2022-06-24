@@ -3,16 +3,16 @@ const {
 } = require('googleapis');
 const path = require('path');
 const fs = require('fs');
-const credentials = require('./client_secret_943529872288-r3l76j9f6v3fnkjek87l9crc4hd4p7ts.apps.googleusercontent.com.json');
+const credentials = require('./cradansial.json');
 
 // Replace with the code you received from Google
-const code = '4/0AX4XfWinBbhC_h4_ZoZ8DjutF6TxMaOQkB8EkOTz2DamcddVkz15o7MiVfb1gTh4KwEFng';
+const code = '4/0AX4XfWhfuM84wvplzmqmaJPlGQycOfUUzBblLY8tDq7M-UV6iEdda_Z-oiiJKItt5ychzw';
 const {
     client_secret,
     client_id,
-    redirect_uris
-} = credentials.installed;
-const oAuth2Client = new google.auth.OAuth2(client_id, client_secret, redirect_uris);
+    redirect_uri
+} = credentials.web;
+const oAuth2Client = new google.auth.OAuth2(client_id, client_secret, redirect_uri);
 
 oAuth2Client.getToken(code).then(({
     tokens

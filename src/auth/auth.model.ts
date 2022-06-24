@@ -11,8 +11,9 @@ const authSchema = new mongooss.Schema({
   state: { type: String, required: false },
   zip: { type: Number, required: false },
   age: { type: Number, required: false },
+  zender:{ type: String, required: false },
   character: { type: String, required: true },
   crreatAt: { type: String, required: true },
-  lastLogin: { type: String },
+  lastLogin: { type: String }
 });
 export default mongooss.model('auth', authSchema )
