@@ -34,7 +34,6 @@ route.get('/', authChack, product.getProduct);
 route.get('/:id', authChack, product.productgetbyid);
 route.post('/', authChack, uplode.array('productImage',7), product.postProduct);
 route.delete('/:id', authChack, product.removeProduct);
-route.put('/:id', authChack, uplode.array('productImage', 7
-), product.productupdate);
+route.put('/:id', authChack, uplode.array('productImage', 7), product.productupdate);
 
 export default route;

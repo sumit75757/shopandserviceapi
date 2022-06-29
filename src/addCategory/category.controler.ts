@@ -1,6 +1,7 @@
 // import cat from "./addCat.modal";
 // import subcatmoduel from "./subCategory/subCategory.modual";
 import caetogory from "./addCat.modal";
+import subcaetogory from "././subCategory/subCategory.modual";
 import mongoose from "mongoose";
 const catagory = {
   getCatagory(req: any, res: any) {
@@ -18,10 +19,10 @@ const catagory = {
       .then((result: any) => {
         console.log(result);
         let obj = {
-          count:result.length,
-          response: 'sucsess',
-          data:result
-        }
+          count: result.length,
+          response: "sucsess",
+          data: result,
+        };
         res.status(200).json(obj);
       })
       .catch((err: any) => {
@@ -99,7 +100,15 @@ const catagory = {
       })
       .exec()
       .then((result: any) => {
-        res.status(200).json(result);
+        subcaetogory.count().then(count => {
+          console.log(count,"countsd");
+          for (let index = 0; index < count; index++) {
+            subcaetogory.findOneAndRemove({ perent: id }).then((ress: any) => {
+            });
+          }
+          res.status(200).json(result);
+          
+        })
       })
       .catch((err: { errors: any }) => {
         res.status(500).json(err.errors);

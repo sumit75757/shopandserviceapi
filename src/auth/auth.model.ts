@@ -1,4 +1,4 @@
-import mongooss from 'mongoose'
+import mongooss, { Schema } from 'mongoose'
 const authSchema = new mongooss.Schema({
   _id: mongooss.Schema.Types.ObjectId,
   username: { type: String, required: true },
@@ -11,9 +11,11 @@ const authSchema = new mongooss.Schema({
   state: { type: String, required: false },
   zip: { type: Number, required: false },
   age: { type: Number, required: false },
-  zender:{ type: String, required: false },
+  zender: { type: String, required: false },
   character: { type: String, required: true },
+  satate: { type: Boolean, required: false  },
   crreatAt: { type: String, required: true },
-  lastLogin: { type: String }
+  lastLogin: { type: String },
 });
+authSchema.index({ "$**": "text" });
 export default mongooss.model('auth', authSchema )

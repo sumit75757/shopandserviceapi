@@ -5,12 +5,14 @@ import mongoos from "mongoose";
 import auth from "./auth/auth";
 import cors from "cors";
 import cat from "./addCategory/addCategory";
-import authChack from "./Middleware/chackauth";
 import product from "./product/product";
-import  admin  from "./admin/admin";
+import admin from "./admin/admin";
 import subCategory from "./addCategory/subCategory/subcategory";
 import seller from "./seller/seller";
 import productSeller from "./seller/product/product";
+import users from "./users/user";
+import cart from "./cart/cart";
+import orders from "./orders/orders";
 
 const app = express();
 require("dotenv").config();
@@ -36,7 +38,7 @@ app.use(
   })
 );
 
-app.use( (req, res, next) =>{
+app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");
   res.header(
     "Access-Control-Allow-Headers",
@@ -46,24 +48,23 @@ app.use( (req, res, next) =>{
 });
 
 app.use("/api/auth", auth);
-app.use("/api/admin/auth",admin );
+app.use("/api/admin/auth", admin);
 app.use("/api/catogory", cat);
 app.use("/api/subcatogory", subCategory);
 app.use("/productImage", express.static("productImage"));
 app.use("/userImage", express.static("userImage"));
-
-
+app.use("/api/users", users);
 app.use("/api/sellers", seller);
 app.use("/api/product", product);
-
+app.use("/api/cart", cart);
+app.use("/api/orders", orders);
 app.use("/api/seller/product", productSeller);
 
-app.use( (res, req, next) => {
+app.use((res, req, next) => {
   const err: any = new Error("404 Not Found");
   err.status = 404;
-  err.message = "not found"
+  err.message = "not found";
   console.log(err);
-  
   next();
 });
 
@@ -76,4 +77,5 @@ app.use((err: any, req: any, res: any, next: any) => {
     },
   });
 });
+
 export default app;

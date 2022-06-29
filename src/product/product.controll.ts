@@ -102,7 +102,9 @@ const product = {
     // }
 
     productModel
-      .find({ skip: 10, limit: 5 })
+      .find()
+      .skip(req.query.skip)
+      .limit(10)
       .exec()
       .then((result) => {
         if (result) {

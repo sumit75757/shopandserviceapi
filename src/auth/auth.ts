@@ -79,6 +79,7 @@ route.post('/singup', uplode.single('userImage') ,(req: any, res: any, next: any
                           zip: req.body.zip,
                           userImage: "/userImage/" + req.file?.filename,
                           age: req.body.age,
+                          satate: req.body.satate,
                           zender: req.body.zender,
                           crreatAt: Date(),
                           lastLogin: "",
@@ -240,19 +241,20 @@ route.put(
             state: req.body.state,
             zip: req.body.zip,
             age: req.body.age,
+            satate: req.body.satate,
             character: req.body.character,
             zender: req.body.zender,
           };
       } else {
           obj = {
             username: req.body.username,
-            // password: req.body.password,
             phone: req.body.phone,
             address: req.body.address,
             city: req.body.city,
             state: req.body.state,
             zip: req.body.zip,
             age: req.body.age,
+            satate: req.body.satate,
             character: req.body.character,
             zender: req.body.zender,
           };
