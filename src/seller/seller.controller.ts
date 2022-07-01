@@ -38,6 +38,7 @@ const sellers = {
                 age: element.age,
                 phone: element.phone,
                 zender: element.zender,
+                satate: element.satate,
                 crreatAt: element.crreatAt,
                 lastLogin: element.lastLogin,
               };

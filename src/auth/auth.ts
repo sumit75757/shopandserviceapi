@@ -154,7 +154,12 @@ route.post('/singin', (req: any, res: any, next: any) => {
                 return res.status(401).json({
                     message: 'Anauthorais user'
                 })
-            }
+        }
+        if (!result[0].satate) {
+          return res.status(401).json({
+            message: "Your Account Blocked",
+          });
+        }
             bcrypt.compare(req.body.password, result[0].password, (err: any, logUSer: any) => {
                 if (err) {
                     return err.status(401).json({
@@ -233,7 +238,6 @@ route.put(
       if (req.file) {
           obj = {
             username: req.body.username,
-            // password: req.body.password,
             phone: req.body.phone,
             address: req.body.address,
             city: req.body.city,

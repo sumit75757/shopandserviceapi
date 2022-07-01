@@ -13,9 +13,8 @@ const authSchema = new mongooss.Schema({
   age: { type: Number, required: false },
   zender: { type: String, required: false },
   character: { type: String, required: true },
-  satate: { type: Boolean, required: false  },
+  satate: { type: Boolean, required: false, default: true },
   crreatAt: { type: String, required: true },
   lastLogin: { type: String },
 });
-authSchema.index({ "$**": "text" });
 export default mongooss.model('auth', authSchema )
