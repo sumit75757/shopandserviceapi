@@ -1,5 +1,5 @@
 
-import  subcaetogory  from "../subCategory/subCategory.modual";
+import  subcaetogory  from "./subCategory.modual";
 import mongoose from "mongoose";
 const subCategory = {
   getCatagory(req: any, res: any) {

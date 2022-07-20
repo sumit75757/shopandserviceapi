@@ -1,8 +1,10 @@
-import express from "express";
+const express = require("express");
 import authChack from "../Middleware/chackauth";
-import sellers from "./orders.controller";
+import order from "./orders.controller";
+
 const route = express();
 
-route.put("/:id", authChack, sellers.cart);
+route.get("/:id", authChack, order.getOrder);
+route.post("/", authChack, order.order);
 
-export default route;
+export default  route;

@@ -1,51 +1,16 @@
 import mongoos from "mongoose";
-import multer from "multer";
-import express from "express";
-const route = express();
 import productModel from "./product.model";
-
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, "./uplode/");
-  },
-  filename: (req, file, cb) => {
-    cb(
-      null,
-      new Date().toISOString().replace(/:/g, "-") + "-" + file.originalname
-    );
-  },
-});
-
-const fileFilter = (req: any, file: any, cb: any) => {
-  if (file.mimetype === "mage/jpeg" || file.mimetype === "image/png") {
-    cb(null, true);
-  } else {
-    cb(null, false);
-  }
-};
-
-const uplode = multer({
-  storage: storage,
-  // limits: {
-  //   fieldSize: 1024 * 1024 * 5,
-  // },
-  // fileFilter: fileFilter,
-}).array("productImage", 7);
 
 const fs = require("fs");
 import { promisify } from "util";
 
 const unlinkAsync = promisify(fs.unlink);
 
-let imageArr :any[]=[]
+let imageArr: any[] = [];
 const product = {
   postProduct(req: any, res: any) {
-    console.log(req);
-    
-    // console.log(req);
-    req.files.forEach((element:any) => {
-      imageArr.push("/productImage/"+element.filename);
-      
+    req.files.forEach((element: any) => {
+      imageArr.push("/productImage/" + element.filename);
     });
     const product = new productModel({
       _id: new mongoos.Types.ObjectId(),
@@ -57,30 +22,29 @@ const product = {
       inStock: req.body.inStock,
       productImage: imageArr,
       discrption: req.body.discrption,
-      subCatogory:req.body.subCatogory,
-      delevery:req.body.delevery,
+      subCatogory: req.body.subCatogory,
+      delevery: req.body.delevery,
       createAt: Date(),
     });
 
     product
-    .save()
+      .save()
       .then((result: any) => {
         let data = {
           success: true,
           message: "Product added",
           result,
         };
-        
-      res.status(201).json(data);
-      imageArr = []
+
+        res.status(201).json(data);
+        imageArr = [];
       })
       .catch((err: any) => {
         res.status(500).json(err);
         console.log("dfasdfaSDFASDFA", err);
       });
-    },
+  },
   getProduct(req: any, res: any) {
-    
     // console.log(req.query.username);
     // const id = req.query.product;
     // const fin = { _id: id }
@@ -143,7 +107,6 @@ const product = {
       .exec()
       .then((result) => {
         if (result) {
-          
           res.status(200).json(result);
           console.log(result);
         } else {
@@ -180,7 +143,6 @@ const product = {
         discrption: req.body.discrption,
       };
     } else {
-      
       data = {
         sellerId: req.body.sellerId,
         productName: req.body.productName,
@@ -211,14 +173,12 @@ const product = {
             result,
           });
           console.log(result);
-        } else {
-          res.status(400).json(result);
-        }
+        } 
       })
       .catch((err) => {
-        res.status(500).json(err);
+        res.status(400).json(err);
       });
-    imageArr = []
+    imageArr = [];
   },
 
   removeProduct(req: any, res: any) {
@@ -226,31 +186,24 @@ const product = {
     const id = req.params.id;
     let path;
     productModel
-      .remove({
-        _id: id,
-      })
+      .findByIdAndRemove(id)
       .exec()
       .then((result) => {
         res.status(200).json(result);
+        try {
+          result.productImage.forEach((element: any) => {
+            console.log(element);
+            unlinkAsync("." + element);
+          });
+        } catch (err) {
+          console.log(err);
+        }
         console.log(result);
         userImages = true;
       })
       .catch((err) => {
         res.status(500).json(err.errors);
       });
-    if (userImages) {
-      productModel
-        .findById(id)
-        .exec()
-        .then((res) => {
-          path = res.userImage;
-          try {
-            unlinkAsync("." + res.userImage);
-          } catch (err) {
-            console.log(err);
-          }
-        });
-    }
   },
 };
 

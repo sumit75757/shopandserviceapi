@@ -1,7 +1,7 @@
 // import cat from "./addCat.modal";
 // import subcatmoduel from "./subCategory/subCategory.modual";
 import caetogory from "./addCat.modal";
-import subcaetogory from "././subCategory/subCategory.modual";
+import subcaetogory from "./subCategory/subCategory.modual";
 import mongoose from "mongoose";
 const catagory = {
   getCatagory(req: any, res: any) {
@@ -107,7 +107,6 @@ const catagory = {
             });
           }
           res.status(200).json(result);
-          
         })
       })
       .catch((err: { errors: any }) => {

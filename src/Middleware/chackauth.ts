@@ -11,12 +11,13 @@ const authChack = (req: any, res: any, next: any) => {
     }
     next();
   } catch (error) {
-    res.status(401).json({
-      message: "auth fail",
-    });
     const err: any = new Error("401 Not Found");
     err.status = 401;
-    next();
+    // res.status(401).json({
+    //   message: "auth fail",
+    // });
+    
+    next(err);
   }
 };
 export default authChack;

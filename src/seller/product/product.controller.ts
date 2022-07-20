@@ -1,5 +1,4 @@
 import product from "../../product/product.model";
-
 const products = {
   async getgetproduct(req: any, res: any) {
     //
@@ -15,7 +14,7 @@ const products = {
     var re = new RegExp(serch, "i");
     await product
       .find({ sellerId: req.params.id })
-      .or([{ productName: { $regex: re } }, { productInfo: { $regex: re } }])
+      .or([{ productName: { $regex: re }}, { productInfo: { $regex: re } }])
       .then((result: any) => {
         product
           .find({ sellerId: req.params.id })
