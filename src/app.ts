@@ -35,12 +35,13 @@ mongoos
 app.use(express.json());
 app.use(morgen("dev"));
 app.use(bodyParser.json());
-app.use(
-  cors({
-    origin: "*",
-    methods: ["GET", "POST", "DELETE", "UPDATE", "PUT", "PATCH"],
-  })
-);
+app.use(cors());
+// app.use(
+//   cors({
+//     origin: "*",
+//     methods: ["GET", "POST", "DELETE", "UPDATE", "PUT", "PATCH"],
+//   })
+// );
 
 app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");
