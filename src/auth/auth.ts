@@ -292,6 +292,8 @@ route.put(
             console.log(err);
           }
         }
+      }).catch(err => {
+         res.status(400).json(err);
       });
   }
 );
@@ -308,7 +310,7 @@ route.delete("/seller/:id", (req, res) => {
       console.log(result);
     })
     .catch((err) => {
-      res.status(500).json(err.errors);
+      res.status(400).json(err.errors);
     });
 });
 
