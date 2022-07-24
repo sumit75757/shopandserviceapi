@@ -292,11 +292,14 @@ route.put(
             console.log(err);
             res.status(401).json(result);
           } finally {
-              res.status(201).json(result);
+            res.status(201).json(result);
           }
+        } else {
+          res.status(201).json(result);
         }
-      }).catch(err => {
-         res.status(400).json(err);
+      })
+      .catch((err) => {
+        res.status(400).json(err);
       });
   }
 );
