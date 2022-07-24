@@ -283,13 +283,15 @@ route.put(
       )
       .exec()
       .then((result: any) => {
-        res.status(201).json(result);
+        // res.status(201).json(result);
         if (req.file) {
           try {
             console.log("adfasdfasdfadsfa", result.userImage);
             unlinkAsync("." + result.userImage);
           } catch (err) {
             console.log(err);
+          } finally {
+              res.status(201).json(result);
           }
         }
       }).catch(err => {
