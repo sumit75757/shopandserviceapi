@@ -5,7 +5,7 @@ import mongoos from "mongoose";
 import auth from "./auth/auth";
 import cors from "cors";
 import cat from "./addCategory/addCategory";
-import product from "./seller/product/product";
+import product from "./product/product";
 import admin from "./admin/admin";
 import subCategory from "./addCategory/subCategory/subcategory";
 import seller from "./seller/seller";
@@ -35,13 +35,13 @@ mongoos
 app.use(express.json());
 app.use(morgen("dev"));
 app.use(bodyParser.json());
-app.use(cors());
-// app.use(
-//   cors({
-//     origin: "*",
-//     methods: ["GET", "POST", "DELETE", "UPDATE", "PUT", "PATCH"],
-//   })
-// );
+// app.use(cors());
+app.use(
+  cors({
+    origin: "*",
+    methods: ["GET", "POST", "DELETE", "UPDATE", "PUT", "PATCH"],
+  })
+);
 
 app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");
