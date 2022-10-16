@@ -16,7 +16,8 @@ import orders from "./orders/orders";
 import service from "./services/createservice/service";
 import servicecat from "./services/catogory/catogory";
 import offers from "./offers/offers";
-import render from "./render";
+import render from "../dist/render";
+import path from "path";
 const app = express();
 require("dotenv").config();
 
@@ -52,7 +53,9 @@ app.use((req, res, next) => {
   );
   next();
 });
-// app.use("/", render);
+app.use(express.static("./dist"));
+app.set("view engine", "pug");
+app.use("/", render);
 
 app.use("/api/auth", auth);
 app.use("/api/admin/auth", admin);
