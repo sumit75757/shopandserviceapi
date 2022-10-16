@@ -19,8 +19,8 @@ import offers from "./offers/offers";
 const app = express();
 require("dotenv").config();
 
-const database: any = process.env.MONGO_URL;
-// const database: any = process.env.MONGO_URL_LOCAL;
+// const database: any = process.env.MONGO_URL;
+const database: any = process.env.MONGO_URL_LOCAL;
 console.log(database);
 
 mongoos

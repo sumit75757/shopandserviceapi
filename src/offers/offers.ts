@@ -2,6 +2,7 @@ import express from "express";
 import multer from "multer";
 import authChack from "../Middleware/chackauth";
 import offers from "./offers.controller";
+const route = express();
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
     cb(null, "./offerImage/");
@@ -27,7 +28,6 @@ const uplode = multer({
   },
   fileFilter: fileFilter,
 });
-const route = express();
 
 route.get("/", authChack, offers.getOffers);
 route.post("/", authChack, uplode.single("offerImage"), offers.postOffers);
