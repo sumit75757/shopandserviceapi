@@ -16,11 +16,12 @@ import orders from "./orders/orders";
 import service from "./services/createservice/service";
 import servicecat from "./services/catogory/catogory";
 import offers from "./offers/offers";
+import render from "./render";
 const app = express();
 require("dotenv").config();
 
-// const database: any = process.env.MONGO_URL;
-const database: any = process.env.MONGO_URL_LOCAL;
+const database: any = process.env.MONGO_URL;
+// const database: any = process.env.MONGO_URL_LOCAL;
 console.log(database);
 
 mongoos
@@ -51,6 +52,7 @@ app.use((req, res, next) => {
   );
   next();
 });
+// app.use("/", render);
 
 app.use("/api/auth", auth);
 app.use("/api/admin/auth", admin);
