@@ -53,8 +53,9 @@ app.use((req, res, next) => {
   );
   next();
 });
-app.use(express.static("./dist"));
+// app.use(express.static("./dist"));
 app.set("view engine", "pug");
+app.use(express.static(__dirname + '/dist'));
 app.use("/", render);
 
 app.use("/api/auth", auth);
