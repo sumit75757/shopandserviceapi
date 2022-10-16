@@ -16,7 +16,7 @@ import orders from "./orders/orders";
 import service from "./services/createservice/service";
 import servicecat from "./services/catogory/catogory";
 import offers from "./offers/offers";
-import render from "./dist/render";
+import render from "./templet/render";
 import path from "path";
 const app = express();
 require("dotenv").config();
