@@ -30,7 +30,7 @@ const product = {
     product
       .save()
       .then((result: any) => {
-        let data = {
+        const data = {
           success: true,
           message: "Product added",
           result,
@@ -40,7 +40,7 @@ const product = {
         imageArr = [];
       })
       .catch((err: any) => {
-        res.status(500).json(err);
+        res.status(404).json(err);
         console.log("dfasdfaSDFASDFA", err);
       });
   },
@@ -70,7 +70,7 @@ const product = {
       .skip(req.query.skip)
       .limit(10)
       .exec()
-      .then((result) => {
+      .then((result:any) => {
         if (result) {
           res.status(200).json({
             response: {
@@ -78,7 +78,7 @@ const product = {
               request: "GEt",
               respons: "succses",
             },
-            data: result.map((data) => {
+            data: result.map((data:any) => {
               return {
                 _id: data._id,
                 productName: data.productName,
@@ -105,7 +105,7 @@ const product = {
     productModel
       .findById(id)
       .exec()
-      .then((result) => {
+      .then((result:any) => {
         if (result) {
           res.status(200).json(result);
           console.log(result);
@@ -165,7 +165,7 @@ const product = {
         }
       )
       .exec()
-      .then((result) => {
+      .then((result:any) => {
         if (result) {
           res.status(200).json({
             success: true,
@@ -184,11 +184,10 @@ const product = {
   removeProduct(req: any, res: any) {
     let userImages = false;
     const id = req.params.id;
-    let path;
     productModel
       .findByIdAndRemove(id)
       .exec()
-      .then((result) => {
+      .then((result:any) => {
         res.status(200).json(result);
         try {
           result.productImage.forEach((element: any) => {

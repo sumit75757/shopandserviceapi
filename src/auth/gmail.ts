@@ -5,6 +5,7 @@ console.log(redirect_uri);
 const oAuth2Client = new google.auth.OAuth2(
   client_id,
   client_secret,
+  redirect_uri
 );
 
 const GMAIL_SCOPES = ["https://www.googleapis.com/auth/gmail.send"];

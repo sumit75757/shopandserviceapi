@@ -32,6 +32,7 @@ const uplode = multer({
   fileFilter: fileFilter,
 });
 
+// api/product/dasdfasdfagfasdaf
 route.get("/", authChack, product.getProduct);
 route.get("/:id", authChack, product.productgetbyid);
 route.post(

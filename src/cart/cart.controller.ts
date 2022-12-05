@@ -33,7 +33,7 @@ const carts = {
           $set: obj,
         }
       )
-      .then((result: any[]) => {
+      .then((result: any) => {
         let obj = {
           response: "sucsess",
           data: result,

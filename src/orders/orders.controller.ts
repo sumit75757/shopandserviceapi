@@ -16,6 +16,7 @@ const orders = {
         res.status(400).json(err);
       });
   },
+  
   async order(req: any, res: any) {
     let prod: any;
     await productModel

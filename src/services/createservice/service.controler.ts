@@ -183,7 +183,7 @@ const services = {
     const id = req.params.id;
     await ServiceModel.findByIdAndRemove(id)
       .exec()
-      .then((result) => {
+      .then((result:any) => {
         serviceImage = true;
         res.status(200).json(result);
         try {

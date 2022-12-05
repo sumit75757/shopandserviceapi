@@ -10,7 +10,7 @@ const offers = {
     offersModel
       .find()
       .exec()
-      .then((result) => {
+      .then((result:any) => {
         res.status(200).json({
           count: result.length,
           response: "success",
@@ -89,7 +89,7 @@ const offers = {
     offersModel
       .findByIdAndRemove(id)
       .exec()
-      .then((result) => {
+      .then((result:any) => {
         res.status(200).json(result);
         try {
           unlinkAsync("." + result.offerImage);

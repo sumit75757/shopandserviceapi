@@ -311,7 +311,7 @@ route.delete("/seller/:id", (req, res) => {
       _id: id,
     })
     .exec()
-    .then((result) => {
+    .then((result:any) => {
       res.status(200).json(result);
       console.log(result);
     })
