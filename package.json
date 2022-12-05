@@ -3,10 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.ts",
-  "type": "module",
   "scripts": {
-    "start": "ts-node index.ts",
-    "watch": "nodemon index.ts"
+    "start": "ts-node index",
+    "watch": "nodemon index"
   },
   "author": "sumit patel",
   "license": "ISC",

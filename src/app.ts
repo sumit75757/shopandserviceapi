@@ -18,6 +18,7 @@ import servicecat from "./services/catogory/catogory";
 import offers from "./offers/offers";
 import render from "./templet/render";
 import path from "path";
+import search from "./search/search";
 const app = express();
 require("dotenv").config();
 
@@ -76,6 +77,8 @@ app.use("/api/seller/product", productSeller);
 app.use("/api/service",service)
 app.use("/api/servicecat", servicecat);
 app.use("/api/offers", offers);
+app.use("/api/serche", search);
+
 
 app.use((res, req, next) => {
   const err: any = new Error("404 Not Found");
