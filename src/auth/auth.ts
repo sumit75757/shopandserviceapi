@@ -136,7 +136,10 @@ route.post(
                   // console.log(result);
                 })
                 .catch((err: any) => {
-                  console.log(err);
+                  res.status(401).json({
+                    err,
+                    message: "unauthorais user",
+                  });
                 });
             }
           });
@@ -183,14 +186,7 @@ route.post("/singin", (req: any, res: any, next: any) => {
               }
             );
             // tslint:disable-next-line:no-string-literal
-            const rData = {
-              _id: result[0]._id,
-              username: result[0].username,
-              email: result[0].email,
-              character: result[0].character,
-              crreatAt: result[0].crreatAt,
-              lastLogin: result[0].lastLogin,
-            };
+            const rData = getdata(result[0])
 
             let data;
             result.forEach((element: any) => {
@@ -322,5 +318,58 @@ route.delete("/seller/:id", (req, res) => {
 
 route.use("/varification", email);
 route.use("/forgot", forgot);
-
+function getdata(result:any) {
+  let res = Object.assign(result)
+  let obj
+  console.log(res);
+  if(res.character=="seller"){
+    obj={
+      "_id": res._id,
+      "username":res.username,
+      "email": res.email,
+      "userImage": res.userImage,
+      "phone": res.phone,
+      "address": res.address,
+      "city": res.city,
+      "state": res.state,
+      "zip": res.zip,
+      "age": res.age,
+      "character": res.character,
+      "crreatAt":  res.crreatAt,
+      "lastLogin":res.lastLogin,
+      "zender": res.zender,
+      "cart":res.cart,
+      "orders": res.orders,
+      "satate": res.satate
+    }
+  }else if(res.character=="User" ){
+    obj={
+      "_id": res._id,
+      "username":res.username,
+      "email": res.email,
+      "userImage": res.userImage,
+      "phone": res.phone,
+      "address": res.address,
+      "city": res.city,
+      "state": res.state,
+      "zip": res.zip,
+      "age": res.age,
+      "character": res.character,
+      "crreatAt": res.crreatAt,
+      "lastLogin":res.lastLogin,
+      "zender": res.zender,
+      "cart":res.cart,
+      "orders": res.orders,
+      "satate": res.satate
+    }
+  }else
+  {obj ={
+     "_id": res._id,
+    "username":res.username,
+    "email": res.email,
+    "character": res.character,
+  }
+  }
+  return obj
+}
 export default route;
