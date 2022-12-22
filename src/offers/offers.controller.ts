@@ -10,7 +10,7 @@ const offers = {
     offersModel
       .find()
       .exec()
-      .then((result:any) => {
+      .then((result: any) => {
         res.status(200).json({
           count: result.length,
           response: "success",
@@ -25,7 +25,7 @@ const offers = {
     let offerImage = req.file;
     const offer = new offersModel({
       _id: new mongoos.Types.ObjectId(),
-      offerImage: "/offerImage/" + req.file?.filename,
+      offerImage: "/offerImage/" + offerImage?.filename,
       category: req.body.category,
       crreatAt: Date(),
     });
@@ -53,10 +53,12 @@ const offers = {
       offer = {
         offerImage: "/offerImage/" + req.file?.filename,
         category: req.body.category,
+        productid:req.body.productid
       };
     } else {
       offer = {
         category: req.body.category,
+        productid:req.body.productid
       };
     }
 
@@ -89,7 +91,7 @@ const offers = {
     offersModel
       .findByIdAndRemove(id)
       .exec()
-      .then((result:any) => {
+      .then((result: any) => {
         res.status(200).json(result);
         try {
           unlinkAsync("." + result.offerImage);

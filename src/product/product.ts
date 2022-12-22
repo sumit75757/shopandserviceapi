@@ -17,7 +17,7 @@ const storage = multer.diskStorage({
 });
 
 const fileFilter = (req: any, file: any, cb: any) => {
-  if (file.mimetype === "image/jpeg" || file.mimetype === "image/png") {
+  if (file.mimetype === "image/jpeg" || file.mimetype === "image/png" || file.mimetype === "image/webp") {
     cb(null, true);
   } else {
     cb(null, false);
@@ -35,18 +35,9 @@ const uplode = multer({
 // api/product/dasdfasdfagfasdaf
 route.get("/", authChack, product.getProduct);
 route.get("/:id", authChack, product.productgetbyid);
-route.post(
-  "/",
-  authChack,
-  uplode.array("productImage", 7),
-  product.postProduct
-);
+route.post("/", authChack, uplode.array("productImage", 7),product.postProduct);
 route.delete("/:id", authChack, product.removeProduct);
-route.put(
-  "/:id",
-  authChack,
-  uplode.array("productImage", 7),
-  product.productupdate
+route.put("/:id",authChack,uplode.array("productImage", 7),product.productupdate
 );
 
 export default route;

@@ -1,7 +1,7 @@
 import express from "express";
 import morgen from "morgan";
 import bodyParser from "body-parser";
-import mongoos from "mongoose";
+import mongoos, { model, models } from "mongoose";
 import auth from "./auth/auth";
 import cors from "cors";
 import cat from "./addCategory/addCategory";

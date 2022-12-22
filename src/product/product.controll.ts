@@ -9,9 +9,12 @@ const unlinkAsync = promisify(fs.unlink);
 let imageArr: any[] = [];
 const product = {
   postProduct(req: any, res: any) {
-    req.files.forEach((element: any) => {
+    
+    req.file.forEach((element: any) => {
       imageArr.push("/productImage/" + element.filename);
+      console.log(imageArr);
     });
+    
     const product = new productModel({
       _id: new mongoos.Types.ObjectId(),
       sellerId: req.body.sellerId,
@@ -123,13 +126,17 @@ const product = {
   },
 
   async productupdate(req: any, res: any) {
+    console.log(req.files);
+
     req.files.forEach((element: any) => {
       imageArr.push("/productImage/" + element.filename);
       console.log(element.filename);
+      console.log(imageArr);
+
     });
     // console.log("adasd", req.file);
     const id = req.params.id;
-
+    console.log(imageArr);
     let data: any;
     if (req.files) {
       data = {
