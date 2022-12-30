@@ -10,7 +10,7 @@ let imageArr: any[] = [];
 const product = {
   postProduct(req: any, res: any) {
     
-    req.file.forEach((element: any) => {
+    req.files.forEach((element: any) => {
       imageArr.push("/productImage/" + element.filename);
       console.log(imageArr);
     });
