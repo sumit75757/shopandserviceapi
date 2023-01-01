@@ -11,19 +11,19 @@ let io = socketIO(httpServer);
 
 httpServer.listen(port);
 io.on("connection", (socket: any) => {
-  console.log(`User Connected: ${socket.id}`);
+  //console.log(`User Connected: ${socket.id}`);
   socket.on("join_room", (data: any) => {
     socket.join(data);
-    console.log(`User with ID: ${socket.id} joined room: ${data.room}`);
+    //console.log(`User with ID: ${socket.id} joined room: ${data.room}`);
   });
   socket.on("sendMessage", (data: any) => {
-    console.log(data);
+    //console.log(data);
     socket.to(data.room).except(data.room).emit("receive_message", data);
     socket._error((err: any) => {
-      console.log(err);
+      //console.log(err);
     });
   });
   socket.on("disconnect", () => {
-    console.log("User Disconnected", socket.id);
+    //console.log("User Disconnected", socket.id);
   });
 });

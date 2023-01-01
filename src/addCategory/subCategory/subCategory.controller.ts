@@ -17,14 +17,14 @@ const subCategory = {
         }
       })
       .catch((err: any) => {
-        console.log("ERROR", err);
+        //console.log("ERROR", err);
       });
   },
 
   //////getCatogory//////////
 
   addCatagory(req: any, res: any) {
-    console.log(req.body);
+    //console.log(req.body);
     const catogory = new subcaetogory({
       _id: new mongoose.Types.ObjectId(),
       catgory: req.body.catgory,
@@ -50,7 +50,7 @@ const subCategory = {
       perent: req.body.perent,
       updateAt: Date(),
     };
-    console.log(catogory, id);
+    //console.log(catogory, id);
 
     subcaetogory
       .findOneAndUpdate(
@@ -83,9 +83,9 @@ const subCategory = {
   },
 
   removeCatagory(req: any, res: any) {
-    console.log(req.body);
+    //console.log(req.body);
     const id = req.params.id;
-    console.log(id);
+    //console.log(id);
 
     subcaetogory
       .remove({
@@ -116,7 +116,7 @@ const subCategory = {
         }
       })
       .catch((err: any) => {
-        console.log("ERROR", err);
+        //console.log("ERROR", err);
       });
   },
 };

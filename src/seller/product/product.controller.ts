@@ -2,9 +2,9 @@ import product from "../../product/product.model";
 const products = {
   async getgetproduct(req: any, res: any) {
     //
-    console.log(req.query.skip, req.query.limit);
+    //console.log(req.query.skip, req.query.limit);
     let a = req.query.serch;
-    console.log(a);
+    //console.log(a);
     let serch: string = "";
     if (a == undefined && a == "undefined") {
       serch = "";

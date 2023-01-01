@@ -41,7 +41,7 @@ import authChack from "../Middleware/chackauth";
 
 const unlinkAsync = promisify(fs.unlink);
 
-// console.log("dfasdF", jWT_SECRET);
+// //console.log("dfasdF", jWT_SECRET);
 
 route.post(
   "/singup",
@@ -53,7 +53,7 @@ route.post(
       })
       .exec()
       .then((result: any) => {
-        console.log(req.body);
+        //console.log(req.body);
         if (result.length >= 1) {
           return res.status(409).json({
             code: "409",
@@ -93,7 +93,7 @@ route.post(
                     req.body.password,
                     hase,
                     (err: any, logUSer: any) => {
-                      console.log(logUSer);
+                      //console.log(logUSer);
                       if (err) {
                         return err.status(401).json({
                           message: "Anauthorais user",
@@ -133,7 +133,7 @@ route.post(
                       });
                     }
                   );
-                  // console.log(result);
+                  // //console.log(result);
                 })
                 .catch((err: any) => {
                   res.status(401).json({
@@ -154,7 +154,7 @@ route.post("/singin", (req: any, res: any, next: any) => {
     })
     .exec()
     .then((result: any[]) => {
-      console.log("fasdfasdfasd", result);
+      //console.log("fasdfasdfasd", result);
       if (result.length < 1) {
         return res.status(401).json({
           message: "Anauthorais user",
@@ -204,10 +204,10 @@ route.post("/singin", (req: any, res: any, next: any) => {
                 )
                 .exec()
                 .then((final: any) => {
-                  console.log("FasdfasdfAS", final);
+                  //console.log("FasdfasdfAS", final);
                 })
                 .catch((err: any) => {
-                  console.log(err);
+                  //console.log(err);
                 });
               data = {
                 response: {
@@ -236,7 +236,7 @@ route.put(
   uplode.single("userImage"),
   (req: any, res: any) => {
     const _id = req.params.id;
-    console.log(req.body);
+    //console.log(req.body);
 
     let obj;
     if (req.file) {
@@ -282,10 +282,10 @@ route.put(
         // res.status(201).json(result);
         if (req.file) {
           try {
-            console.log("adfasdfasdfadsfa", result.userImage);
+            //console.log("adfasdfasdfadsfa", result.userImage);
             unlinkAsync("." + result.userImage);
           } catch (err) {
-            console.log(err);
+            //console.log(err);
             res.status(400).json(err);
           }
           res.status(201).json(result);
@@ -309,7 +309,7 @@ route.delete("/seller/:id", (req, res) => {
     .exec()
     .then((result:any) => {
       res.status(200).json(result);
-      console.log(result);
+      //console.log(result);
     })
     .catch((err) => {
       res.status(400).json(err.errors);
@@ -321,7 +321,7 @@ route.use("/forgot", forgot);
 function getdata(result:any) {
   let res = Object.assign(result)
   let obj
-  console.log(res);
+  //console.log(res);
   if(res.character=="seller"){
     obj={
       "_id": res._id,

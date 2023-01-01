@@ -33,7 +33,7 @@ const services = {
           });
           element.seller = obj;
         });
-        // //console.log(result);
+        // ////console.log(result);
         res.status(200).json({
           message: "got all service",
           result: result,
@@ -47,7 +47,7 @@ const services = {
   postService(req: any, res: any) {
     req.files.forEach((element: any) => {
       imageArr.push("/serviceImage/" + element.filename);
-      //console.log(element);
+      ////console.log(element);
     });
     let service = new ServiceModel({
       _id: new mongoos.Types.ObjectId(),
@@ -83,7 +83,7 @@ const services = {
   },
 
   async updateService(req: any, res: any) {
-    console.log(req.files.length > 0 );
+    //console.log(req.files.length > 0 );
     
     if (req.files.length > 0) {
       req.files.forEach((element: any) => {
@@ -91,7 +91,7 @@ const services = {
       });
     }
     const id = req.params.id;
-    //console.log(id);
+    ////console.log(id);
     let data: any;
     if (req.body) {
       if (req.files.length > 0) {
@@ -159,17 +159,17 @@ const services = {
                 const elementq = old[index];
                 if (element != elementq) {
                   try {
-                    //console.log("adfasdfasdfadsfa", elementq);
+                    ////console.log("adfasdfasdfadsfa", elementq);
                     unlinkAsync("." + elementq);
                   } catch (err) {
-                    //console.log(err);
+                    ////console.log(err);
                   }
                 }
                 imageArr = [];
               }
             }
           }
-          //console.log(result);
+          ////console.log(result);
         }
       })
       .catch((err) => {
@@ -188,18 +188,18 @@ const services = {
         res.status(200).json(result);
         try {
           result.serviceImage.forEach((element: any) => {
-            //console.log(element);
+            ////console.log(element);
             unlinkAsync("." + element);
           });
         } catch (err) {
-          //console.log(err);
+          ////console.log(err);
         }
-        // //console.log(result);
+        // ////console.log(result);
       })
       .catch((err) => {
         res.status(500).json(err.errors);
       });
-    //console.log(serviceImage);
+    ////console.log(serviceImage);
   },
 };
 export default services;

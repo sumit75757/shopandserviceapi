@@ -3,6 +3,8 @@ import authChack from "../Middleware/chackauth";
 import search from "./search.control";
 const route = express();
 
-route.get("/", authChack, search.serch);
+route.get("/", search.serch);
+route.get("/catogory/:catogory", search.catserch);
+
 
 export default route

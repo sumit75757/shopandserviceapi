@@ -24,7 +24,7 @@ require("dotenv").config();
 
 const database: any = process.env.MONGO_URL;
 // const database: any = process.env.MONGO_URL_LOCAL;
-console.log(database);
+//console.log(database);
 
 mongoos
   .connect(database)
@@ -33,7 +33,7 @@ mongoos
     console.log("http://localhost:" + process.env.PORT + "/");
   })
   .catch((err: any) => {
-    console.log("database not conected", err);
+    //console.log("database not conected", err);
   });
 app.use(express.json());
 app.use(morgen("dev"));
@@ -73,7 +73,6 @@ app.use("/api/product", product);
 app.use("/api/cart", cart);
 app.use("/api/orders", orders);
 app.use("/api/seller/product", productSeller);
-                   // service//
 app.use("/api/service",service)
 app.use("/api/servicecat", servicecat);
 app.use("/api/offers", offers);

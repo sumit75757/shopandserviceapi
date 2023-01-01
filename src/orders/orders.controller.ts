@@ -37,7 +37,7 @@ const orders = {
       payment: req.body.payment,
       crreatAt: Date(),
     });
-    console.log("fasdfasdfsa", prod.price);
+    //console.log("fasdfasdfsa", prod.price);
 
     ordders
       .save()

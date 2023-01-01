@@ -64,7 +64,7 @@ const carts = {
         data.forEach((element) => {
           element.product = element.prod[0];
           delete element.prod;
-          console.log(delete element.prod);
+          //console.log(delete element.prod);
         });
         let obj = {
           count: data.length,
@@ -74,7 +74,7 @@ const carts = {
         res.status(200).json(obj);
       })
       .catch((err: any) => {
-        console.log("ERROR", err);
+        //console.log("ERROR", err);
       });
   },
 
@@ -86,7 +86,7 @@ const carts = {
       quantity: req.body.quantity,
       crreatAt: Date(),
     });
-    console.log(cartss);
+    //console.log(cartss);
     cartss
       .save()
       .then((result: any) => {

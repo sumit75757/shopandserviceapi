@@ -96,9 +96,9 @@ const offers = {
         try {
           unlinkAsync("." + result.offerImage);
         } catch (err) {
-          console.log(err);
+          //console.log(err);
         }
-        console.log(result);
+        //console.log(result);
         userImages = true;
       })
       .catch((err) => {

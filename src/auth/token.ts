@@ -17,7 +17,7 @@ const oAuth2Client = new google.auth.OAuth2(
  oAuth2Client.getToken(code).then(({ tokens }: any) => {
   const tokenPath = path.join(__dirname, "token.json");
   fs.writeFileSync(tokenPath, JSON.stringify(tokens));
-  console.log("Access token and refresh token stored to token.json");
+  //console.log("Access token and refresh token stored to token.json");
 });
 
 

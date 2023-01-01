@@ -12,7 +12,7 @@ const product = {
     
     req.files.forEach((element: any) => {
       imageArr.push("/productImage/" + element.filename);
-      console.log(imageArr);
+      //console.log(imageArr);
     });
     
     const product = new productModel({
@@ -44,24 +44,24 @@ const product = {
       })
       .catch((err: any) => {
         res.status(404).json(err);
-        console.log("dfasdfaSDFASDFA", err);
+        //console.log("dfasdfaSDFASDFA", err);
       });
   },
   getProduct(req: any, res: any) {
-    // console.log(req.query.username);
+    // //console.log(req.query.username);
     // const id = req.query.product;
     // const fin = { _id: id }
     // if (id != null && id !== "" && id != undefined) {
     //     productModel.find().exec().then((result: any) => {
     //         if (result) {
     //             res.status(200).json(result)
-    //             console.log("fasdfasdfsa", result)
+    //             //console.log("fasdfasdfsa", result)
     //         } else {
     //             res.status(404).json({
     //                 code: "404",
     //                 massage: "Not Found"
     //             })
-    //             console.log(result)
+    //             //console.log(result)
     //         }
     //     }).catch((err: any) => {
     //         res.status(500).json(err.errors)
@@ -90,7 +90,8 @@ const product = {
                 catogory: data.catogory,
                 productImage: data.productImage,
                 discrption: data.discrption,
-                createAt: data.createAt,
+                onhome:data.onhome,
+                  createAt: data.createAt,
               };
             }),
           });
@@ -111,13 +112,13 @@ const product = {
       .then((result:any) => {
         if (result) {
           res.status(200).json(result);
-          console.log(result);
+          //console.log(result);
         } else {
           res.status(404).json({
             code: "404",
             massage: "Not Found",
           });
-          console.log(result);
+          //console.log(result);
         }
       })
       .catch((err) => {
@@ -126,18 +127,19 @@ const product = {
   },
 
   async productupdate(req: any, res: any) {
-    console.log(req.files);
-
-    req.files.forEach((element: any) => {
-      imageArr.push("/productImage/" + element.filename);
-      console.log(element.filename);
-      console.log(imageArr);
-
-    });
-    // console.log("adasd", req.file);
-    const id = req.params.id;
-    console.log(imageArr);
     let data: any;
+    if (req.files) {
+      req.files.forEach((element: any) => {
+        imageArr.push("/productImage/" + element.filename);
+      });
+    }
+    // console.log(req.body.sethomepage);
+    //     data = {
+    //       onhome:req.body.sethomepage
+    // }
+    console.log(data);
+    
+    const id = req.params.id;
     if (req.files) {
       data = {
         sellerId: req.body.sellerId,
@@ -158,28 +160,18 @@ const product = {
         catogory: req.body.catogory,
         inStock: req.body.inStock,
         discrption: req.body.discrption,
+        onhome:req.body.sethomepage
+
       };
     }
-    console.log(data);
-
     productModel
-      .findByIdAndUpdate(
-        {
-          _id: id,
-        },
-        {
-          $set: data,
-        }
-      )
-      .exec()
-      .then((result:any) => {
+      .findByIdAndUpdate( {_id: id, },{$set: data, }).exec().then((result:any) => {
         if (result) {
           res.status(200).json({
             success: true,
             message: "data updated",
             result,
           });
-          console.log(result);
         } 
       })
       .catch((err) => {
@@ -198,13 +190,10 @@ const product = {
         res.status(200).json(result);
         try {
           result.productImage.forEach((element: any) => {
-            console.log(element);
             unlinkAsync("." + element);
           });
         } catch (err) {
-          console.log(err);
-        }
-        console.log(result);
+          console.log(err);}
         userImages = true;
       })
       .catch((err) => {

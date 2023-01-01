@@ -35,9 +35,9 @@ const product = new mongoos.Schema({
     type: String,
     required: true
   },
-  delevery: {
-     type: Number,
-    // required: true
+  onhome: {
+    type: Boolean,
+    required: false
   },
   createAt: String,
 });
