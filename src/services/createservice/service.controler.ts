@@ -122,6 +122,7 @@ const services = {
           city: req.body.city,
           state: req.body.state,
           pincode: req.body.pincode,
+          onhome: req.body.sethomepage,
           startTime: req.body.startTime,
           closeTime: req.body.closeTime,
         };

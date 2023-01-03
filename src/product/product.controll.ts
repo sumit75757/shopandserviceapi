@@ -9,12 +9,11 @@ const unlinkAsync = promisify(fs.unlink);
 let imageArr: any[] = [];
 const product = {
   postProduct(req: any, res: any) {
-    
     req.files.forEach((element: any) => {
       imageArr.push("/productImage/" + element.filename);
       //console.log(imageArr);
     });
-    
+
     const product = new productModel({
       _id: new mongoos.Types.ObjectId(),
       sellerId: req.body.sellerId,
@@ -73,7 +72,7 @@ const product = {
       .skip(req.query.skip)
       .limit(10)
       .exec()
-      .then((result:any) => {
+      .then((result: any) => {
         if (result) {
           res.status(200).json({
             response: {
@@ -81,7 +80,7 @@ const product = {
               request: "GEt",
               respons: "succses",
             },
-            data: result.map((data:any) => {
+            data: result.map((data: any) => {
               return {
                 _id: data._id,
                 productName: data.productName,
@@ -90,8 +89,8 @@ const product = {
                 catogory: data.catogory,
                 productImage: data.productImage,
                 discrption: data.discrption,
-                onhome:data.onhome,
-                  createAt: data.createAt,
+                onhome: data.onhome,
+                createAt: data.createAt,
               };
             }),
           });
@@ -109,7 +108,7 @@ const product = {
     productModel
       .findById(id)
       .exec()
-      .then((result:any) => {
+      .then((result: any) => {
         if (result) {
           res.status(200).json(result);
           //console.log(result);
@@ -138,7 +137,7 @@ const product = {
     //       onhome:req.body.sethomepage
     // }
     console.log(data);
-    
+
     const id = req.params.id;
     if (req.files) {
       data = {
@@ -160,19 +159,20 @@ const product = {
         catogory: req.body.catogory,
         inStock: req.body.inStock,
         discrption: req.body.discrption,
-        onhome:req.body.sethomepage
-
+        onhome: req.body.sethomepage,
       };
     }
     productModel
-      .findByIdAndUpdate( {_id: id, },{$set: data, }).exec().then((result:any) => {
+      .findByIdAndUpdate({ _id: id }, { $set: data })
+      .exec()
+      .then((result: any) => {
         if (result) {
           res.status(200).json({
             success: true,
             message: "data updated",
             result,
           });
-        } 
+        }
       })
       .catch((err) => {
         res.status(400).json(err);
@@ -186,14 +186,15 @@ const product = {
     productModel
       .findByIdAndRemove(id)
       .exec()
-      .then((result:any) => {
+      .then((result: any) => {
         res.status(200).json(result);
         try {
           result.productImage.forEach((element: any) => {
             unlinkAsync("." + element);
           });
         } catch (err) {
-          console.log(err);}
+          console.log(err);
+        }
         userImages = true;
       })
       .catch((err) => {

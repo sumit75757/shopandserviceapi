@@ -34,8 +34,8 @@ const uplode = multer({
   fileFilter: fileFilter,
 });
 
-route.get("/", authChack, services.getService);
-route.post("/",authChack,uplode.array("serviceImage", 7),services.postService
+route.get("/", services.getService);
+route.post("/",uplode.array("serviceImage", 7),services.postService
 );
 route.put("/:id",uplode.array("serviceImage", 7),authChack,services.updateService
 );

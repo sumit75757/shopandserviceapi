@@ -44,6 +44,10 @@ const service = new mongoos.Schema({
     type: String,
     required: true,
   },
+  onhome: {
+    type: Boolean,
+    required: false,
+  },
   closeTime: {
     type: String,
     required: true,
