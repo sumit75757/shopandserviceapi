@@ -25,6 +25,7 @@ require("dotenv").config();
 const database: any = process.env.MONGO_URL;
 // const database: any = process.env.MONGO_URL_LOCAL;
 //console.log(database);
+mongoos.set("strictQuery", false);
 
 mongoos
   .connect(database)
