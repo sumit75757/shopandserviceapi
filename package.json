@@ -34,6 +34,7 @@
     "nodemailer": "^6.7.5",
     "nodemon": "^2.0.16",
     "otp-generator": "^4.0.0",
+    "razorpay": "^2.8.4",
     "save": "^2.5.0",
     "socket.io": "^4.5.2",
     "ts-loader": "^9.3.0",

@@ -6,5 +6,7 @@ const route = express();
 
 route.get("/:id", authChack, order.getOrder);
 route.post("/", authChack, order.order);
+// route.post("/rezeer", authChack, order.order);
+
 
 export default  route;

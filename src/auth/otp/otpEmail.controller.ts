@@ -4,6 +4,7 @@ let otp: any = "";
 require("dotenv").config();
 
 const otpdata: any[] = [];
+let ecpire: any[]
 
 const emailservice = {
   email(req: any, res: any) {
@@ -34,9 +35,20 @@ const emailservice = {
         otpdata.push({
           email: req.body.email,
           otp: otp,
-          time: new Date().getTime(),
+          time: Date.now()
         });
         res.status(200).json(emailsend);
+          
+          setInterval(()=> {
+            let time = Date.now();
+            ecpire = otpdata.filter(function(item) {
+              console.log(item.time + (5000 * 60));
+              return time < item.time + (5000 * 60);
+            }); 
+            console.log(ecpire);
+            
+          }, 500);
+          
       })
       .catch((Err) => {
         res.status(400).json(Err);
@@ -44,14 +56,9 @@ const emailservice = {
   },
 
   verify(req: any, res: any) {
-    //console.log(otpdata);
-    //console.log(new Date().getTime());
-
-    let getotps: any = otpdata.filter((d) => (req.body.email = d.email));
-    //console.log(getotps);
-
+    let getotps: any = ecpire.filter((d) => (req.body.email == d.email));
     if (getotps) {
-      getotps[0].otp == req.body.otp
+      getotps[0]?.otp == req.body.otp
         ? res.status(200).json({
             status: true,
             messge: "You has been successfully registered",
@@ -62,20 +69,21 @@ const emailservice = {
           });
     }
   },
+  
 };
 
 export default emailservice;
 
-function deleteOtp() {
-  otpdata.forEach((element) => {
-    //console.log("asdgasdf", element);
-    if (new Date().getTime() > element.time) {
-      let deletedata = otpdata.filter((item) => item.email !== element.email);
-      //console.log("asdgaasdfasdf", deletedata);
-    } else {
-      //console.log("not done");
-    }
-    //console.log(new Date().getTime());
-  });
-}
-const get = setInterval(deleteOtp, 300000);
+// function deleteOtp() {
+//   otpdata.forEach((element) => {
+//     //console.log("asdgasdf", element);
+//     if (new Date().getTime() > element.time) {
+//       let deletedata = otpdata.filter((item) => item.email !== element.email);
+//       //console.log("asdgaasdfasdf", deletedata);
+//     } else {
+//       //console.log("not done");
+//     }
+//     //console.log(new Date().getTime());
+//   });
+// }
+

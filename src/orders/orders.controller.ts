@@ -1,22 +1,57 @@
 import orderes from "./orders.model";
 import productModel from "../product/product.model";
 const mongoos = require("mongoose");
+var Razorpay = require("razorpay");
 const orders = {
   getOrder(req: any, res: any) {
+    const id = req.params.id;
+
     orderes
-      .find({ userId: req.params.id })
-      .then((result: any) => {
-        let data = {
-          message: "order",
-          result: result,
+      .aggregate([
+        {
+          $lookup: {
+            from: "products",
+            localField: "productId",
+            foreignField: "_id",
+            as: "prod",
+          },
+        },
+      ])
+      .then((result: any[]) => {
+        console.log(result);
+        
+        let total :any
+        let prodArr: any[] = [];
+        let data = result.filter((d) => d.userId == id);
+        data.forEach((element) => {
+         
+          console.log(element._id);
+          // delete element.prod;
+          element.prod[0]['productId'] = element.prod[0]['_id']
+          element.prod[0]._id =element._id
+          element.prod[0].qty =element.quantity
+          prodArr.push( element.prod[0])
+          
+          //  element.prod[0].price + total
+          
+          
+          // console.log( );
+        });
+        let obj = {
+          count: data.length, 
+          response: "sucsess",
+          data: prodArr,
+          
         };
-        res.status(200).json(data);
+        // console.log(prodArr);
+        
+        res.status(200).json(obj);
       })
       .catch((err: any) => {
         res.status(400).json(err);
       });
   },
-  
+
   async order(req: any, res: any) {
     let prod: any;
     await productModel
@@ -34,23 +69,28 @@ const orders = {
       productId: req.body.productId,
       quantity: req.body.quantity,
       price: prod.price * req.body.quantity,
+      address: req.body.address,
+      city: req.body.city,
+      state: req.body.state,
+      zip: req.body.zip,
       payment: req.body.payment,
       crreatAt: Date(),
     });
-    //console.log("fasdfasdfsa", prod.price);
-
-    ordders
-      .save()
-      .then((result: any) => {
-        let data = {
-          message: "order plased",
-          result: result,
-        };
-        res.status(201).json(data);
-      })
-      .catch((err: any) => {
-        res.status(400).json(err);
-      });
+     ordders
+       .save()
+       .then((result: any) => {
+         let data = {
+           message: "order plased",
+           result: result,
+         };
+         res.status(201).json(data);
+       })
+       .catch((err: any) => {
+         res.status(400).json(err);
+       });
+   
   },
 };
 export default orders;
+
+

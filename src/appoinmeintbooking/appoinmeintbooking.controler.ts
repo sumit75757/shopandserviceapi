@@ -2,11 +2,11 @@ import express from "express";
 const route = express();
 import mongoos from "mongoose";
 
-import cart from "./cart.model";
-const carts = {
-  removeCart(req: any, res: any) {
+import apoimentbooking from "./appoinmeintbooking.model";
+const apobooking = {
+  removeapobooking(req: any, res: any) {
     const id = req.params.id;
-    cart.remove({_id:id})
+    apoimentbooking.remove({_id:id})
       .then((result: any[]) => {
         let obj = {
           response: "sucsess",
@@ -18,12 +18,12 @@ const carts = {
         res.status(400).json(err);
       });
   },
-  updateCart(req: any, res: any) {
+  updateapobooking(req: any, res: any) {
     const id = req.params.id;
     let obj = {
-      quantity: req.body.quantity,
+      
     };
-    cart
+    apoimentbooking
       .findByIdAndUpdate(
         {
           _id: id,
@@ -44,16 +44,16 @@ const carts = {
       });
   },
 
-  getCart(req: any, res: any) {
+  getapobooking(req: any, res: any) {
     const id = req.params.id;
-    cart
+    apoimentbooking
       .aggregate([
         {
           $lookup: {
-            from: "products",
-            localField: "productId",
+            from: "services",
+            localField: "serviceId",
             foreignField: "_id",
-            as: "prod",
+            as: "service",
           },
         },
       ])
@@ -61,18 +61,18 @@ const carts = {
         console.log(result);
         
         let total :any
-        let prodArr: any[] = [];
+        let serveArr: any[] = [];
         let data = result.filter((d) => d.userId == id);
         data.forEach((element) => {
          
-          console.log(element._id);
-          // delete element.prod;
-          element.prod[0]['productId'] = element.prod[0]['_id']
-          element.prod[0]._id =element._id
-          element.prod[0].qty =element.quantity
-          prodArr.push( element.prod[0])
+          console.log(element);
+          // delete element.serve;
+          element.service[0]['serviceId'] = element.service[0]['_id']
+          element.service[0]._id =element._id
+          element.service[0].userdata =element.userdata
+          serveArr.push(element.service[0])
           
-          //  element.prod[0].price + total
+          //  element.serve[0].price + total
           
           
           // console.log( );
@@ -80,10 +80,10 @@ const carts = {
         let obj = {
           count: data.length, 
           response: "sucsess",
-          data: prodArr,
+          data: serveArr,
           
         };
-        // console.log(prodArr);
+        // console.log(serveArr);
         
         res.status(200).json(obj);
       })
@@ -94,16 +94,16 @@ const carts = {
       });
   },
 
-  addCart(req: any, res: any) {
-    const cartss = new cart({
+  addapobooking(req: any, res: any) {
+    const apobookingss = new apoimentbooking({
       _id: new mongoos.Types.ObjectId(),
       userId: req.body.userId,
-      productId: req.body.productId,
-      quantity: req.body.quantity,
+      serviceId: req.body.serviceId,
+      userdata:req.body.userdata,
       crreatAt: Date(),
     });
-    //console.log(cartss);
-    cartss
+    //console.log(apobookingss);
+    apobookingss
       .save()
       .then((result: any) => {
         res.status(201).json(result);
@@ -113,4 +113,4 @@ const carts = {
       });
   },
 };
-export default carts;
+export default apobooking;

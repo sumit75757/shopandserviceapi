@@ -22,11 +22,12 @@ const offers = {
       });
   },
   postOffers(req: any, res: any) {
-    let offerImage = req.file;
     const offer = new offersModel({
       _id: new mongoos.Types.ObjectId(),
-      offerImage: "/offerImage/" + offerImage?.filename,
+      offerImage: req.body.offerImage,
+      productid: req.body.productid,
       category: req.body.category,
+      discout: req.body.discout,
       crreatAt: Date(),
     });
     offer.save().then((result: any) => {

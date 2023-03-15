@@ -35,6 +35,8 @@ const uplode = multer({
 });
 
 route.get("/", services.getService);
+route.get("/:id", services.getService);
+
 route.post("/",uplode.array("serviceImage", 7),services.postService
 );
 route.put("/:id",uplode.array("serviceImage", 7),authChack,services.updateService

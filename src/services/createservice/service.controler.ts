@@ -9,6 +9,7 @@ let imageArr: any[] = [];
 
 const services = {
   getService(req: any, res: any) {
+   
     ServiceModel.aggregate([
       {
         $lookup: {
@@ -19,7 +20,7 @@ const services = {
         },
       },
     ])
-      .then((result: any) => {
+      .then((result: any[]) => {
         let obj: any;
         result.forEach((element: any) => {
           element.seller.forEach((element: any) => {
@@ -33,11 +34,22 @@ const services = {
           });
           element.seller = obj;
         });
-        // ////console.log(result);
-        res.status(200).json({
-          message: "got all service",
-          result: result,
-        });
+         if (req.params.id) {
+           console.log(req.params.id);
+
+          let arr =  result.filter((i) => i._id == req.params.id);
+           // ////console.log(result);
+           res.status(200).json({
+             message: "got all service",
+             result: arr,
+           });
+         }else{
+           res.status(200).json({
+             message: "got all service",
+             result: result,
+           });
+         }
+
       })
       .catch((err: any) => {
         res.status(400).send(err);

@@ -17,4 +17,4 @@ const url = oAuth2Client.generateAuthUrl({
   scope: GMAIL_SCOPES,
 });
 
-//console.log("Authorize this app by visiting this url:", url);
+console.log("Authorize this app by visiting this url:", url);

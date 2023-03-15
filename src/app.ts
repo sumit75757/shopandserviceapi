@@ -19,6 +19,7 @@ import offers from "./offers/offers";
 import render from "./templet/render";
 import path from "path";
 import search from "./search/search";
+import apobooking from "./appoinmeintbooking/appoinmeintbooking";
 const app = express();
 require("dotenv").config();
 
@@ -34,7 +35,7 @@ mongoos
     console.log("http://localhost:" + process.env.PORT + "/");
   })
   .catch((err: any) => {
-    //console.log("database not conected", err);
+    console.log("database not conected", err);
   });
 app.use(express.json());
 app.use(morgen("dev"));
@@ -78,6 +79,8 @@ app.use("/api/service",service)
 app.use("/api/servicecat", servicecat);
 app.use("/api/offers", offers);
 app.use("/api/serche", search);
+app.use("/api/bookapoinment", apobooking);
+
 
 
 app.use((res, req, next) => {

@@ -5,6 +5,10 @@ const order = new mongooss.Schema({
   productId: { type: Schema.Types.ObjectId, ref: "product" },
   quantity: { type: Number, required: true },
   price: { type: Number, required: true },
+  address: { type: String, required: true },
+  city: { type: String, required: true },
+  state: { type: String, required: true },
+  zip: { type: String, required: true },
   payment: { type: String, required: true },
   crreatAt: { type: String, required: true },
 });
