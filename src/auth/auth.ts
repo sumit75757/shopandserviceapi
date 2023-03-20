@@ -315,6 +315,18 @@ route.delete("/seller/:id", (req, res) => {
       res.status(400).json(err.errors);
     });
 });
+route.get("/seller/:id", (req, res) => {
+  const id = req.params.id;
+  auth.findById(id)
+    .exec()
+    .then((result:any) => {
+      res.status(200).json(result);
+      //console.log(result);
+    })
+    .catch((err) => {
+      res.status(400).json(err);
+    });
+});
 
 route.use("/varification", email);
 route.use("/forgot", forgot);

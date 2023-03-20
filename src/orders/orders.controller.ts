@@ -5,50 +5,63 @@ var Razorpay = require("razorpay");
 const orders = {
   getOrder(req: any, res: any) {
     const id = req.params.id;
-
     orderes
       .aggregate([
         {
           $lookup: {
-            from: "products",
-            localField: "productId",
-            foreignField: "_id",
-            as: "prod",
+              from: "products",
+              localField: "productId",
+              foreignField: "_id",
+              as: "prod"
           },
         },
       ])
       .then((result: any[]) => {
-        console.log(result);
+        // console.log(result);
         
         let total :any
         let prodArr: any[] = [];
         let data = result.filter((d) => d.userId == id);
+        console.log("#############################",data);
+
         data.forEach((element) => {
-         
-          console.log(element._id);
+          
+          // console.log(element._id);
           // delete element.prod;
           element.prod[0]['productId'] = element.prod[0]['_id']
           element.prod[0]._id =element._id
           element.prod[0].qty =element.quantity
-          prodArr.push( element.prod[0])
+          element.prod[0].payment =element.payment
+          element.prod[0].cancel =element.cancel
+
+          
+
+          
+          prodArr.push(element.prod[0])
           
           //  element.prod[0].price + total
           
           
           // console.log( );
         });
+        
         let obj = {
           count: data.length, 
           response: "sucsess",
           data: prodArr,
           
         };
+
         // console.log(prodArr);
         
         res.status(200).json(obj);
       })
       .catch((err: any) => {
-        res.status(400).json(err);
+        res.status(400).json(
+          {
+            erro :err,
+            response: "error",
+          });
       });
   },
 
@@ -89,7 +102,22 @@ const orders = {
          res.status(400).json(err);
        });
    
+
   },
+  update(req:any,res:any){
+    const id = req.params.id;
+    let data = {cancel:req.body.cancel}
+    orderes
+    .findByIdAndUpdate({ _id: id }, { $set: data })
+    .exec()
+    .then((result: any) => {
+        res.status(200).json(result);
+      })
+    .catch((err: any) => {
+        res.status(400).json(err);
+      });
+  }
+
 };
 export default orders;
 

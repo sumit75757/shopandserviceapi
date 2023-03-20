@@ -9,6 +9,7 @@ const order = new mongooss.Schema({
   city: { type: String, required: true },
   state: { type: String, required: true },
   zip: { type: String, required: true },
+  cancel:{ type: String, default: "false" },
   payment: { type: String, required: true },
   crreatAt: { type: String, required: true },
 });
