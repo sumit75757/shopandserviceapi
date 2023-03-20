@@ -814,7 +814,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;/**
             onUnhandledError: noop,
             microtaskDrainDone: noop,
             scheduleMicroTask: scheduleMicroTask,
-            showUncaughtError: () => !Zone[__symbol__('ignoreConsoleErrorUncaughtError')],
+            showUncaughtError: () => !Zone[__symbol__('ignore// consoleErrorUncaughtError')],
             patchEventTarget: () => [],
             patchOnProperties: noop,
             patchMethod: () => noop,
@@ -878,10 +878,10 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;/**
             if (api.showUncaughtError()) {
                 const rejection = e && e.rejection;
                 if (rejection) {
-                    console.error('Unhandled Promise rejection:', rejection instanceof Error ? rejection.message : rejection, '; Zone:', e.zone.name, '; Task:', e.task && e.task.source, '; Value:', rejection, rejection instanceof Error ? rejection.stack : undefined);
+                    // console.error('Unhandled Promise rejection:', rejection instanceof Error ? rejection.message : rejection, '; Zone:', e.zone.name, '; Task:', e.task && e.task.source, '; Value:', rejection, rejection instanceof Error ? rejection.stack : undefined);
                 }
                 else {
-                    console.error(e);
+                    // console.error(e);
                 }
             }
         };

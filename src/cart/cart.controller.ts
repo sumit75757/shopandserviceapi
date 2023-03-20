@@ -58,14 +58,14 @@ const carts = {
         },
       ])
       .then((result: any[]) => {
-        console.log(result);
+        // console.log(result);
         
         let total :any
         let prodArr: any[] = [];
         let data = result.filter((d) => d.userId == id);
         data.forEach((element) => {
          
-          console.log(element._id);
+          // console.log(element._id);
           // delete element.prod;
           element.prod[0]['productId'] = element.prod[0]['_id']
           element.prod[0]._id =element._id
@@ -75,7 +75,7 @@ const carts = {
           //  element.prod[0].price + total
           
           
-          // console.log( );
+          // // console.log( );
         });
         let obj = {
           count: data.length, 
@@ -83,12 +83,12 @@ const carts = {
           data: prodArr,
           
         };
-        // console.log(prodArr);
+        // // console.log(prodArr);
         
         res.status(200).json(obj);
       })
       .catch((err: any) => {
-        console.log("ERROR", err);
+        // console.log("ERROR", err);
         // res.status(400).send(err);
 
       });
@@ -102,7 +102,7 @@ const carts = {
       quantity: req.body.quantity,
       crreatAt: Date(),
     });
-    //console.log(cartss);
+    //// console.log(cartss);
     cartss
       .save()
       .then((result: any) => {

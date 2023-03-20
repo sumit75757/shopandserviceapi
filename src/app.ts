@@ -25,17 +25,17 @@ require("dotenv").config();
 
 const database: any = process.env.MONGO_URL;
 // const database: any = process.env.MONGO_URL_LOCAL;
-//console.log(database);
+//// console.log(database);
 mongoos.set("strictQuery", false);
 
 mongoos
   .connect(database)
   .then((res: any) => {
-    console.log("database conected");
-    console.log("http://localhost:" + process.env.PORT + "/");
+    // console.log("database conected");
+    // console.log("http://localhost:" + process.env.PORT + "/");
   })
   .catch((err: any) => {
-    console.log("database not conected", err);
+    // console.log("database not conected", err);
   });
 app.use(express.json());
 app.use(morgen("dev"));
@@ -87,12 +87,12 @@ app.use((res, req, next) => {
   const err: any = new Error("404 Not Found");
   err.status = 404;
   err.message = "not found";
-  console.log(err);
+  // console.log(err);
   next();
 });
 
 app.use((err: any, req: any, res: any, next: any) => {
-  console.log(err);
+  // console.log(err);
   res.status(err.status || 500);
   res.json({
     error: {

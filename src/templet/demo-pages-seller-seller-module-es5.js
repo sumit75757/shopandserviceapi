@@ -2630,7 +2630,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           ar = {
         fromHtml: function fromHtml(e, t) {
           var n = (t || V.document).createElement("div");
-          if (n.innerHTML = e, !n.hasChildNodes() || 1 < n.childNodes.length) throw V.console.error("HTML does not have a single root node", e), new Error("HTML must have a single root node");
+          if (n.innerHTML = e, !n.hasChildNodes() || 1 < n.childNodes.length) throw V.// console.error("HTML does not have a single root node", e), new Error("HTML must have a single root node");
           return ir(n.childNodes[0]);
         },
         fromTag: function fromTag(e, t) {
@@ -2692,7 +2692,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         return e.style !== undefined && D(e.style.getPropertyValue);
       },
           xr = function xr(e, t, n) {
-        if (!(S(n) || R(n) || O(n))) throw V.console.error("Invalid call to Attr.set. Key ", t, ":: Value ", n, ":: Element ", e), new Error("Attribute value was not simple");
+        if (!(S(n) || R(n) || O(n))) throw V.// console.error("Invalid call to Attr.set. Key ", t, ":: Value ", n, ":: Element ", e), new Error("Attribute value was not simple");
         e.setAttribute(t, n + "");
       },
           wr = function wr(e, t, n) {
@@ -2715,7 +2715,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         var n = e.dom();
         hr(t, function (e, t) {
           !function (e, t, n) {
-            if (!S(n)) throw V.console.error("Invalid call to CSS.set. Property ", t, ":: Value ", n, ":: Element ", e), new Error("CSS value must be a string: " + n);
+            if (!S(n)) throw V.// console.error("Invalid call to CSS.set. Property ", t, ":: Value ", n, ":: Element ", e), new Error("CSS value must be a string: " + n);
             Cr(e) && e.style.setProperty(t, n);
           }(n, t, e);
         });
@@ -3152,7 +3152,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
                 } : function (e) {
                   t(e, 0);
                 }, i._unhandledRejectionFn = function (e) {
-                  "undefined" != typeof console && console && console.warn("Possible Unhandled Promise Rejection:", e);
+                  "undefined" != typeof // console && // console && // console.warn("Possible Unhandled Promise Rejection:", e);
                 }, i._setImmediateFn = function (e) {
                   i._immediateFn = e;
                 }, i._setUnhandledRejectionFn = function (e) {
@@ -4872,7 +4872,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
               }, i = (a = Ti).uniqueId(), (o = V.document.createElement("script")).id = i, o.type = "text/javascript", o.src = Xt._addCacheSuffix(t), o.onload = function () {
                 a.remove(i), o && (o.onreadystatechange = o.onload = o = null), n();
               }, o.onerror = function () {
-                Ai(r) ? r() : "undefined" != typeof console && console.log && console.log("Failed to load script: " + t);
+                Ai(r) ? r() : "undefined" != typeof // console && // console.log && // console.log("Failed to load script: " + t);
               }, (V.document.getElementsByTagName("head")[0] || V.document.body).appendChild(o)) : c("failure", e) : c("success", e);
             }), !f) {
               var t = a.slice(0);
@@ -7484,7 +7484,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
                 return e[o].apply(null, n);
               },
               log: function log(e) {
-                V.console.log(e, {
+                V.// console.log(e, {
                   constructors: u,
                   constructor: o,
                   params: n
@@ -9967,7 +9967,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           t[n - 1] = arguments[n];
         }
 
-        var r = V.window.console;
+        var r = V.window.// console;
         r && (r.error ? r.error.apply(r, arguments) : r.log.apply(r, arguments));
       },
           kh = {
@@ -17378,7 +17378,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           }
 
           this.counts();
-          console.log(this.next);
+          // console.log(this.next);
         }
       }, {
         key: "nexts",
@@ -17388,7 +17388,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           this.skip = s + l;
           this.nexta = this.skip;
           this.getproducta();
-          console.log(this.next);
+          // console.log(this.next);
           this.counts();
         }
       }, {
@@ -17407,9 +17407,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
           this.api.getCatogory().subscribe(function (res) {
             if (res.response == 'sucsess') {
-              console.log(res);
+              // console.log(res);
               _this2.category = res.data;
-              console.log(_this2.category);
+              // console.log(_this2.category);
             }
 
             if (res.count == 0) {
@@ -17429,7 +17429,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
             _this3.getproducta();
 
-            console.log(res);
+            // console.log(res);
           });
         }
       }, {
@@ -17535,13 +17535,13 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
                           _this6.getproducta();
 
-                          console.log(res);
+                          // console.log(res);
                         });
                       } else {
                         this.api.addproduct(formdata).subscribe(function (res) {
                           _this6.toastr.success('Product Add!');
 
-                          console.log(res);
+                          // console.log(res);
 
                           _this6.getproducta();
                         });
@@ -18678,7 +18678,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           }
 
           this.counts();
-          console.log(this.next);
+          // console.log(this.next);
         }
       }, {
         key: "nexts",
@@ -18688,7 +18688,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           this.skip = s + l;
           this.next = this.skip;
           this.getseller();
-          console.log(this.next);
+          // console.log(this.next);
           this.counts();
         }
       }, {
@@ -18730,7 +18730,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
                 _this8.toastr.error('Search result not found!');
               }
 
-              console.log(res);
+              // console.log(res);
               _this8.tableData = res.sellers;
               _this8.count = res.count;
 
@@ -18757,7 +18757,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             this.seller.patchValue(item);
             this.seller.controls['email'].disable();
             this.seller.controls['password'].disable();
-            console.log(item);
+            // console.log(item);
           }
         }
       }, {
@@ -18774,8 +18774,8 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           var _this9 = this;
 
           this.spiner.show();
-          console.log(this.file);
-          console.log(this.seller.controls['zender'].value);
+          // console.log(this.file);
+          // console.log(this.seller.controls['zender'].value);
           var formdata = new FormData(); // formdata.set('data',this.seller.)
 
           formdata.set('username', this.seller.controls['username'].value ? this.seller.controls['username'].value : '');
@@ -18795,7 +18795,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             formdata["delete"]('password');
             this.api.updateSeller(formdata, this.id).subscribe(function (res) {
               if (res.response = 'success') {
-                console.log(res);
+                // console.log(res);
 
                 _this9.spiner.hide();
 
@@ -18815,7 +18815,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           } else {
             this.api.addSeller(formdata).subscribe(function (res) {
               if (res.response = 'success') {
-                console.log(res);
+                // console.log(res);
 
                 _this9.spiner.hide();
 
@@ -18837,14 +18837,14 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         value: function statusHandel(e) {
           var _this10 = this;
 
-          console.log(e.target.checked);
-          console.log(e.target.id);
+          // console.log(e.target.checked);
+          // console.log(e.target.id);
           var obj = {
             satate: e.target.checked
           };
           this.api.updateSeller(obj, e.target.id).subscribe(function (res) {
             if (res.response = 'success') {
-              console.log(res);
+              // console.log(res);
 
               _this10.spiner.hide();
 
@@ -20081,7 +20081,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       _createClass(PipePipe, [{
         key: "transform",
         value: function transform(number) {
-          console.log(number);
+          // console.log(number);
           var num = number.toString();
 
           if (number == 0) {

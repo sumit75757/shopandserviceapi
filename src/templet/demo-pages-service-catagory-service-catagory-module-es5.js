@@ -285,9 +285,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           this.spiner.show();
           this.api.getServiceCategory().subscribe(function (res) {
             if (res.response == 'sucsess') {
-              console.log(res);
+              // console.log(res);
               _this.tableData = res.data;
-              console.log(_this.tableData);
+              // console.log(_this.tableData);
 
               _this.spiner.hide();
             } else {
@@ -306,7 +306,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         value: function update(item) {
           this.id = item._id;
           this.catogory.patchValue(item);
-          console.log(item);
+          // console.log(item);
         }
       }, {
         key: "clearForm",
@@ -320,8 +320,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           var _this2 = this;
 
           this.spiner.show();
-          console.log(this.file);
-          console.log(this.catogory.value);
+          // console.log(this.file);
+          // console.log(this.catogory.value);
 
           if (this.catogory.valid) {
             var formdata = {
@@ -332,7 +332,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             if (this.id) {
               this.api.updateServiceCategory(formdata, this.id).subscribe(function (res) {
                 if (res.response = 'success') {
-                  console.log(res);
+                  // console.log(res);
 
                   _this2.spiner.hide();
 
@@ -349,7 +349,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             } else {
               this.api.postServiceCategory(formdata).subscribe(function (res) {
                 if (res.response = 'success') {
-                  console.log(res);
+                  // console.log(res);
 
                   _this2.spiner.hide();
 
@@ -369,13 +369,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         key: "lodemor",
         value: function lodemor() {
           this.number += 5;
-          console.log(this.number);
+          // console.log(this.number);
         }
       }, {
         key: "reset",
         value: function reset() {
           this.number = 5;
-          console.log(this.number);
+          // console.log(this.number);
         }
       }, {
         key: "remove",

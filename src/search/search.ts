@@ -5,6 +5,10 @@ const route = express();
 
 route.get("/", search.serch);
 route.get("/catogory/:catogory", search.catserch);
+route.get("/service/:catogory", search.serivececatserch);
+route.get("/serviceserch/:serch", search.serviceserch);
+
+
 
 
 export default route

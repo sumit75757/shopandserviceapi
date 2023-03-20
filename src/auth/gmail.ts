@@ -1,7 +1,7 @@
 const { google } = require("googleapis");
 const credentials = require("./cradansial.json");
 const { client_secret, client_id, redirect_uri } = credentials.web;
-//console.log(redirect_uri);
+//// console.log(redirect_uri);
 const oAuth2Client = new google.auth.OAuth2(
   client_id,
   client_secret,
@@ -17,4 +17,4 @@ const url = oAuth2Client.generateAuthUrl({
   scope: GMAIL_SCOPES,
 });
 
-console.log("Authorize this app by visiting this url:", url);
+// console.log("Authorize this app by visiting this url:", url);

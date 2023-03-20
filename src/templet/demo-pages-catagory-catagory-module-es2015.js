@@ -193,9 +193,9 @@ class CatagoryComponent {
         this.spiner.show();
         this.api.getCatogory().subscribe((res) => {
             if (res.response == 'sucsess') {
-                console.log(res);
+                // console.log(res);
                 this.tableData = res.data;
-                console.log(this.tableData);
+                // console.log(this.tableData);
                 this.spiner.hide();
             }
             else {
@@ -210,12 +210,12 @@ class CatagoryComponent {
     update(item) {
         this.id = item._id;
         this.catogory.patchValue(item);
-        console.log(item);
+        // console.log(item);
     }
     updateSub(item) {
         this.id = item._id;
         this.subCatogory.patchValue(item);
-        console.log(item);
+        // console.log(item);
     }
     clearForm() {
         this.catogory.reset();
@@ -224,8 +224,8 @@ class CatagoryComponent {
     }
     submit() {
         this.spiner.show();
-        console.log(this.file);
-        console.log(this.catogory.value);
+        // console.log(this.file);
+        // console.log(this.catogory.value);
         if (this.catogory.valid) {
             let formdata = {
                 name: this.catogory.controls['name'].value,
@@ -234,7 +234,7 @@ class CatagoryComponent {
             if (this.id) {
                 this.api.updateCatogory(formdata, this.id).subscribe((res) => {
                     if (res.response = 'success') {
-                        console.log(res);
+                        // console.log(res);
                         this.spiner.hide();
                         this.getcatogory();
                         this.id = '';
@@ -249,7 +249,7 @@ class CatagoryComponent {
             else {
                 this.api.addCatogory(formdata).subscribe((res) => {
                     if (res.response = 'success') {
-                        console.log(res);
+                        // console.log(res);
                         this.spiner.hide();
                         this.getcatogory();
                         this.toster.success('Catogory Created');
@@ -264,8 +264,8 @@ class CatagoryComponent {
     }
     submitSub() {
         this.spiner.show();
-        console.log(this.file);
-        console.log(this.subCatogory.value);
+        // console.log(this.file);
+        // console.log(this.subCatogory.value);
         let formdata = {
             name: this.subCatogory.controls['name'].value,
             catgory: this.subCatogory.controls['name'].value,
@@ -274,7 +274,7 @@ class CatagoryComponent {
         if (this.id) {
             this.api.updateSubCatogory(formdata, this.id).subscribe((res) => {
                 if (res.response = 'success') {
-                    console.log(res);
+                    // console.log(res);
                     this.spiner.hide();
                     this.getcatogory();
                     this.id = '';
@@ -289,7 +289,7 @@ class CatagoryComponent {
         else {
             this.api.addSubCatogory(formdata).subscribe((res) => {
                 if (res.response = 'success') {
-                    console.log(res);
+                    // console.log(res);
                     this.spiner.hide();
                     this.getcatogory();
                     this.toster.success('Catogory Created');
@@ -303,11 +303,11 @@ class CatagoryComponent {
     }
     lodemor() {
         this.number += 5;
-        console.log(this.number);
+        // console.log(this.number);
     }
     reset() {
         this.number = 5;
-        console.log(this.number);
+        // console.log(this.number);
     }
     remove(id) {
         sweetalert2__WEBPACK_IMPORTED_MODULE_3___default.a.fire({

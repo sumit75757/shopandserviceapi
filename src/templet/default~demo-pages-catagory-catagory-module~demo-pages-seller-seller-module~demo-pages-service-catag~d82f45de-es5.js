@@ -185,7 +185,7 @@ function _createClass2(Constructor, protoProps, staticProps) { if (protoProps) _
         return _get(target, property, receiver || target);
       }
 
-      var consolePrefix = 'SweetAlert2:';
+      var // consolePrefix = 'SweetAlert2:';
       /**
        * Filter the unique values into a new array
        * @param arr
@@ -223,22 +223,22 @@ function _createClass2(Constructor, protoProps, staticProps) { if (protoProps) _
         return Array.prototype.slice.call(nodeList);
       };
       /**
-       * Standardise console warnings
+       * Standardise // console warnings
        * @param message
        */
 
 
       var warn = function warn(message) {
-        console.warn("".concat(consolePrefix, " ").concat(message));
+        // console.warn("".concat(// consolePrefix, " ").concat(message));
       };
       /**
-       * Standardise console errors
+       * Standardise // console errors
        * @param message
        */
 
 
       var error = function error(message) {
-        console.error("".concat(consolePrefix, " ").concat(message));
+        // console.error("".concat(// consolePrefix, " ").concat(message));
       };
       /**
        * Private global state for `warnOnce`
@@ -249,7 +249,7 @@ function _createClass2(Constructor, protoProps, staticProps) { if (protoProps) _
 
       var previousWarnOnceMessages = [];
       /**
-       * Show a console warning, but only if it hasn't already been shown
+       * Show a // console warning, but only if it hasn't already been shown
        * @param message
        */
 
@@ -260,7 +260,7 @@ function _createClass2(Constructor, protoProps, staticProps) { if (protoProps) _
         }
       };
       /**
-       * Show a one-time console warning about deprecated params/methods
+       * Show a one-time // console warning about deprecated params/methods
        */
 
 
@@ -3070,7 +3070,7 @@ function _createClass2(Constructor, protoProps, staticProps) { if (protoProps) _
         key: "getSeller",
         value: function getSeller(skip, limit, serch) {
           serch = serch ? serch : '';
-          console.log(serch);
+          // console.log(serch);
           return this.http.get(this.baseUrl + 'api/sellers?skip=' + skip + "&limit=" + limit + "&serch=" + serch, {
             headers: this.header
           });
@@ -3098,7 +3098,7 @@ function _createClass2(Constructor, protoProps, staticProps) { if (protoProps) _
         key: "getproduct",
         value: function getproduct(id, skip, limit, serch) {
           serch = serch ? serch : '';
-          console.log(serch);
+          // console.log(serch);
           return this.http.get(this.baseUrl + 'api/seller/product/' + id + '?skip=' + skip + "&limit=" + limit + "&serch=" + serch, {
             headers: this.header
           });
@@ -3141,7 +3141,7 @@ function _createClass2(Constructor, protoProps, staticProps) { if (protoProps) _
       }, {
         key: "addCatogory",
         value: function addCatogory(data) {
-          console.log(this.token);
+          // console.log(this.token);
           return this.http.post(this.baseUrl + 'api/catogory', data, {
             headers: this.header
           });
@@ -3192,7 +3192,7 @@ function _createClass2(Constructor, protoProps, staticProps) { if (protoProps) _
         key: "getUser",
         value: function getUser(skip, limit, serch) {
           serch = serch ? serch : '';
-          console.log(serch);
+          // console.log(serch);
           return this.http.get(this.baseUrl + 'api/users?skip=' + skip + "&limit=" + limit + "&serch=" + serch, {
             headers: this.header
           });

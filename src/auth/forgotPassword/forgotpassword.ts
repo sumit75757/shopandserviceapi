@@ -16,7 +16,7 @@ route.post("/", (req: any, res: any, next: any) => {
       await auth
         .findOneAndUpdate({ email: req.body.email }, { password: hase })
         .then((ress) => {
-          //console.log(ress);
+          //// console.log(ress);
         });
       res.status(200).json({
         message: "Password Updated",

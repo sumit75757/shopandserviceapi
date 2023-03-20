@@ -675,7 +675,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           }
 
           this.counts();
-          console.log(this.next);
+          // console.log(this.next);
         }
       }, {
         key: "nexts",
@@ -685,7 +685,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           this.skip = s + l;
           this.next = this.skip;
           this.getseller();
-          console.log(this.next);
+          // console.log(this.next);
           this.counts();
         }
       }, {
@@ -713,10 +713,10 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           }
 
           this.api.getUser(this.skip, this.limit, this.serch).subscribe(function (res) {
-            console.log(_this3.skip);
+            // console.log(_this3.skip);
 
             if (res.response == 'success') {
-              console.log(res);
+              // console.log(res);
 
               if (_this3.serch != '' && res.users.length == 0) {
                 _this3.toastr.error('Search result not found!');
@@ -724,7 +724,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
               _this3.count = res.count;
               _this3.tableData = res;
-              console.log(_this3.tableData.count);
+              // console.log(_this3.tableData.count);
 
               _this3.spiner.hide();
             } else {
@@ -745,14 +745,14 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         value: function statusHandel(e) {
           var _this4 = this;
 
-          console.log(e.target.checked);
-          console.log(e.target.id);
+          // console.log(e.target.checked);
+          // console.log(e.target.id);
           var obj = {
             satate: e.target.checked
           };
           this.api.updateSeller(obj, e.target.id).subscribe(function (res) {
             if (res.response = 'success') {
-              console.log(res);
+              // console.log(res);
 
               _this4.spiner.hide();
 

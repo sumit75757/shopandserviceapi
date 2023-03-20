@@ -2,9 +2,9 @@ import auth from "../auth/auth.model";
 
 const sellers = {
   async getseller(req: any, res: any) {
-    //console.log(req.query.skip, req.query.limit);
+    //// console.log(req.query.skip, req.query.limit);
     let a = req.query.serch
-    //console.log(a);
+    //// console.log(a);
     let serch: string = "";
     if (a == undefined && a == "undefined") {
       serch = '';
@@ -25,7 +25,7 @@ const sellers = {
       .sort("title")
       .count()
       .then((ress) => {
-        //console.log(result);
+        //// console.log(result);
         const arr: any[] = [];
         result.forEach((element: any) => {
           const obj = {
@@ -39,7 +39,7 @@ const sellers = {
           };
           arr.push(obj);
         });
-        //console.log(ress);
+        //// console.log(ress);
         
         const responseData: any = {
           count: ress,

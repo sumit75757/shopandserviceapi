@@ -11,7 +11,7 @@ const product = {
   postProduct(req: any, res: any) {
     req.files.forEach((element: any) => {
       imageArr.push("/productImage/" + element.filename);
-      //console.log(imageArr);
+      //// console.log(imageArr);
     });
 
     const product = new productModel({
@@ -43,24 +43,24 @@ const product = {
       })
       .catch((err: any) => {
         res.status(404).json(err);
-        //console.log("dfasdfaSDFASDFA", err);
+        //// console.log("dfasdfaSDFASDFA", err);
       });
   },
   getProduct(req: any, res: any) {
-    // //console.log(req.query.username);
+    // //// console.log(req.query.username);
     // const id = req.query.product;
     // const fin = { _id: id }
     // if (id != null && id !== "" && id != undefined) {
     //     productModel.find().exec().then((result: any) => {
     //         if (result) {
     //             res.status(200).json(result)
-    //             //console.log("fasdfasdfsa", result)
+    //             //// console.log("fasdfasdfsa", result)
     //         } else {
     //             res.status(404).json({
     //                 code: "404",
     //                 massage: "Not Found"
     //             })
-    //             //console.log(result)
+    //             //// console.log(result)
     //         }
     //     }).catch((err: any) => {
     //         res.status(500).json(err.errors)
@@ -111,13 +111,13 @@ const product = {
       .then((result: any) => {
         if (result) {
           res.status(200).json(result);
-          //console.log(result);
+          //// console.log(result);
         } else {
           res.status(404).json({
             code: "404",
             massage: "Not Found",
           });
-          //console.log(result);
+          //// console.log(result);
         }
       })
       .catch((err) => {
@@ -132,11 +132,11 @@ const product = {
         imageArr.push("/productImage/" + element.filename);
       });
     }
-    // console.log(req.body.sethomepage);
+    // // console.log(req.body.sethomepage);
     //     data = {
     //       onhome:req.body.sethomepage
     // }
-    console.log(data);
+    // console.log(data);
 
     const id = req.params.id;
     if (req.files) {
@@ -193,7 +193,7 @@ const product = {
             unlinkAsync("." + element);
           });
         } catch (err) {
-          console.log(err);
+          // console.log(err);
         }
         userImages = true;
       })

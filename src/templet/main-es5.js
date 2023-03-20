@@ -911,7 +911,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
             _this.toast.error(error.statusText);
 
-            console.log(error);
+            // console.log(error);
             var err = error;
             return rxjs__WEBPACK_IMPORTED_MODULE_1__["Observable"]["throw"](error);
           }));
@@ -4860,13 +4860,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             }];
           }
 
-          console.log(userType);
+          // console.log(userType);
           return NavigationItems;
         }
       }, {
         key: "get",
         value: function get() {
-          console.log(this.navigation());
+          // console.log(this.navigation());
           return this.navigation();
         }
       }]);
@@ -5272,8 +5272,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           var _this8 = this;
 
           this.spiner.show();
-          console.log(this.file);
-          console.log(this.seller.controls['zender'].value);
+          // console.log(this.file);
+          // console.log(this.seller.controls['zender'].value);
           var formdata = new FormData(); // formdata.set('data',this.seller.)
 
           formdata.set('username', this.seller.controls['username'].value ? this.seller.controls['username'].value : '');
@@ -5290,7 +5290,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           formdata.append('userImage', this.file);
           this.api.addSeller(formdata).subscribe(function (res) {
             if (res.response = 'success') {
-              console.log(res);
+              // console.log(res);
 
               _this8.spiner.hide();
             } else {
@@ -9116,7 +9116,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     }
 
     _angular_platform_browser__WEBPACK_IMPORTED_MODULE_3__["platformBrowser"]().bootstrapModule(_app_app_module__WEBPACK_IMPORTED_MODULE_2__["AppModule"])["catch"](function (err) {
-      return console.error(err);
+      return // console.error(err);
     });
     /***/
 

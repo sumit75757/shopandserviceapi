@@ -476,7 +476,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             // }
             _this.sta = res;
             _this.states = Object.keys(res);
-            console.log(_this.states);
+            // console.log(_this.states);
           });
           this.serviceForm = this.fb.group({
             // sellerId: new FormControl("", [Validators.required]),
@@ -508,9 +508,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
           this.api.getServiceCategory().subscribe(function (res) {
             if (res.response == 'sucsess') {
-              console.log(res);
+              // console.log(res);
               _this2.category = res.data;
-              console.log(_this2.category);
+              // console.log(_this2.category);
             }
 
             if (res.count == 0) {
@@ -586,7 +586,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         value: function setState(e) {
           var state = e.target.value;
           this.city = this.sta[state];
-          console.log(this.city);
+          // console.log(this.city);
         }
       }, {
         key: "addService",
@@ -615,13 +615,13 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           if (this.updateId) {
             this.api.Updatesrvice(formdata, this.updateId).subscribe(function (res) {
               if (res) {
-                console.log(res);
+                // console.log(res);
               }
             });
           } else {
             this.api.addservice(formdata).subscribe(function (res) {
               if (res) {
-                console.log(res);
+                // console.log(res);
               }
             });
           }

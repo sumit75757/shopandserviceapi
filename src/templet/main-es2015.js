@@ -508,7 +508,7 @@ class InterceptorService {
             else {
             }
             this.toast.error(error.statusText);
-            console.log(error);
+            // console.log(error);
             let err = error;
             return rxjs__WEBPACK_IMPORTED_MODULE_1__["Observable"].throw(error);
         }));
@@ -2643,11 +2643,11 @@ class NavigationItem {
                 }
             ];
         }
-        console.log(userType);
+        // console.log(userType);
         return NavigationItems;
     }
     get() {
-        console.log(this.navigation());
+        // console.log(this.navigation());
         return this.navigation();
     }
 }
@@ -2845,8 +2845,8 @@ class SingupComponent {
     }
     submit() {
         this.spiner.show();
-        console.log(this.file);
-        console.log(this.seller.controls['zender'].value);
+        // console.log(this.file);
+        // console.log(this.seller.controls['zender'].value);
         let formdata = new FormData();
         // formdata.set('data',this.seller.)
         formdata.set('username', this.seller.controls['username'].value ? this.seller.controls['username'].value : '');
@@ -2863,7 +2863,7 @@ class SingupComponent {
         formdata.append('userImage', this.file);
         this.api.addSeller(formdata).subscribe((res) => {
             if (res.response = 'success') {
-                console.log(res);
+                // console.log(res);
                 this.spiner.hide();
             }
             else {
@@ -4880,7 +4880,7 @@ if (_environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].produc
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["enableProdMode"])();
 }
 _angular_platform_browser__WEBPACK_IMPORTED_MODULE_3__["platformBrowser"]().bootstrapModule(_app_app_module__WEBPACK_IMPORTED_MODULE_2__["AppModule"])
-    .catch(err => console.error(err));
+    .catch(err => // console.error(err));
 
 
 /***/ }),

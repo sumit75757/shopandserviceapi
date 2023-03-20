@@ -123,9 +123,9 @@ class ServiceCatagoryComponent {
         this.spiner.show();
         this.api.getServiceCategory().subscribe((res) => {
             if (res.response == 'sucsess') {
-                console.log(res);
+                // console.log(res);
                 this.tableData = res.data;
-                console.log(this.tableData);
+                // console.log(this.tableData);
                 this.spiner.hide();
             }
             else {
@@ -140,7 +140,7 @@ class ServiceCatagoryComponent {
     update(item) {
         this.id = item._id;
         this.catogory.patchValue(item);
-        console.log(item);
+        // console.log(item);
     }
     clearForm() {
         this.catogory.reset();
@@ -148,8 +148,8 @@ class ServiceCatagoryComponent {
     }
     submit() {
         this.spiner.show();
-        console.log(this.file);
-        console.log(this.catogory.value);
+        // console.log(this.file);
+        // console.log(this.catogory.value);
         if (this.catogory.valid) {
             let formdata = {
                 name: this.catogory.controls['name'].value,
@@ -158,7 +158,7 @@ class ServiceCatagoryComponent {
             if (this.id) {
                 this.api.updateServiceCategory(formdata, this.id).subscribe((res) => {
                     if (res.response = 'success') {
-                        console.log(res);
+                        // console.log(res);
                         this.spiner.hide();
                         this.getcatogory();
                         this.id = '';
@@ -173,7 +173,7 @@ class ServiceCatagoryComponent {
             else {
                 this.api.postServiceCategory(formdata).subscribe((res) => {
                     if (res.response = 'success') {
-                        console.log(res);
+                        // console.log(res);
                         this.spiner.hide();
                         this.getcatogory();
                         sweetalert2__WEBPACK_IMPORTED_MODULE_3___default.a.fire('Create!', 'catogory created!', 'success');
@@ -188,11 +188,11 @@ class ServiceCatagoryComponent {
     }
     lodemor() {
         this.number += 5;
-        console.log(this.number);
+        // console.log(this.number);
     }
     reset() {
         this.number = 5;
-        console.log(this.number);
+        // console.log(this.number);
     }
     remove(id) {
         sweetalert2__WEBPACK_IMPORTED_MODULE_3___default.a.fire({

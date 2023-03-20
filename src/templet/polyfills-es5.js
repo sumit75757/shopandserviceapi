@@ -3133,10 +3133,10 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     "./node_modules/@angular-devkit/build-angular/node_modules/core-js/internals/global.js");
 
     module.exports = function (a, b) {
-      var console = global.console;
+      var // console = global.// console;
 
-      if (console && console.error) {
-        arguments.length === 1 ? console.error(a) : console.error(a, b);
+      if (// console && // console.error) {
+        arguments.length === 1 ? // console.error(a) : // console.error(a, b);
       }
     };
     /***/
@@ -15839,7 +15839,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           microtaskDrainDone: noop,
           scheduleMicroTask: scheduleMicroTask,
           showUncaughtError: function showUncaughtError() {
-            return !Zone[__symbol__('ignoreConsoleErrorUncaughtError')];
+            return !Zone[__symbol__('ignore// consoleErrorUncaughtError')];
           },
           patchEventTarget: function patchEventTarget() {
             return [];
@@ -15954,9 +15954,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             var rejection = e && e.rejection;
 
             if (rejection) {
-              console.error('Unhandled Promise rejection:', rejection instanceof Error ? rejection.message : rejection, '; Zone:', e.zone.name, '; Task:', e.task && e.task.source, '; Value:', rejection, rejection instanceof Error ? rejection.stack : undefined);
+              // console.error('Unhandled Promise rejection:', rejection instanceof Error ? rejection.message : rejection, '; Zone:', e.zone.name, '; Task:', e.task && e.task.source, '; Value:', rejection, rejection instanceof Error ? rejection.stack : undefined);
             } else {
-              console.error(e);
+              // console.error(e);
             }
           }
         };
@@ -18780,7 +18780,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
                 descJson = desc.toString();
               }
 
-              console.log("Attempting to configure '" + prop + "' with descriptor '" + descJson + "' on object '" + obj + "' and got error, giving up: " + error);
+              // console.log("Attempting to configure '" + prop + "' with descriptor '" + descJson + "' on object '" + obj + "' and got error, giving up: " + error);
             }
           } else {
             throw error;
@@ -18830,7 +18830,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         var ieOrEdge = api.isIEOrEdge();
         var ADD_EVENT_LISTENER_SOURCE = '.addEventListener:';
         var FUNCTION_WRAPPER = '[object FunctionWrapper]';
-        var BROWSER_TOOLS = 'function __BROWSERTOOLS_CONSOLE_SAFEFUNC() { [native code] }';
+        var BROWSER_TOOLS = 'function __BROWSERTOOLS_// console_SAFEFUNC() { [native code] }';
         var pointerEventsMap = {
           'MSPointerCancel': 'pointercancel',
           'MSPointerDown': 'pointerdown',

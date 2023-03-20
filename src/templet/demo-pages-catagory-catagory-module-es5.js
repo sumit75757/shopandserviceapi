@@ -457,9 +457,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           this.spiner.show();
           this.api.getCatogory().subscribe(function (res) {
             if (res.response == 'sucsess') {
-              console.log(res);
+              // console.log(res);
               _this.tableData = res.data;
-              console.log(_this.tableData);
+              // console.log(_this.tableData);
 
               _this.spiner.hide();
             } else {
@@ -478,14 +478,14 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         value: function update(item) {
           this.id = item._id;
           this.catogory.patchValue(item);
-          console.log(item);
+          // console.log(item);
         }
       }, {
         key: "updateSub",
         value: function updateSub(item) {
           this.id = item._id;
           this.subCatogory.patchValue(item);
-          console.log(item);
+          // console.log(item);
         }
       }, {
         key: "clearForm",
@@ -500,8 +500,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           var _this2 = this;
 
           this.spiner.show();
-          console.log(this.file);
-          console.log(this.catogory.value);
+          // console.log(this.file);
+          // console.log(this.catogory.value);
 
           if (this.catogory.valid) {
             var formdata = {
@@ -512,7 +512,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             if (this.id) {
               this.api.updateCatogory(formdata, this.id).subscribe(function (res) {
                 if (res.response = 'success') {
-                  console.log(res);
+                  // console.log(res);
 
                   _this2.spiner.hide();
 
@@ -530,7 +530,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             } else {
               this.api.addCatogory(formdata).subscribe(function (res) {
                 if (res.response = 'success') {
-                  console.log(res);
+                  // console.log(res);
 
                   _this2.spiner.hide();
 
@@ -552,8 +552,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           var _this3 = this;
 
           this.spiner.show();
-          console.log(this.file);
-          console.log(this.subCatogory.value);
+          // console.log(this.file);
+          // console.log(this.subCatogory.value);
           var formdata = {
             name: this.subCatogory.controls['name'].value,
             catgory: this.subCatogory.controls['name'].value,
@@ -563,7 +563,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           if (this.id) {
             this.api.updateSubCatogory(formdata, this.id).subscribe(function (res) {
               if (res.response = 'success') {
-                console.log(res);
+                // console.log(res);
 
                 _this3.spiner.hide();
 
@@ -581,7 +581,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           } else {
             this.api.addSubCatogory(formdata).subscribe(function (res) {
               if (res.response = 'success') {
-                console.log(res);
+                // console.log(res);
 
                 _this3.spiner.hide();
 
@@ -600,13 +600,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         key: "lodemor",
         value: function lodemor() {
           this.number += 5;
-          console.log(this.number);
+          // console.log(this.number);
         }
       }, {
         key: "reset",
         value: function reset() {
           this.number = 5;
-          console.log(this.number);
+          // console.log(this.number);
         }
       }, {
         key: "remove",

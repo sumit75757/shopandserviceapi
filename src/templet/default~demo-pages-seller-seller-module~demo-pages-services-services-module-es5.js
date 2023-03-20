@@ -2089,13 +2089,13 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
        * const sumObserver = {
        *   sum: 0,
        *   next(value) {
-       *     console.log('Adding: ' + value);
+       *     // console.log('Adding: ' + value);
        *     this.sum = this.sum + value;
        *   },
        *   error() { // We actually could just remove this method,
        *   },        // since we do not really care about errors right now.
        *   complete() {
-       *     console.log('Sum equals: ' + this.sum);
+       *     // console.log('Sum equals: ' + this.sum);
        *   }
        * };
        *
@@ -2115,12 +2115,12 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
        * Rx.Observable.of(1, 2, 3)
        * .subscribe(
        *   function(value) {
-       *     console.log('Adding: ' + value);
+       *     // console.log('Adding: ' + value);
        *     sum = sum + value;
        *   },
        *   undefined,
        *   function() {
-       *     console.log('Sum equals: ' + sum);
+       *     // console.log('Sum equals: ' + sum);
        *   }
        * );
        *
@@ -2133,15 +2133,15 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
        *
        * @example <caption>Cancel a subscription</caption>
        * const subscription = Rx.Observable.interval(1000).subscribe(
-       *   num => console.log(num),
+       *   num => // console.log(num),
        *   undefined,
-       *   () => console.log('completed!') // Will not be called, even
+       *   () => // console.log('completed!') // Will not be called, even
        * );                                // when cancelling subscription
        *
        *
        * setTimeout(() => {
        *   subscription.unsubscribe();
-       *   console.log('unsubscribed!');
+       *   // console.log('unsubscribed!');
        * }, 2500);
        *
        * // Logs:
@@ -2277,7 +2277,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
        *     map(x => x + x),
        *     scan((acc, x) => acc + x)
        *   )
-       *   .subscribe(x => console.log(x))
+       *   .subscribe(x => // console.log(x))
        */
 
 
@@ -2832,32 +2832,32 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
        * // Suppose we have jQuery.getJSON('/my/url', callback)
        * var getJSONAsObservable = Rx.Observable.bindCallback(jQuery.getJSON);
        * var result = getJSONAsObservable('/my/url');
-       * result.subscribe(x => console.log(x), e => console.error(e));
+       * result.subscribe(x => // console.log(x), e => // console.error(e));
        *
        *
        * @example <caption>Receive an array of arguments passed to a callback</caption>
        * someFunction((a, b, c) => {
-       *   console.log(a); // 5
-       *   console.log(b); // 'some string'
-       *   console.log(c); // {someProperty: 'someValue'}
+       *   // console.log(a); // 5
+       *   // console.log(b); // 'some string'
+       *   // console.log(c); // {someProperty: 'someValue'}
        * });
        *
        * const boundSomeFunction = Rx.Observable.bindCallback(someFunction);
        * boundSomeFunction().subscribe(values => {
-       *   console.log(values) // [5, 'some string', {someProperty: 'someValue'}]
+       *   // console.log(values) // [5, 'some string', {someProperty: 'someValue'}]
        * });
        *
        *
        * @example <caption>Use bindCallback with a selector function</caption>
        * someFunction((a, b, c) => {
-       *   console.log(a); // 'a'
-       *   console.log(b); // 'b'
-       *   console.log(c); // 'c'
+       *   // console.log(a); // 'a'
+       *   // console.log(b); // 'b'
+       *   // console.log(c); // 'c'
        * });
        *
        * const boundSomeFunction = Rx.Observable.bindCallback(someFunction, (a, b, c) => a + b + c);
        * boundSomeFunction().subscribe(value => {
-       *   console.log(value) // 'abc'
+       *   // console.log(value) // 'abc'
        * });
        *
        *
@@ -2869,9 +2869,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
        * const boundSyncFn = Rx.Observable.bindCallback(iCallMyCallbackSynchronously);
        * const boundAsyncFn = Rx.Observable.bindCallback(iCallMyCallbackSynchronously, null, Rx.Scheduler.async);
        *
-       * boundSyncFn().subscribe(() => console.log('I was sync!'));
-       * boundAsyncFn().subscribe(() => console.log('I was async!'));
-       * console.log('This happened...');
+       * boundSyncFn().subscribe(() => // console.log('I was sync!'));
+       * boundAsyncFn().subscribe(() => // console.log('I was async!'));
+       * // console.log('This happened...');
        *
        * // Logs:
        * // I was sync!
@@ -3161,44 +3161,44 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
        * import * as fs from 'fs';
        * var readFileAsObservable = Rx.Observable.bindNodeCallback(fs.readFile);
        * var result = readFileAsObservable('./roadNames.txt', 'utf8');
-       * result.subscribe(x => console.log(x), e => console.error(e));
+       * result.subscribe(x => // console.log(x), e => // console.error(e));
        *
        *
        * @example <caption>Use on function calling callback with multiple arguments</caption>
        * someFunction((err, a, b) => {
-       *   console.log(err); // null
-       *   console.log(a); // 5
-       *   console.log(b); // "some string"
+       *   // console.log(err); // null
+       *   // console.log(a); // 5
+       *   // console.log(b); // "some string"
        * });
        * var boundSomeFunction = Rx.Observable.bindNodeCallback(someFunction);
        * boundSomeFunction()
        * .subscribe(value => {
-       *   console.log(value); // [5, "some string"]
+       *   // console.log(value); // [5, "some string"]
        * });
        *
        *
        * @example <caption>Use with selector function</caption>
        * someFunction((err, a, b) => {
-       *   console.log(err); // undefined
-       *   console.log(a); // "abc"
-       *   console.log(b); // "DEF"
+       *   // console.log(err); // undefined
+       *   // console.log(a); // "abc"
+       *   // console.log(b); // "DEF"
        * });
        * var boundSomeFunction = Rx.Observable.bindNodeCallback(someFunction, (a, b) => a + b);
        * boundSomeFunction()
        * .subscribe(value => {
-       *   console.log(value); // "abcDEF"
+       *   // console.log(value); // "abcDEF"
        * });
        *
        *
        * @example <caption>Use on function calling callback in regular style</caption>
        * someFunction(a => {
-       *   console.log(a); // 5
+       *   // console.log(a); // 5
        * });
        * var boundSomeFunction = Rx.Observable.bindNodeCallback(someFunction);
        * boundSomeFunction()
        * .subscribe(
        *   value => {}             // never gets called
-       *   err => console.log(err) // 5
+       *   err => // console.log(err) // 5
        *);
        *
        *
@@ -3529,16 +3529,16 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
        *
        * @example <caption>Emit the number 7, then complete.</caption>
        * var result = Rx.Observable.empty().startWith(7);
-       * result.subscribe(x => console.log(x));
+       * result.subscribe(x => // console.log(x));
        *
        * @example <caption>Map and flatten only odd numbers to the sequence 'a', 'b', 'c'</caption>
        * var interval = Rx.Observable.interval(1000);
        * var result = interval.mergeMap(x =>
        *   x % 2 === 1 ? Rx.Observable.of('a', 'b', 'c') : Rx.Observable.empty()
        * );
-       * result.subscribe(x => console.log(x));
+       * result.subscribe(x => // console.log(x));
        *
-       * // Results in the following to the console:
+       * // Results in the following to the // console:
        * // x is equal to the count on the interval eg(0,1,2,3,...)
        * // x will occur every 1000ms
        * // if x % 2 is equal to 1 print abc
@@ -3647,7 +3647,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
        * var letters = Rx.Observable.of('a', 'b', 'c');
        * var interval = Rx.Observable.interval(1000);
        * var result = numbers.concat(letters).concat(interval);
-       * result.subscribe(x => console.log(x));
+       * result.subscribe(x => // console.log(x));
        *
        * @see {@link create}
        * @see {@link empty}
@@ -4019,9 +4019,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * var weight = Rx.Observable.of(70, 72, 76, 79, 75);
      * var height = Rx.Observable.of(1.76, 1.77, 1.78);
      * var bmi = weight.combineLatest(height, (w, h) => w / (h * h));
-     * bmi.subscribe(x => console.log('BMI is ' + x));
+     * bmi.subscribe(x => // console.log('BMI is ' + x));
      *
-     * // With output to console:
+     * // With output to // console:
      * // BMI is 24.212293388429753
      * // BMI is 23.93948099205209
      * // BMI is 23.671253629592222
@@ -4221,7 +4221,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * const firstTimer = Rx.Observable.timer(0, 1000); // emit 0, 1, 2... after every second, starting from now
      * const secondTimer = Rx.Observable.timer(500, 1000); // emit 0, 1, 2... after every second, starting 0,5s from now
      * const combinedTimers = Rx.Observable.combineLatest(firstTimer, secondTimer);
-     * combinedTimers.subscribe(value => console.log(value));
+     * combinedTimers.subscribe(value => // console.log(value));
      * // Logs
      * // [0, 0] after 0.5s
      * // [1, 0] after 1s
@@ -4234,7 +4234,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      *   n => Rx.Observable.of(n).delay(n * 1000).startWith(0) // emit 0 and then emit n after n seconds
      * );
      * const combined = Rx.Observable.combineLatest(observables);
-     * combined.subscribe(value => console.log(value));
+     * combined.subscribe(value => // console.log(value));
      * // Logs
      * // [0, 0, 0] immediately
      * // [1, 0, 0] after 1s
@@ -4246,9 +4246,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * var weight = Rx.Observable.of(70, 72, 76, 79, 75);
      * var height = Rx.Observable.of(1.76, 1.77, 1.78);
      * var bmi = Rx.Observable.combineLatest(weight, height, (w, h) => w / (h * h));
-     * bmi.subscribe(x => console.log('BMI is ' + x));
+     * bmi.subscribe(x => // console.log('BMI is ' + x));
      *
-     * // With output to console:
+     * // With output to // console:
      * // BMI is 24.212293388429753
      * // BMI is 23.93948099205209
      * // BMI is 23.671253629592222
@@ -4351,7 +4351,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
        *
        * @example <caption>Convert the Promise returned by Fetch to an Observable</caption>
        * var result = Rx.Observable.fromPromise(fetch('http://myserver.com/'));
-       * result.subscribe(x => console.log(x), e => console.error(e));
+       * result.subscribe(x => // console.log(x), e => // console.error(e));
        *
        * @see {@link bindCallback}
        * @see {@link from}
@@ -5162,7 +5162,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
        * @example <caption>Converts an array to an Observable</caption>
        * var array = [10, 20, 30];
        * var result = Rx.Observable.from(array);
-       * result.subscribe(x => console.log(x));
+       * result.subscribe(x => // console.log(x));
        *
        * // Results in the following:
        * // 10 20 30
@@ -5178,7 +5178,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
        *
        * var iterator = generateDoubles(3);
        * var result = Rx.Observable.from(iterator).take(10);
-       * result.subscribe(x => console.log(x));
+       * result.subscribe(x => // console.log(x));
        *
        * // Results in the following:
        * // 3 6 12 24 48 96 192 384 768 1536
@@ -5280,7 +5280,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * var result = letters.mergeMap(x =>
      *   Rx.Observable.interval(1000).map(i => x+i)
      * );
-     * result.subscribe(x => console.log(x));
+     * result.subscribe(x => // console.log(x));
      *
      * // Results in the following:
      * // a0
@@ -5488,13 +5488,13 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * var clicks = Rx.Observable.fromEvent(document, 'click');
      * var higherOrder = clicks.map((ev) => Rx.Observable.interval(1000));
      * var firstOrder = higherOrder.mergeAll();
-     * firstOrder.subscribe(x => console.log(x));
+     * firstOrder.subscribe(x => // console.log(x));
      *
      * @example <caption>Count from 0 to 9 every second for each click, but only allow 2 concurrent timers</caption>
      * var clicks = Rx.Observable.fromEvent(document, 'click');
      * var higherOrder = clicks.map((ev) => Rx.Observable.interval(1000).take(10));
      * var firstOrder = higherOrder.mergeAll(2);
-     * firstOrder.subscribe(x => console.log(x));
+     * firstOrder.subscribe(x => // console.log(x));
      *
      * @see {@link combineAll}
      * @see {@link concatAll}
@@ -5552,7 +5552,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * var clicks = Rx.Observable.fromEvent(document, 'click');
      * var higherOrder = clicks.map(ev => Rx.Observable.interval(1000).take(4));
      * var firstOrder = higherOrder.concatAll();
-     * firstOrder.subscribe(x => console.log(x));
+     * firstOrder.subscribe(x => // console.log(x));
      *
      * // Results in the following:
      * // (results are not concurrent)
@@ -5626,7 +5626,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * var timer = Rx.Observable.interval(1000).take(4);
      * var sequence = Rx.Observable.range(1, 10);
      * var result = Rx.Observable.concat(timer, sequence);
-     * result.subscribe(x => console.log(x));
+     * result.subscribe(x => // console.log(x));
      *
      * // results in:
      * // 0 -1000ms-> 1 -1000ms-> 2 -1000ms-> 3 -immediate-> 1 ... 10
@@ -5637,10 +5637,10 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * var timer2 = Rx.Observable.interval(2000).take(6);
      * var timer3 = Rx.Observable.interval(500).take(10);
      * var result = Rx.Observable.concat([timer1, timer2, timer3]); // note that array is passed
-     * result.subscribe(x => console.log(x));
+     * result.subscribe(x => // console.log(x));
      *
      * // results in the following:
-     * // (Prints to console sequentially)
+     * // (Prints to // console sequentially)
      * // -1000ms-> 0 -1000ms-> 1 -1000ms-> ... 9
      * // -2000ms-> 0 -2000ms-> 1 -2000ms-> ... 5
      * // -500ms-> 0 -500ms-> 1 -500ms-> ... 9
@@ -5651,9 +5651,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      *
      * Rx.Observable.concat(timer, timer) // concating the same Observable!
      * .subscribe(
-     *   value => console.log(value),
+     *   value => // console.log(value),
      *   err => {},
-     *   () => console.log('...and it is done!')
+     *   () => // console.log('...and it is done!')
      * );
      *
      * // Logs:
@@ -5751,12 +5751,12 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
        *     return Rx.Observable.interval(1000);
        *   }
        * });
-       * clicksOrInterval.subscribe(x => console.log(x));
+       * clicksOrInterval.subscribe(x => // console.log(x));
        *
        * // Results in the following behavior:
        * // If the result of Math.random() is greater than 0.5 it will listen
        * // for clicks anywhere on the "document"; when document is clicked it
-       * // will log a MouseEvent object to the console. If the result is less
+       * // will log a MouseEvent object to the // console. If the result is less
        * // than 0.5 it will emit ascending numbers, one every second(1000ms).
        *
        * @see {@link create}
@@ -5902,9 +5902,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
        *   Rx.Observable.of(5, 6, 7, 8)
        * );
        * observable.subscribe(
-       *   value => console.log(value),
+       *   value => // console.log(value),
        *   err => {},
-       *   () => console.log('This is how it ends!')
+       *   () => // console.log('This is how it ends!')
        * );
        *
        * // Logs:
@@ -5918,9 +5918,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
        *   Rx.Observable.interval(500).take(4) // emit 0, 1, 2, 3 every half a second and complete
        * );
        * observable.subscribe(
-       *   value => console.log(value),
+       *   value => // console.log(value),
        *   err => {},
-       *   () => console.log('This is how it ends!')
+       *   () => // console.log('This is how it ends!')
        * );
        *
        * // Logs:
@@ -5935,9 +5935,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
        *   (n, m) => n + m
        * );
        * observable.subscribe(
-       *   value => console.log(value),
+       *   value => // console.log(value),
        *   err => {},
-       *   () => console.log('This is how it ends!')
+       *   () => // console.log('This is how it ends!')
        * );
        *
        * // Logs:
@@ -6211,10 +6211,10 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
        *
        * @example <caption>Emits clicks happening on the DOM document</caption>
        * var clicks = Rx.Observable.fromEvent(document, 'click');
-       * clicks.subscribe(x => console.log(x));
+       * clicks.subscribe(x => // console.log(x));
        *
        * // Results in:
-       * // MouseEvent object logged to console every time a click
+       * // MouseEvent object logged to // console every time a click
        * // occurs on the document.
        *
        *
@@ -6223,14 +6223,14 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
        *                                                                          // which will be passed to addEventListener
        * var clicksInDiv = Rx.Observable.fromEvent(someDivInDocument, 'click');
        *
-       * clicksInDocument.subscribe(() => console.log('document'));
-       * clicksInDiv.subscribe(() => console.log('div'));
+       * clicksInDocument.subscribe(() => // console.log('document'));
+       * clicksInDiv.subscribe(() => // console.log('div'));
        *
        * // By default events bubble UP in DOM tree, so normally
        * // when we would click on div in document
        * // "div" would be logged first and then "document".
        * // Since we specified optional `capture` option, document
-       * // will catch event when it goes DOWN DOM tree, so console
+       * // will catch event when it goes DOWN DOM tree, so // console
        * // will log "document" and then "div".
        *
        * @see {@link bindCallback}
@@ -6392,7 +6392,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
        *   addClickHandler,
        *   removeClickHandler
        * );
-       * clicks.subscribe(x => console.log(x));
+       * clicks.subscribe(x => // console.log(x));
        *
        * @see {@link from}
        * @see {@link fromEvent}
@@ -7165,7 +7165,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * better choice will be the {@link asap} scheduler.
      *
      * @example <caption>Use async scheduler to delay task</caption>
-     * const task = () => console.log('it works!');
+     * const task = () => // console.log('it works!');
      *
      * Rx.Scheduler.async.schedule(task, 2000);
      *
@@ -7175,7 +7175,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      *
      * @example <caption>Use async scheduler to repeat task in intervals</caption>
      * function task(state) {
-     *   console.log(state);
+     *   // console.log(state);
      *   this.schedule(state + 1, 1000); // `this` references currently executing Action,
      *                                   // which we reschedule with new state and delay
      * }
@@ -7259,7 +7259,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
        *
        * @example <caption>Emits ascending numbers, one every second (1000ms)</caption>
        * var numbers = Rx.Observable.interval(1000);
-       * numbers.subscribe(x => console.log(x));
+       * numbers.subscribe(x => // console.log(x));
        *
        * @see {@link timer}
        * @see {@link delay}
@@ -7348,11 +7348,11 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * var clicks = Rx.Observable.fromEvent(document, 'click');
      * var timer = Rx.Observable.interval(1000);
      * var clicksOrTimer = Rx.Observable.merge(clicks, timer);
-     * clicksOrTimer.subscribe(x => console.log(x));
+     * clicksOrTimer.subscribe(x => // console.log(x));
      *
      * // Results in the following:
-     * // timer will emit ascending values, one every second(1000ms) to console
-     * // clicks logs MouseEvents to console everytime the "document" is clicked
+     * // timer will emit ascending values, one every second(1000ms) to // console
+     * // clicks logs MouseEvents to // console everytime the "document" is clicked
      * // Since the two streams are merged you see these happening
      * // as they occur.
      *
@@ -7362,7 +7362,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * var timer3 = Rx.Observable.interval(500).take(10);
      * var concurrent = 2; // the argument
      * var merged = Rx.Observable.merge(timer1, timer2, timer3, concurrent);
-     * merged.subscribe(x => console.log(x));
+     * merged.subscribe(x => // console.log(x));
      *
      * // Results in the following:
      * // - First timer1 and timer2 will run concurrently
@@ -7581,10 +7581,10 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
        *
        * @example <caption>Emit the number 7, then never emit anything else (not even complete).</caption>
        * function info() {
-       *   console.log('Will not be called');
+       *   // console.log('Will not be called');
        * }
        * var result = Rx.Observable.never().startWith(7);
-       * result.subscribe(x => console.log(x), info, info);
+       * result.subscribe(x => // console.log(x), info, info);
        *
        * @see {@link create}
        * @see {@link empty}
@@ -7673,9 +7673,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      *   })
      *   .onErrorResumeNext(Rx.Observable.of(1, 2, 3))
      *   .subscribe(
-     *     val => console.log(val),
-     *     err => console.log(err),          // Will never be called.
-     *     () => console.log('that\'s it!')
+     *     val => // console.log(val),
+     *     err => // console.log(err),          // Will never be called.
+     *     () => // console.log('that\'s it!')
      *   );
      *
      * // Logs:
@@ -7858,13 +7858,13 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
        *
        * var subscription = source.subscribe(
        *   function (x) {
-       *     console.log('Next: %s', x);
+       *     // console.log('Next: %s', x);
        *   },
        *   function (err) {
-       *     console.log('Error: %s', err);
+       *     // console.log('Error: %s', err);
        *   },
        *   function () {
-       *     console.log('Completed');
+       *     // console.log('Completed');
        *   });
        *
        * @param {Object} obj The object to inspect and turn into an
@@ -7963,7 +7963,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
        *
        * @example <caption>Emits the numbers 1 to 10</caption>
        * var numbers = Rx.Observable.range(1, 10);
-       * numbers.subscribe(x => console.log(x));
+       * numbers.subscribe(x => // console.log(x));
        *
        * @see {@link timer}
        * @see {@link interval}
@@ -8190,7 +8190,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
        *
        * @example <caption>Emit the number 7, then emit an error.</caption>
        * var result = Rx.Observable.throw(new Error('oops!')).startWith(7);
-       * result.subscribe(x => console.log(x), e => console.error(e));
+       * result.subscribe(x => // console.log(x), e => // console.error(e));
        *
        * @example <caption>Map and flatten numbers to the sequence 'a', 'b', 'c', but throw an error for 13</caption>
        * var interval = Rx.Observable.interval(1000);
@@ -8199,7 +8199,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
        *     Rx.Observable.throw('Thirteens are bad') :
        *     Rx.Observable.of('a', 'b', 'c')
        * );
-       * result.subscribe(x => console.log(x), e => console.error(e));
+       * result.subscribe(x => // console.log(x), e => // console.error(e));
        *
        * @see {@link create}
        * @see {@link empty}
@@ -8330,11 +8330,11 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
        *
        * @example <caption>Emits ascending numbers, one every second (1000ms), starting after 3 seconds</caption>
        * var numbers = Rx.Observable.timer(3000, 1000);
-       * numbers.subscribe(x => console.log(x));
+       * numbers.subscribe(x => // console.log(x));
        *
        * @example <caption>Emits one number after five seconds</caption>
        * var numbers = Rx.Observable.timer(5000);
-       * numbers.subscribe(x => console.log(x));
+       * numbers.subscribe(x => // console.log(x));
        *
        * @see {@link interval}
        * @see {@link delay}
@@ -8463,7 +8463,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      *          name$,
      *          isDev$,
      *          (age: number, name: string, isDev: boolean) => ({ age, name, isDev }))
-     *     .subscribe(x => console.log(x));
+     *     .subscribe(x => // console.log(x));
      *
      * // outputs
      * // { age: 27, name: 'Foo', isDev: true }
@@ -8803,7 +8803,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * @example <caption>Map every click to the clientX position of that click</caption>
      * var clicks = Rx.Observable.fromEvent(document, 'click');
      * var positions = clicks.map(ev => ev.clientX);
-     * positions.subscribe(x => console.log(x));
+     * positions.subscribe(x => // console.log(x));
      *
      * @see {@link mapTo}
      * @see {@link pluck}
@@ -9575,9 +9575,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * @examples <caption>Schedule recursively first, then do something</caption>
      *
      * Rx.Scheduler.queue.schedule(() => {
-     *   Rx.Scheduler.queue.schedule(() => console.log('second')); // will not happen now, but will be put on a queue
+     *   Rx.Scheduler.queue.schedule(() => // console.log('second')); // will not happen now, but will be put on a queue
      *
-     *   console.log('first');
+     *   // console.log('first');
      * });
      *
      * // Logs:
@@ -9589,10 +9589,10 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      *
      * Rx.Scheduler.queue.schedule(function(state) {
      *   if (state !== 0) {
-     *     console.log('before', state);
+     *     // console.log('before', state);
      *     this.schedule(state - 1); // `this` references currently executing Action,
      *                               // which we reschedule with new state
-     *     console.log('after', state);
+     *     // console.log('after', state);
      *   }
      * }, 0, 3);
      *
@@ -9851,9 +9851,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
        * let socket$ = Observable.webSocket('ws://localhost:8081');
        *
        * socket$.subscribe(
-       *    (msg) => console.log('message received: ' + msg),
-       *    (err) => console.log(err),
-       *    () => console.log('complete')
+       *    (msg) => // console.log('message received: ' + msg),
+       *    (err) => // console.log(err),
+       *    () => // console.log('complete')
        *  );
        *
        * socket$.next(JSON.stringify({ op: 'hello' }));
@@ -9868,9 +9868,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
        * });
        *
        * socket$.subscribe(
-       *    (msg) => console.log('message received: ' + msg),
-       *    (err) => console.log(err),
-       *    () => console.log('complete')
+       *    (msg) => // console.log('message received: ' + msg),
+       *    (err) => // console.log(err),
+       *    () => // console.log('complete')
        *  );
        *
        * socket$.next(JSON.stringify({ op: 'hello' }));
@@ -10133,7 +10133,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * var clicks = Rx.Observable.fromEvent(document, 'click');
      * var interval = Rx.Observable.interval(1000);
      * var buffered = interval.buffer(clicks);
-     * buffered.subscribe(x => console.log(x));
+     * buffered.subscribe(x => // console.log(x));
      *
      * @see {@link bufferCount}
      * @see {@link bufferTime}
@@ -10219,7 +10219,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * var clicks = Rx.Observable.fromEvent(document, 'click');
      * var interval = Rx.Observable.interval(1000);
      * var buffered = interval.buffer(clicks);
-     * buffered.subscribe(x => console.log(x));
+     * buffered.subscribe(x => // console.log(x));
      *
      * @see {@link bufferCount}
      * @see {@link bufferTime}
@@ -10274,12 +10274,12 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * @example <caption>Emit the last two click events as an array</caption>
      * var clicks = Rx.Observable.fromEvent(document, 'click');
      * var buffered = clicks.bufferCount(2);
-     * buffered.subscribe(x => console.log(x));
+     * buffered.subscribe(x => // console.log(x));
      *
      * @example <caption>On every click, emit the last two click events as an array</caption>
      * var clicks = Rx.Observable.fromEvent(document, 'click');
      * var buffered = clicks.bufferCount(2, 1);
-     * buffered.subscribe(x => console.log(x));
+     * buffered.subscribe(x => // console.log(x));
      *
      * @see {@link buffer}
      * @see {@link bufferTime}
@@ -10451,12 +10451,12 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * @example <caption>Emit the last two click events as an array</caption>
      * var clicks = Rx.Observable.fromEvent(document, 'click');
      * var buffered = clicks.bufferCount(2);
-     * buffered.subscribe(x => console.log(x));
+     * buffered.subscribe(x => // console.log(x));
      *
      * @example <caption>On every click, emit the last two click events as an array</caption>
      * var clicks = Rx.Observable.fromEvent(document, 'click');
      * var buffered = clicks.bufferCount(2, 1);
-     * buffered.subscribe(x => console.log(x));
+     * buffered.subscribe(x => // console.log(x));
      *
      * @see {@link buffer}
      * @see {@link bufferTime}
@@ -10522,12 +10522,12 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * @example <caption>Every second, emit an array of the recent click events</caption>
      * var clicks = Rx.Observable.fromEvent(document, 'click');
      * var buffered = clicks.bufferTime(1000);
-     * buffered.subscribe(x => console.log(x));
+     * buffered.subscribe(x => // console.log(x));
      *
      * @example <caption>Every 5 seconds, emit the click events from the next 2 seconds</caption>
      * var clicks = Rx.Observable.fromEvent(document, 'click');
      * var buffered = clicks.bufferTime(2000, 5000);
-     * buffered.subscribe(x => console.log(x));
+     * buffered.subscribe(x => // console.log(x));
      *
      * @see {@link buffer}
      * @see {@link bufferCount}
@@ -10785,12 +10785,12 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * @example <caption>Every second, emit an array of the recent click events</caption>
      * var clicks = Rx.Observable.fromEvent(document, 'click');
      * var buffered = clicks.bufferTime(1000);
-     * buffered.subscribe(x => console.log(x));
+     * buffered.subscribe(x => // console.log(x));
      *
      * @example <caption>Every 5 seconds, emit the click events from the next 2 seconds</caption>
      * var clicks = Rx.Observable.fromEvent(document, 'click');
      * var buffered = clicks.bufferTime(2000, 5000);
-     * buffered.subscribe(x => console.log(x));
+     * buffered.subscribe(x => // console.log(x));
      *
      * @see {@link buffer}
      * @see {@link bufferCount}
@@ -10870,7 +10870,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * var buffered = clicks.bufferToggle(openings, i =>
      *   i % 2 ? Rx.Observable.interval(500) : Rx.Observable.empty()
      * );
-     * buffered.subscribe(x => console.log(x));
+     * buffered.subscribe(x => // console.log(x));
      *
      * @see {@link buffer}
      * @see {@link bufferCount}
@@ -11049,7 +11049,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * var buffered = clicks.bufferToggle(openings, i =>
      *   i % 2 ? Rx.Observable.interval(500) : Rx.Observable.empty()
      * );
-     * buffered.subscribe(x => console.log(x));
+     * buffered.subscribe(x => // console.log(x));
      *
      * @see {@link buffer}
      * @see {@link bufferCount}
@@ -11108,7 +11108,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * var buffered = clicks.bufferWhen(() =>
      *   Rx.Observable.interval(1000 + Math.random() * 4000)
      * );
-     * buffered.subscribe(x => console.log(x));
+     * buffered.subscribe(x => // console.log(x));
      *
      * @see {@link buffer}
      * @see {@link bufferCount}
@@ -11248,7 +11248,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * var buffered = clicks.bufferWhen(() =>
      *   Rx.Observable.interval(1000 + Math.random() * 4000)
      * );
-     * buffered.subscribe(x => console.log(x));
+     * buffered.subscribe(x => // console.log(x));
      *
      * @see {@link buffer}
      * @see {@link bufferCount}
@@ -11299,7 +11299,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      *	   return n;
      *   })
      *   .catch(err => Observable.of('I', 'II', 'III', 'IV', 'V'))
-     *   .subscribe(x => console.log(x));
+     *   .subscribe(x => // console.log(x));
      *   // 1, 2, 3, I, II, III, IV, V
      *
      * @example <caption>Retries the caught source Observable again in case of error, similar to retry() operator</caption>
@@ -11313,7 +11313,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      *   })
      *   .catch((err, caught) => caught)
      *   .take(30)
-     *   .subscribe(x => console.log(x));
+     *   .subscribe(x => // console.log(x));
      *   // 1, 2, 3, 1, 2, 3, ...
      *
      * @example <caption>Throws a new error when the source Observable throws an error</caption>
@@ -11329,8 +11329,8 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      *     throw 'error in source. Details: ' + err;
      *   })
      *   .subscribe(
-     *     x => console.log(x),
-     *     err => console.log(err)
+     *     x => // console.log(x),
+     *     err => // console.log(err)
      *   );
      *   // 1, 2, 3, error in source. Details: four!
      *
@@ -11425,7 +11425,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      *	   return n;
      *   })
      *   .catch(err => Observable.of('I', 'II', 'III', 'IV', 'V'))
-     *   .subscribe(x => console.log(x));
+     *   .subscribe(x => // console.log(x));
      *   // 1, 2, 3, I, II, III, IV, V
      *
      * @example <caption>Retries the caught source Observable again in case of error, similar to retry() operator</caption>
@@ -11439,7 +11439,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      *   })
      *   .catch((err, caught) => caught)
      *   .take(30)
-     *   .subscribe(x => console.log(x));
+     *   .subscribe(x => // console.log(x));
      *   // 1, 2, 3, 1, 2, 3, ...
      *
      * @example <caption>Throws a new error when the source Observable throws an error</caption>
@@ -11455,8 +11455,8 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      *     throw 'error in source. Details: ' + err;
      *   })
      *   .subscribe(
-     *     x => console.log(x),
-     *     err => console.log(err)
+     *     x => // console.log(x),
+     *     err => // console.log(err)
      *   );
      *   // 1, 2, 3, error in source. Details: four!
      *
@@ -11518,7 +11518,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      *   Rx.Observable.interval(Math.random()*2000).take(3)
      * ).take(2);
      * var result = higherOrder.combineAll();
-     * result.subscribe(x => console.log(x));
+     * result.subscribe(x => // console.log(x));
      *
      * @see {@link combineLatest}
      * @see {@link mergeAll}
@@ -11565,9 +11565,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * var weight = Rx.Observable.of(70, 72, 76, 79, 75);
      * var height = Rx.Observable.of(1.76, 1.77, 1.78);
      * var bmi = weight.combineLatest(height, (w, h) => w / (h * h));
-     * bmi.subscribe(x => console.log('BMI is ' + x));
+     * bmi.subscribe(x => // console.log('BMI is ' + x));
      *
-     * // With output to console:
+     * // With output to // console:
      * // BMI is 24.212293388429753
      * // BMI is 23.93948099205209
      * // BMI is 23.671253629592222
@@ -11624,7 +11624,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * var timer = Rx.Observable.interval(1000).take(4);
      * var sequence = Rx.Observable.range(1, 10);
      * var result = timer.concat(sequence);
-     * result.subscribe(x => console.log(x));
+     * result.subscribe(x => // console.log(x));
      *
      * // results in:
      * // 1000ms-> 0 -1000ms-> 1 -1000ms-> 2 -1000ms-> 3 -immediate-> 1 ... 10
@@ -11634,10 +11634,10 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * var timer2 = Rx.Observable.interval(2000).take(6);
      * var timer3 = Rx.Observable.interval(500).take(10);
      * var result = timer1.concat(timer2, timer3);
-     * result.subscribe(x => console.log(x));
+     * result.subscribe(x => // console.log(x));
      *
      * // results in the following:
-     * // (Prints to console sequentially)
+     * // (Prints to // console sequentially)
      * // -1000ms-> 0 -1000ms-> 1 -1000ms-> ... 9
      * // -2000ms-> 0 -2000ms-> 1 -2000ms-> ... 5
      * // -500ms-> 0 -500ms-> 1 -500ms-> ... 9
@@ -11694,7 +11694,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * var timer = Rx.Observable.interval(1000).take(4);
      * var sequence = Rx.Observable.range(1, 10);
      * var result = timer.concat(sequence);
-     * result.subscribe(x => console.log(x));
+     * result.subscribe(x => // console.log(x));
      *
      * // results in:
      * // 1000ms-> 0 -1000ms-> 1 -1000ms-> 2 -1000ms-> 3 -immediate-> 1 ... 10
@@ -11704,10 +11704,10 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * var timer2 = Rx.Observable.interval(2000).take(6);
      * var timer3 = Rx.Observable.interval(500).take(10);
      * var result = timer1.concat(timer2, timer3);
-     * result.subscribe(x => console.log(x));
+     * result.subscribe(x => // console.log(x));
      *
      * // results in the following:
-     * // (Prints to console sequentially)
+     * // (Prints to // console sequentially)
      * // -1000ms-> 0 -1000ms-> 1 -1000ms-> ... 9
      * // -2000ms-> 0 -2000ms-> 1 -2000ms-> ... 5
      * // -500ms-> 0 -500ms-> 1 -500ms-> ... 9
@@ -11770,7 +11770,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * var clicks = Rx.Observable.fromEvent(document, 'click');
      * var higherOrder = clicks.map(ev => Rx.Observable.interval(1000).take(4));
      * var firstOrder = higherOrder.concatAll();
-     * firstOrder.subscribe(x => console.log(x));
+     * firstOrder.subscribe(x => // console.log(x));
      *
      * // Results in the following:
      * // (results are not concurrent)
@@ -11830,7 +11830,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * @example <caption>For each click event, tick every second from 0 to 3, with no concurrency</caption>
      * var clicks = Rx.Observable.fromEvent(document, 'click');
      * var result = clicks.concatMap(ev => Rx.Observable.interval(1000).take(4));
-     * result.subscribe(x => console.log(x));
+     * result.subscribe(x => // console.log(x));
      *
      * // Results in the following:
      * // (results are not concurrent)
@@ -11900,7 +11900,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * @example <caption>For each click event, tick every second from 0 to 3, with no concurrency</caption>
      * var clicks = Rx.Observable.fromEvent(document, 'click');
      * var result = clicks.concatMap(ev => Rx.Observable.interval(1000).take(4));
-     * result.subscribe(x => console.log(x));
+     * result.subscribe(x => // console.log(x));
      *
      * // Results in the following:
      * // (results are not concurrent)
@@ -11971,7 +11971,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * @example <caption>For each click event, tick every second from 0 to 3, with no concurrency</caption>
      * var clicks = Rx.Observable.fromEvent(document, 'click');
      * var result = clicks.concatMapTo(Rx.Observable.interval(1000).take(4));
-     * result.subscribe(x => console.log(x));
+     * result.subscribe(x => // console.log(x));
      *
      * // Results in the following:
      * // (results are not concurrent)
@@ -12040,7 +12040,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * @example <caption>For each click event, tick every second from 0 to 3, with no concurrency</caption>
      * var clicks = Rx.Observable.fromEvent(document, 'click');
      * var result = clicks.concatMapTo(Rx.Observable.interval(1000).take(4));
-     * result.subscribe(x => console.log(x));
+     * result.subscribe(x => // console.log(x));
      *
      * // Results in the following:
      * // (results are not concurrent)
@@ -12115,12 +12115,12 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * var clicks = Rx.Observable.fromEvent(document, 'click');
      * var secondsBeforeClick = seconds.takeUntil(clicks);
      * var result = secondsBeforeClick.count();
-     * result.subscribe(x => console.log(x));
+     * result.subscribe(x => // console.log(x));
      *
      * @example <caption>Counts how many odd numbers are there between 1 and 7</caption>
      * var numbers = Rx.Observable.range(1, 7);
      * var result = numbers.count(i => i % 2 === 1);
-     * result.subscribe(x => console.log(x));
+     * result.subscribe(x => // console.log(x));
      *
      * // Results in:
      * // 4
@@ -12238,12 +12238,12 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * var clicks = Rx.Observable.fromEvent(document, 'click');
      * var secondsBeforeClick = seconds.takeUntil(clicks);
      * var result = secondsBeforeClick.count();
-     * result.subscribe(x => console.log(x));
+     * result.subscribe(x => // console.log(x));
      *
      * @example <caption>Counts how many odd numbers are there between 1 and 7</caption>
      * var numbers = Rx.Observable.range(1, 7);
      * var result = numbers.count(i => i % 2 === 1);
-     * result.subscribe(x => console.log(x));
+     * result.subscribe(x => // console.log(x));
      *
      * // Results in:
      * // 4
@@ -12310,7 +12310,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * );
      * var materialized = Rx.Observable.of(notifA, notifB, notifE);
      * var upperCase = materialized.dematerialize();
-     * upperCase.subscribe(x => console.log(x), e => console.error(e));
+     * upperCase.subscribe(x => // console.log(x), e => // console.error(e));
      *
      * // Results in:
      * // A
@@ -12393,7 +12393,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * );
      * var materialized = Rx.Observable.of(notifA, notifB, notifE);
      * var upperCase = materialized.dematerialize();
-     * upperCase.subscribe(x => console.log(x), e => console.error(e));
+     * upperCase.subscribe(x => // console.log(x), e => // console.error(e));
      *
      * // Results in:
      * // A
@@ -12456,7 +12456,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * @example <caption>Emit the most recent click after a burst of clicks</caption>
      * var clicks = Rx.Observable.fromEvent(document, 'click');
      * var result = clicks.debounce(() => Rx.Observable.interval(1000));
-     * result.subscribe(x => console.log(x));
+     * result.subscribe(x => // console.log(x));
      *
      * @see {@link audit}
      * @see {@link debounceTime}
@@ -12603,7 +12603,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * @example <caption>Emit the most recent click after a burst of clicks</caption>
      * var clicks = Rx.Observable.fromEvent(document, 'click');
      * var result = clicks.debounce(() => Rx.Observable.interval(1000));
-     * result.subscribe(x => console.log(x));
+     * result.subscribe(x => // console.log(x));
      *
      * @see {@link audit}
      * @see {@link debounceTime}
@@ -12667,7 +12667,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * @example <caption>Emit the most recent click after a burst of clicks</caption>
      * var clicks = Rx.Observable.fromEvent(document, 'click');
      * var result = clicks.debounceTime(1000);
-     * result.subscribe(x => console.log(x));
+     * result.subscribe(x => // console.log(x));
      *
      * @see {@link auditTime}
      * @see {@link debounce}
@@ -12801,7 +12801,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * @example <caption>Emit the most recent click after a burst of clicks</caption>
      * var clicks = Rx.Observable.fromEvent(document, 'click');
      * var result = clicks.debounceTime(1000);
-     * result.subscribe(x => console.log(x));
+     * result.subscribe(x => // console.log(x));
      *
      * @see {@link auditTime}
      * @see {@link debounce}
@@ -12866,7 +12866,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * var clicks = Rx.Observable.fromEvent(document, 'click');
      * var clicksBeforeFive = clicks.takeUntil(Rx.Observable.interval(5000));
      * var result = clicksBeforeFive.defaultIfEmpty('no clicks');
-     * result.subscribe(x => console.log(x));
+     * result.subscribe(x => // console.log(x));
      *
      * @see {@link empty}
      * @see {@link last}
@@ -12959,7 +12959,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * var clicks = Rx.Observable.fromEvent(document, 'click');
      * var clicksBeforeFive = clicks.takeUntil(Rx.Observable.interval(5000));
      * var result = clicksBeforeFive.defaultIfEmpty('no clicks');
-     * result.subscribe(x => console.log(x));
+     * result.subscribe(x => // console.log(x));
      *
      * @see {@link empty}
      * @see {@link last}
@@ -13017,13 +13017,13 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * @example <caption>Delay each click by one second</caption>
      * var clicks = Rx.Observable.fromEvent(document, 'click');
      * var delayedClicks = clicks.delay(1000); // each click emitted after 1 second
-     * delayedClicks.subscribe(x => console.log(x));
+     * delayedClicks.subscribe(x => // console.log(x));
      *
      * @example <caption>Delay all clicks until a future date happens</caption>
      * var clicks = Rx.Observable.fromEvent(document, 'click');
      * var date = new Date('March 15, 2050 12:00:00'); // in the future
      * var delayedClicks = clicks.delay(date); // click emitted only after that date
-     * delayedClicks.subscribe(x => console.log(x));
+     * delayedClicks.subscribe(x => // console.log(x));
      *
      * @see {@link debounceTime}
      * @see {@link delayWhen}
@@ -13175,13 +13175,13 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * @example <caption>Delay each click by one second</caption>
      * var clicks = Rx.Observable.fromEvent(document, 'click');
      * var delayedClicks = clicks.delay(1000); // each click emitted after 1 second
-     * delayedClicks.subscribe(x => console.log(x));
+     * delayedClicks.subscribe(x => // console.log(x));
      *
      * @example <caption>Delay all clicks until a future date happens</caption>
      * var clicks = Rx.Observable.fromEvent(document, 'click');
      * var date = new Date('March 15, 2050 12:00:00'); // in the future
      * var delayedClicks = clicks.delay(date); // click emitted only after that date
-     * delayedClicks.subscribe(x => console.log(x));
+     * delayedClicks.subscribe(x => // console.log(x));
      *
      * @see {@link debounceTime}
      * @see {@link delayWhen}
@@ -13249,7 +13249,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * var delayedClicks = clicks.delayWhen(event =>
      *   Rx.Observable.interval(Math.random() * 5000)
      * );
-     * delayedClicks.subscribe(x => console.log(x));
+     * delayedClicks.subscribe(x => // console.log(x));
      *
      * @see {@link debounce}
      * @see {@link delay}
@@ -13482,7 +13482,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * var delayedClicks = clicks.delayWhen(event =>
      *   Rx.Observable.interval(Math.random() * 5000)
      * );
-     * delayedClicks.subscribe(x => console.log(x));
+     * delayedClicks.subscribe(x => // console.log(x));
      *
      * @see {@link debounce}
      * @see {@link delay}
@@ -13579,7 +13579,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * @example <caption>A simple example with numbers</caption>
      * Observable.of(1, 1, 2, 2, 2, 1, 2, 3, 4, 3, 2, 1)
      *   .distinct()
-     *   .subscribe(x => console.log(x)); // 1, 2, 3, 4
+     *   .subscribe(x => // console.log(x)); // 1, 2, 3, 4
      *
      * @example <caption>An example using a keySelector function</caption>
      * interface Person {
@@ -13592,7 +13592,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      *     { age: 7, name: 'Bar'},
      *     { age: 5, name: 'Foo'})
      *     .distinct((p: Person) => p.name)
-     *     .subscribe(x => console.log(x));
+     *     .subscribe(x => // console.log(x));
      *
      * // displays:
      * // { age: 4, name: 'Foo' }
@@ -13714,7 +13714,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * @example <caption>A simple example with numbers</caption>
      * Observable.of(1, 1, 2, 2, 2, 1, 2, 3, 4, 3, 2, 1)
      *   .distinct()
-     *   .subscribe(x => console.log(x)); // 1, 2, 3, 4
+     *   .subscribe(x => // console.log(x)); // 1, 2, 3, 4
      *
      * @example <caption>An example using a keySelector function</caption>
      * interface Person {
@@ -13727,7 +13727,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      *     { age: 7, name: 'Bar'},
      *     { age: 5, name: 'Foo'})
      *     .distinct((p: Person) => p.name)
-     *     .subscribe(x => console.log(x));
+     *     .subscribe(x => // console.log(x));
      *
      * // displays:
      * // { age: 4, name: 'Foo' }
@@ -13776,7 +13776,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * @example <caption>A simple example with numbers</caption>
      * Observable.of(1, 1, 2, 2, 2, 1, 1, 2, 3, 3, 4)
      *   .distinctUntilChanged()
-     *   .subscribe(x => console.log(x)); // 1, 2, 1, 2, 3, 4
+     *   .subscribe(x => // console.log(x)); // 1, 2, 1, 2, 3, 4
      *
      * @example <caption>An example using a compare function</caption>
      * interface Person {
@@ -13790,7 +13790,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      *     { age: 5, name: 'Foo'})
      *     { age: 6, name: 'Foo'})
      *     .distinctUntilChanged((p: Person, q: Person) => p.name === q.name)
-     *     .subscribe(x => console.log(x));
+     *     .subscribe(x => // console.log(x));
      *
      * // displays:
      * // { age: 4, name: 'Foo' }
@@ -13900,7 +13900,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * @example <caption>A simple example with numbers</caption>
      * Observable.of(1, 1, 2, 2, 2, 1, 1, 2, 3, 3, 4)
      *   .distinctUntilChanged()
-     *   .subscribe(x => console.log(x)); // 1, 2, 1, 2, 3, 4
+     *   .subscribe(x => // console.log(x)); // 1, 2, 1, 2, 3, 4
      *
      * @example <caption>An example using a compare function</caption>
      * interface Person {
@@ -13914,7 +13914,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      *     { age: 5, name: 'Foo'})
      *     { age: 6, name: 'Foo'})
      *     .distinctUntilChanged((p: Person, q: Person) => p.name === q.name)
-     *     .subscribe(x => console.log(x));
+     *     .subscribe(x => // console.log(x));
      *
      * // displays:
      * // { age: 4, name: 'Foo' }
@@ -13962,7 +13962,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      *     { age: 5, name: 'Foo'},
      *     { age: 6, name: 'Foo'})
      *     .distinctUntilKeyChanged('name')
-     *     .subscribe(x => console.log(x));
+     *     .subscribe(x => // console.log(x));
      *
      * // displays:
      * // { age: 4, name: 'Foo' }
@@ -13982,7 +13982,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      *     { age: 5, name: 'Foo2'},
      *     { age: 6, name: 'Foo3'})
      *     .distinctUntilKeyChanged('name', (x: string, y: string) => x.substring(0, 3) === y.substring(0, 3))
-     *     .subscribe(x => console.log(x));
+     *     .subscribe(x => // console.log(x));
      *
      * // displays:
      * // { age: 4, name: 'Foo1' }
@@ -14032,7 +14032,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      *     { age: 5, name: 'Foo'},
      *     { age: 6, name: 'Foo'})
      *     .distinctUntilKeyChanged('name')
-     *     .subscribe(x => console.log(x));
+     *     .subscribe(x => // console.log(x));
      *
      * // displays:
      * // { age: 4, name: 'Foo' }
@@ -14052,7 +14052,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      *     { age: 5, name: 'Foo2'},
      *     { age: 6, name: 'Foo3'})
      *     .distinctUntilKeyChanged('name', (x: string, y: string) => x.substring(0, 3) === y.substring(0, 3))
-     *     .subscribe(x => console.log(x));
+     *     .subscribe(x => // console.log(x));
      *
      * // displays:
      * // { age: 4, name: 'Foo1' }
@@ -14118,9 +14118,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * @example <caption>Map every click to the clientX position of that click, while also logging the click event</caption>
      * var clicks = Rx.Observable.fromEvent(document, 'click');
      * var positions = clicks
-     *   .do(ev => console.log(ev))
+     *   .do(ev => // console.log(ev))
      *   .map(ev => ev.clientX);
-     * positions.subscribe(x => console.log(x));
+     * positions.subscribe(x => // console.log(x));
      *
      * @see {@link map}
      * @see {@link subscribe}
@@ -14242,9 +14242,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * @example <caption>Map every click to the clientX position of that click, while also logging the click event</caption>
      * var clicks = Rx.Observable.fromEvent(document, 'click');
      * var positions = clicks
-     *   .do(ev => console.log(ev))
+     *   .do(ev => // console.log(ev))
      *   .map(ev => ev.clientX);
-     * positions.subscribe(x => console.log(x));
+     * positions.subscribe(x => // console.log(x));
      *
      * @see {@link map}
      * @see {@link subscribe}
@@ -14303,7 +14303,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * var clicks = Rx.Observable.fromEvent(document, 'click');
      * var higherOrder = clicks.map((ev) => Rx.Observable.interval(1000).take(5));
      * var result = higherOrder.exhaust();
-     * result.subscribe(x => console.log(x));
+     * result.subscribe(x => // console.log(x));
      *
      * @see {@link combineAll}
      * @see {@link concatAll}
@@ -14404,7 +14404,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * var clicks = Rx.Observable.fromEvent(document, 'click');
      * var higherOrder = clicks.map((ev) => Rx.Observable.interval(1000).take(5));
      * var result = higherOrder.exhaust();
-     * result.subscribe(x => console.log(x));
+     * result.subscribe(x => // console.log(x));
      *
      * @see {@link combineAll}
      * @see {@link concatAll}
@@ -14463,7 +14463,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * @example <caption>Run a finite timer for each click, only if there is no currently active timer</caption>
      * var clicks = Rx.Observable.fromEvent(document, 'click');
      * var result = clicks.exhaustMap((ev) => Rx.Observable.interval(1000).take(5));
-     * result.subscribe(x => console.log(x));
+     * result.subscribe(x => // console.log(x));
      *
      * @see {@link concatMap}
      * @see {@link exhaust}
@@ -14623,7 +14623,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * @example <caption>Run a finite timer for each click, only if there is no currently active timer</caption>
      * var clicks = Rx.Observable.fromEvent(document, 'click');
      * var result = clicks.exhaustMap((ev) => Rx.Observable.interval(1000).take(5));
-     * result.subscribe(x => console.log(x));
+     * result.subscribe(x => // console.log(x));
      *
      * @see {@link concatMap}
      * @see {@link exhaust}
@@ -14697,7 +14697,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      *   .mapTo(1)
      *   .expand(x => Rx.Observable.of(2 * x).delay(1000))
      *   .take(10);
-     * powersOfTwo.subscribe(x => console.log(x));
+     * powersOfTwo.subscribe(x => // console.log(x));
      *
      * @see {@link mergeMap}
      * @see {@link mergeScan}
@@ -14883,7 +14883,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      *   .mapTo(1)
      *   .expand(x => Rx.Observable.of(2 * x).delay(1000))
      *   .take(10);
-     * powersOfTwo.subscribe(x => console.log(x));
+     * powersOfTwo.subscribe(x => // console.log(x));
      *
      * @see {@link mergeMap}
      * @see {@link mergeScan}
@@ -14992,12 +14992,12 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * @example <caption>Emit only the third click event</caption>
      * var clicks = Rx.Observable.fromEvent(document, 'click');
      * var result = clicks.elementAt(2);
-     * result.subscribe(x => console.log(x));
+     * result.subscribe(x => // console.log(x));
      *
      * // Results in:
      * // click 1 = nothing
      * // click 2 = nothing
-     * // click 3 = MouseEvent object logged to console
+     * // click 3 = MouseEvent object logged to // console
      *
      * @see {@link first}
      * @see {@link last}
@@ -15104,12 +15104,12 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * @example <caption>Emit only the third click event</caption>
      * var clicks = Rx.Observable.fromEvent(document, 'click');
      * var result = clicks.elementAt(2);
-     * result.subscribe(x => console.log(x));
+     * result.subscribe(x => // console.log(x));
      *
      * // Results in:
      * // click 1 = nothing
      * // click 2 = nothing
-     * // click 3 = MouseEvent object logged to console
+     * // click 3 = MouseEvent object logged to // console
      *
      * @see {@link first}
      * @see {@link last}
@@ -15170,7 +15170,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * @example <caption>Emit only click events whose target was a DIV element</caption>
      * var clicks = Rx.Observable.fromEvent(document, 'click');
      * var clicksOnDivs = clicks.filter(ev => ev.target.tagName === 'DIV');
-     * clicksOnDivs.subscribe(x => console.log(x));
+     * clicksOnDivs.subscribe(x => // console.log(x));
      *
      * @see {@link distinct}
      * @see {@link distinctUntilChanged}
@@ -15274,7 +15274,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * @example <caption>Emit only click events whose target was a DIV element</caption>
      * var clicks = Rx.Observable.fromEvent(document, 'click');
      * var clicksOnDivs = clicks.filter(ev => ev.target.tagName === 'DIV');
-     * clicksOnDivs.subscribe(x => console.log(x));
+     * clicksOnDivs.subscribe(x => // console.log(x));
      *
      * @see {@link distinct}
      * @see {@link distinctUntilChanged}
@@ -15417,7 +15417,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * @example <caption>Find and emit the first click that happens on a DIV element</caption>
      * var clicks = Rx.Observable.fromEvent(document, 'click');
      * var result = clicks.find(ev => ev.target.tagName === 'DIV');
-     * result.subscribe(x => console.log(x));
+     * result.subscribe(x => // console.log(x));
      *
      * @see {@link filter}
      * @see {@link first}
@@ -15538,7 +15538,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * @example <caption>Find and emit the first click that happens on a DIV element</caption>
      * var clicks = Rx.Observable.fromEvent(document, 'click');
      * var result = clicks.find(ev => ev.target.tagName === 'DIV');
-     * result.subscribe(x => console.log(x));
+     * result.subscribe(x => // console.log(x));
      *
      * @see {@link filter}
      * @see {@link first}
@@ -15582,7 +15582,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * @example <caption>Emit the index of first click that happens on a DIV element</caption>
      * var clicks = Rx.Observable.fromEvent(document, 'click');
      * var result = clicks.findIndex(ev => ev.target.tagName === 'DIV');
-     * result.subscribe(x => console.log(x));
+     * result.subscribe(x => // console.log(x));
      *
      * @see {@link filter}
      * @see {@link find}
@@ -15627,7 +15627,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * @example <caption>Emit the index of first click that happens on a DIV element</caption>
      * var clicks = Rx.Observable.fromEvent(document, 'click');
      * var result = clicks.findIndex(ev => ev.target.tagName === 'DIV');
-     * result.subscribe(x => console.log(x));
+     * result.subscribe(x => // console.log(x));
      *
      * @see {@link filter}
      * @see {@link find}
@@ -15727,12 +15727,12 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * @example <caption>Emit only the first click that happens on the DOM</caption>
      * var clicks = Rx.Observable.fromEvent(document, 'click');
      * var result = clicks.first();
-     * result.subscribe(x => console.log(x));
+     * result.subscribe(x => // console.log(x));
      *
      * @example <caption>Emits the first click that happens on a DIV</caption>
      * var clicks = Rx.Observable.fromEvent(document, 'click');
      * var result = clicks.first(ev => ev.target.tagName === 'DIV');
-     * result.subscribe(x => console.log(x));
+     * result.subscribe(x => // console.log(x));
      *
      * @see {@link filter}
      * @see {@link find}
@@ -15898,12 +15898,12 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * @example <caption>Emit only the first click that happens on the DOM</caption>
      * var clicks = Rx.Observable.fromEvent(document, 'click');
      * var result = clicks.first();
-     * result.subscribe(x => console.log(x));
+     * result.subscribe(x => // console.log(x));
      *
      * @example <caption>Emits the first click that happens on a DIV</caption>
      * var clicks = Rx.Observable.fromEvent(document, 'click');
      * var result = clicks.first(ev => ev.target.tagName === 'DIV');
-     * result.subscribe(x => console.log(x));
+     * result.subscribe(x => // console.log(x));
      *
      * @see {@link filter}
      * @see {@link find}
@@ -16083,7 +16083,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      *     )
      *     .groupBy(p => p.id)
      *     .flatMap( (group$) => group$.reduce((acc, cur) => [...acc, cur], []))
-     *     .subscribe(p => console.log(p));
+     *     .subscribe(p => // console.log(p));
      *
      * // displays:
      * // [ { id: 1, name: 'aze1' },
@@ -16110,7 +16110,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      *     .groupBy(p => p.id, p => p.name)
      *     .flatMap( (group$) => group$.reduce((acc, cur) => [...acc, cur], ["" + group$.key]))
      *     .map(arr => ({'id': parseInt(arr[0]), 'values': arr.slice(1)}))
-     *     .subscribe(p => console.log(p));
+     *     .subscribe(p => // console.log(p));
      *
      * // displays:
      * // { id: 1, values: [ 'aze1', 'erg1', 'df1' ] }
@@ -16416,7 +16416,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      *     )
      *     .groupBy(p => p.id)
      *     .flatMap( (group$) => group$.reduce((acc, cur) => [...acc, cur], []))
-     *     .subscribe(p => console.log(p));
+     *     .subscribe(p => // console.log(p));
      *
      * // displays:
      * // [ { id: 1, name: 'aze1' },
@@ -16443,7 +16443,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      *     .groupBy(p => p.id, p => p.name)
      *     .flatMap( (group$) => group$.reduce((acc, cur) => [...acc, cur], ["" + group$.key]))
      *     .map(arr => ({'id': parseInt(arr[0]), 'values': arr.slice(1)}))
-     *     .subscribe(p => console.log(p));
+     *     .subscribe(p => // console.log(p));
      *
      * // displays:
      * // { id: 1, values: [ 'aze1', 'erg1', 'df1' ] }
@@ -16679,7 +16679,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * @example <caption>Emit clicks at a rate of at most one click per second</caption>
      * var clicks = Rx.Observable.fromEvent(document, 'click');
      * var result = clicks.audit(ev => Rx.Observable.interval(1000));
-     * result.subscribe(x => console.log(x));
+     * result.subscribe(x => // console.log(x));
      *
      * @see {@link auditTime}
      * @see {@link debounce}
@@ -16811,7 +16811,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * @example <caption>Emit clicks at a rate of at most one click per second</caption>
      * var clicks = Rx.Observable.fromEvent(document, 'click');
      * var result = clicks.audit(ev => Rx.Observable.interval(1000));
-     * result.subscribe(x => console.log(x));
+     * result.subscribe(x => // console.log(x));
      *
      * @see {@link auditTime}
      * @see {@link debounce}
@@ -16861,7 +16861,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * @example <caption>Emit clicks at a rate of at most one click per second</caption>
      * var clicks = Rx.Observable.fromEvent(document, 'click');
      * var result = clicks.auditTime(1000);
-     * result.subscribe(x => console.log(x));
+     * result.subscribe(x => // console.log(x));
      *
      * @see {@link audit}
      * @see {@link debounceTime}
@@ -16918,7 +16918,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * @example <caption>Emit clicks at a rate of at most one click per second</caption>
      * var clicks = Rx.Observable.fromEvent(document, 'click');
      * var result = clicks.auditTime(1000);
-     * result.subscribe(x => console.log(x));
+     * result.subscribe(x => // console.log(x));
      *
      * @see {@link audit}
      * @see {@link debounceTime}
@@ -17165,7 +17165,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * @example <caption>A simple example emitting true if all elements are less than 5, false otherwise</caption>
      *  Observable.of(1, 2, 3, 4, 5, 6)
      *     .every(x => x < 5)
-     *     .subscribe(x => console.log(x)); // -> false
+     *     .subscribe(x => // console.log(x)); // -> false
      *
      * @param {function} predicate A function for determining if an item meets a specified condition.
      * @param {any} [thisArg] Optional object to use for `this` in the callback.
@@ -17252,7 +17252,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * @example <caption>A simple example emitting true if all elements are less than 5, false otherwise</caption>
      *  Observable.of(1, 2, 3, 4, 5, 6)
      *     .every(x => x < 5)
-     *     .subscribe(x => console.log(x)); // -> false
+     *     .subscribe(x => // console.log(x)); // -> false
      *
      * @param {function} predicate A function for determining if an item meets a specified condition.
      * @param {any} [thisArg] Optional object to use for `this` in the callback.
@@ -17287,7 +17287,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * @example <caption>Map every click to the clientX position of that click</caption>
      * var clicks = Rx.Observable.fromEvent(document, 'click');
      * var positions = clicks.map(ev => ev.clientX);
-     * positions.subscribe(x => console.log(x));
+     * positions.subscribe(x => // console.log(x));
      *
      * @see {@link mapTo}
      * @see {@link pluck}
@@ -17341,7 +17341,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * @example <caption>Map every click to the string 'Hi'</caption>
      * var clicks = Rx.Observable.fromEvent(document, 'click');
      * var greetings = clicks.mapTo('Hi');
-     * greetings.subscribe(x => console.log(x));
+     * greetings.subscribe(x => // console.log(x));
      *
      * @see {@link map}
      *
@@ -17414,7 +17414,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * @example <caption>Map every click to the string 'Hi'</caption>
      * var clicks = Rx.Observable.fromEvent(document, 'click');
      * var greetings = clicks.mapTo('Hi');
-     * greetings.subscribe(x => console.log(x));
+     * greetings.subscribe(x => // console.log(x));
      *
      * @see {@link map}
      *
@@ -17472,7 +17472,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * var letters = Rx.Observable.of('a', 'b', 13, 'd');
      * var upperCase = letters.map(x => x.toUpperCase());
      * var materialized = upperCase.materialize();
-     * materialized.subscribe(x => console.log(x));
+     * materialized.subscribe(x => // console.log(x));
      *
      * // Results in the following:
      * // - Notification {kind: "N", value: "A", error: undefined, hasValue: true}
@@ -17571,7 +17571,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * var letters = Rx.Observable.of('a', 'b', 13, 'd');
      * var upperCase = letters.map(x => x.toUpperCase());
      * var materialized = upperCase.materialize();
-     * materialized.subscribe(x => console.log(x));
+     * materialized.subscribe(x => // console.log(x));
      *
      * // Results in the following:
      * // - Notification {kind: "N", value: "A", error: undefined, hasValue: true}
@@ -17637,7 +17637,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * var ones = clicks.mapTo(1);
      * var seed = 0;
      * var count = ones.scan((acc, one) => acc + one, seed);
-     * count.subscribe(x => console.log(x));
+     * count.subscribe(x => // console.log(x));
      *
      * @see {@link expand}
      * @see {@link mergeScan}
@@ -17778,7 +17778,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * @example <caption>Take the last 3 values of an Observable with many values</caption>
      * var many = Rx.Observable.range(1, 100);
      * var lastThree = many.takeLast(3);
-     * lastThree.subscribe(x => console.log(x));
+     * lastThree.subscribe(x => // console.log(x));
      *
      * @see {@link take}
      * @see {@link takeUntil}
@@ -17909,7 +17909,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * var ones = clicksInFiveSeconds.mapTo(1);
      * var seed = 0;
      * var count = ones.reduce((acc, one) => acc + one, seed);
-     * count.subscribe(x => console.log(x));
+     * count.subscribe(x => // console.log(x));
      *
      * @see {@link count}
      * @see {@link expand}
@@ -17957,7 +17957,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * @example <caption>Get the maximal value of a series of numbers</caption>
      * Rx.Observable.of(5, 4, 7, 2, 8)
      *   .max()
-     *   .subscribe(x => console.log(x)); // -> 8
+     *   .subscribe(x => // console.log(x)); // -> 8
      *
      * @example <caption>Use a comparer function to get the maximal item</caption>
      * interface Person {
@@ -17968,7 +17968,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      *                       {age: 5, name: 'Bar'},
      *                       {age: 9, name: 'Beer'})
      *           .max<Person>((a: Person, b: Person) => a.age < b.age ? -1 : 1)
-     *           .subscribe((x: Person) => console.log(x.name)); // -> 'Beer'
+     *           .subscribe((x: Person) => // console.log(x.name)); // -> 'Beer'
      * }
      *
      * @see {@link min}
@@ -18002,7 +18002,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * @example <caption>Get the maximal value of a series of numbers</caption>
      * Rx.Observable.of(5, 4, 7, 2, 8)
      *   .max()
-     *   .subscribe(x => console.log(x)); // -> 8
+     *   .subscribe(x => // console.log(x)); // -> 8
      *
      * @example <caption>Use a comparer function to get the maximal item</caption>
      * interface Person {
@@ -18013,7 +18013,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      *                       {age: 5, name: 'Bar'},
      *                       {age: 9, name: 'Beer'})
      *           .max<Person>((a: Person, b: Person) => a.age < b.age ? -1 : 1)
-     *           .subscribe((x: Person) => console.log(x.name)); // -> 'Beer'
+     *           .subscribe((x: Person) => // console.log(x.name)); // -> 'Beer'
      * }
      *
      * @see {@link min}
@@ -18058,7 +18058,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * var clicks = Rx.Observable.fromEvent(document, 'click');
      * var timer = Rx.Observable.interval(1000);
      * var clicksOrTimer = clicks.merge(timer);
-     * clicksOrTimer.subscribe(x => console.log(x));
+     * clicksOrTimer.subscribe(x => // console.log(x));
      *
      * @example <caption>Merge together 3 Observables, but only 2 run concurrently</caption>
      * var timer1 = Rx.Observable.interval(1000).take(10);
@@ -18066,7 +18066,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * var timer3 = Rx.Observable.interval(500).take(10);
      * var concurrent = 2; // the argument
      * var merged = timer1.merge(timer2, timer3, concurrent);
-     * merged.subscribe(x => console.log(x));
+     * merged.subscribe(x => // console.log(x));
      *
      * @see {@link mergeAll}
      * @see {@link mergeMap}
@@ -18125,7 +18125,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * var clicks = Rx.Observable.fromEvent(document, 'click');
      * var timer = Rx.Observable.interval(1000);
      * var clicksOrTimer = clicks.merge(timer);
-     * clicksOrTimer.subscribe(x => console.log(x));
+     * clicksOrTimer.subscribe(x => // console.log(x));
      *
      * @example <caption>Merge together 3 Observables, but only 2 run concurrently</caption>
      * var timer1 = Rx.Observable.interval(1000).take(10);
@@ -18133,7 +18133,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * var timer3 = Rx.Observable.interval(500).take(10);
      * var concurrent = 2; // the argument
      * var merged = timer1.merge(timer2, timer3, concurrent);
-     * merged.subscribe(x => console.log(x));
+     * merged.subscribe(x => // console.log(x));
      *
      * @see {@link mergeAll}
      * @see {@link mergeMap}
@@ -18187,13 +18187,13 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * var clicks = Rx.Observable.fromEvent(document, 'click');
      * var higherOrder = clicks.map((ev) => Rx.Observable.interval(1000));
      * var firstOrder = higherOrder.mergeAll();
-     * firstOrder.subscribe(x => console.log(x));
+     * firstOrder.subscribe(x => // console.log(x));
      *
      * @example <caption>Count from 0 to 9 every second for each click, but only allow 2 concurrent timers</caption>
      * var clicks = Rx.Observable.fromEvent(document, 'click');
      * var higherOrder = clicks.map((ev) => Rx.Observable.interval(1000).take(10));
      * var firstOrder = higherOrder.mergeAll(2);
-     * firstOrder.subscribe(x => console.log(x));
+     * firstOrder.subscribe(x => // console.log(x));
      *
      * @see {@link combineAll}
      * @see {@link concatAll}
@@ -18247,7 +18247,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * var result = letters.mergeMap(x =>
      *   Rx.Observable.interval(1000).map(i => x+i)
      * );
-     * result.subscribe(x => console.log(x));
+     * result.subscribe(x => // console.log(x));
      *
      * // Results in the following:
      * // a0
@@ -18331,7 +18331,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * @example <caption>For each click event, start an interval Observable ticking every 1 second</caption>
      * var clicks = Rx.Observable.fromEvent(document, 'click');
      * var result = clicks.mergeMapTo(Rx.Observable.interval(1000));
-     * result.subscribe(x => console.log(x));
+     * result.subscribe(x => // console.log(x));
      *
      * @see {@link concatMapTo}
      * @see {@link merge}
@@ -18520,7 +18520,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * @example <caption>For each click event, start an interval Observable ticking every 1 second</caption>
      * var clicks = Rx.Observable.fromEvent(document, 'click');
      * var result = clicks.mergeMapTo(Rx.Observable.interval(1000));
-     * result.subscribe(x => console.log(x));
+     * result.subscribe(x => // console.log(x));
      *
      * @see {@link concatMapTo}
      * @see {@link merge}
@@ -18587,7 +18587,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * const one$ = click$.mapTo(1);
      * const seed = 0;
      * const count$ = one$.mergeScan((acc, one) => Rx.Observable.of(acc + one), seed);
-     * count$.subscribe(x => console.log(x));
+     * count$.subscribe(x => // console.log(x));
      *
      * // Results:
      * 1
@@ -18735,7 +18735,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * const one$ = click$.mapTo(1);
      * const seed = 0;
      * const count$ = one$.mergeScan((acc, one) => Rx.Observable.of(acc + one), seed);
-     * count$.subscribe(x => console.log(x));
+     * count$.subscribe(x => // console.log(x));
      *
      * // Results:
      * 1
@@ -18776,7 +18776,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * @example <caption>Get the minimal value of a series of numbers</caption>
      * Rx.Observable.of(5, 4, 7, 2, 8)
      *   .min()
-     *   .subscribe(x => console.log(x)); // -> 2
+     *   .subscribe(x => // console.log(x)); // -> 2
      *
      * @example <caption>Use a comparer function to get the minimal item</caption>
      * interface Person {
@@ -18787,7 +18787,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      *                       {age: 5, name: 'Bar'},
      *                       {age: 9, name: 'Beer'})
      *           .min<Person>( (a: Person, b: Person) => a.age < b.age ? -1 : 1)
-     *           .subscribe((x: Person) => console.log(x.name)); // -> 'Bar'
+     *           .subscribe((x: Person) => // console.log(x.name)); // -> 'Bar'
      * }
      *
      * @see {@link max}
@@ -18821,7 +18821,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * @example <caption>Get the minimal value of a series of numbers</caption>
      * Rx.Observable.of(5, 4, 7, 2, 8)
      *   .min()
-     *   .subscribe(x => console.log(x)); // -> 2
+     *   .subscribe(x => // console.log(x)); // -> 2
      *
      * @example <caption>Use a comparer function to get the minimal item</caption>
      * interface Person {
@@ -18832,7 +18832,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      *                       {age: 5, name: 'Bar'},
      *                       {age: 9, name: 'Beer'})
      *           .min<Person>( (a: Person, b: Person) => a.age < b.age ? -1 : 1)
-     *           .subscribe((x: Person) => console.log(x.name)); // -> 'Bar'
+     *           .subscribe((x: Person) => // console.log(x.name)); // -> 'Bar'
      * }
      *
      * @see {@link max}
@@ -19322,14 +19322,14 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * const seconds = Rx.Observable.interval(1000);
      * const connectableSeconds = seconds.multicast(new Subject());
      *
-     * connectableSeconds.subscribe(value => console.log('first: ' + value));
-     * connectableSeconds.subscribe(value => console.log('second: ' + value));
+     * connectableSeconds.subscribe(value => // console.log('first: ' + value));
+     * connectableSeconds.subscribe(value => // console.log('second: ' + value));
      *
      * // At this point still nothing happens, even though we subscribed twice.
      *
      * connectableSeconds.connect();
      *
-     * // From now on `seconds` are being logged to the console,
+     * // From now on `seconds` are being logged to the // console,
      * // twice per every second. `seconds` Observable was however only subscribed once,
      * // so under the hood Observable.interval had only one clock started.
      *
@@ -19474,9 +19474,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      *   })
      *   .onErrorResumeNext(Rx.Observable.of(1, 2, 3))
      *   .subscribe(
-     *     val => console.log(val),
-     *     err => console.log(err),          // Will never be called.
-     *     () => console.log('that\'s it!')
+     *     val => // console.log(val),
+     *     err => // console.log(err),          // Will never be called.
+     *     () => // console.log('that\'s it!')
      *   );
      *
      * // Logs:
@@ -19550,7 +19550,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      *   var y1 = pair[1].clientY;
      *   return Math.sqrt(Math.pow(x0 - x1, 2) + Math.pow(y0 - y1, 2));
      * });
-     * distance.subscribe(x => console.log(x));
+     * distance.subscribe(x => // console.log(x));
      *
      * @see {@link buffer}
      * @see {@link bufferCount}
@@ -19636,7 +19636,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      *   var y1 = pair[1].clientY;
      *   return Math.sqrt(Math.pow(x0 - x1, 2) + Math.pow(y0 - y1, 2));
      * });
-     * distance.subscribe(x => console.log(x));
+     * distance.subscribe(x => // console.log(x));
      *
      * @see {@link buffer}
      * @see {@link bufferCount}
@@ -19693,8 +19693,8 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * var parts = clicks.partition(ev => ev.target.tagName === 'DIV');
      * var clicksOnDivs = parts[0];
      * var clicksElsewhere = parts[1];
-     * clicksOnDivs.subscribe(x => console.log('DIV clicked: ', x));
-     * clicksElsewhere.subscribe(x => console.log('Other clicked: ', x));
+     * clicksOnDivs.subscribe(x => // console.log('DIV clicked: ', x));
+     * clicksElsewhere.subscribe(x => // console.log('Other clicked: ', x));
      *
      * @see {@link filter}
      *
@@ -19745,8 +19745,8 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * var parts = clicks.partition(ev => ev.target.tagName === 'DIV');
      * var clicksOnDivs = parts[0];
      * var clicksElsewhere = parts[1];
-     * clicksOnDivs.subscribe(x => console.log('DIV clicked: ', x));
-     * clicksElsewhere.subscribe(x => console.log('Other clicked: ', x));
+     * clicksOnDivs.subscribe(x => // console.log('DIV clicked: ', x));
+     * clicksElsewhere.subscribe(x => // console.log('Other clicked: ', x));
      *
      * @see {@link filter}
      *
@@ -19790,7 +19790,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * @example <caption>Map every click to the tagName of the clicked target element</caption>
      * var clicks = Rx.Observable.fromEvent(document, 'click');
      * var tagNames = clicks.pluck('target', 'tagName');
-     * tagNames.subscribe(x => console.log(x));
+     * tagNames.subscribe(x => // console.log(x));
      *
      * @see {@link map}
      *
@@ -19860,7 +19860,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * @example <caption>Map every click to the tagName of the clicked target element</caption>
      * var clicks = Rx.Observable.fromEvent(document, 'click');
      * var tagNames = clicks.pluck('target', 'tagName');
-     * tagNames.subscribe(x => console.log(x));
+     * tagNames.subscribe(x => // console.log(x));
      *
      * @see {@link map}
      *
@@ -20197,7 +20197,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * var ones = clicksInFiveSeconds.mapTo(1);
      * var seed = 0;
      * var count = ones.reduce((acc, one) => acc + one, seed);
-     * count.subscribe(x => console.log(x));
+     * count.subscribe(x => // console.log(x));
      *
      * @see {@link count}
      * @see {@link expand}
@@ -20844,7 +20844,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * var seconds = Rx.Observable.interval(1000);
      * var clicks = Rx.Observable.fromEvent(document, 'click');
      * var result = seconds.sample(clicks);
-     * result.subscribe(x => console.log(x));
+     * result.subscribe(x => // console.log(x));
      *
      * @see {@link audit}
      * @see {@link debounce}
@@ -20944,7 +20944,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * var seconds = Rx.Observable.interval(1000);
      * var clicks = Rx.Observable.fromEvent(document, 'click');
      * var result = seconds.sample(clicks);
-     * result.subscribe(x => console.log(x));
+     * result.subscribe(x => // console.log(x));
      *
      * @see {@link audit}
      * @see {@link debounce}
@@ -21000,7 +21000,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * @example <caption>Every second, emit the most recent click at most once</caption>
      * var clicks = Rx.Observable.fromEvent(document, 'click');
      * var result = clicks.sampleTime(1000);
-     * result.subscribe(x => console.log(x));
+     * result.subscribe(x => // console.log(x));
      *
      * @see {@link auditTime}
      * @see {@link debounceTime}
@@ -21109,7 +21109,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * @example <caption>Every second, emit the most recent click at most once</caption>
      * var clicks = Rx.Observable.fromEvent(document, 'click');
      * var result = clicks.sampleTime(1000);
-     * result.subscribe(x => console.log(x));
+     * result.subscribe(x => // console.log(x));
      *
      * @see {@link auditTime}
      * @see {@link debounceTime}
@@ -21166,7 +21166,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * var ones = clicks.mapTo(1);
      * var seed = 0;
      * var count = ones.scan((acc, one) => acc + one, seed);
-     * count.subscribe(x => console.log(x));
+     * count.subscribe(x => // console.log(x));
      *
      * @see {@link expand}
      * @see {@link mergeScan}
@@ -21244,7 +21244,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      *      Rx.Observable.from(last11)
      *        .sequenceEqual(code)
      *   );
-     * matches.subscribe(matched => console.log('Successful cheat at Contra? ', matched));
+     * matches.subscribe(matched => // console.log('Successful cheat at Contra? ', matched));
      *
      * @see {@link combineLatest}
      * @see {@link zip}
@@ -21437,7 +21437,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      *      Rx.Observable.from(last11)
      *        .sequenceEqual(code)
      *   );
-     * matches.subscribe(matched => console.log('Successful cheat at Contra? ', matched));
+     * matches.subscribe(matched => // console.log('Successful cheat at Contra? ', matched));
      *
      * @see {@link combineLatest}
      * @see {@link zip}
@@ -21843,7 +21843,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * @example <caption>Skip the last 2 values of an Observable with many values</caption>
      * var many = Rx.Observable.range(1, 5);
      * var skipLastTwo = many.skipLast(2);
-     * skipLastTwo.subscribe(x => console.log(x));
+     * skipLastTwo.subscribe(x => // console.log(x));
      *
      * // Results in:
      * // 1 2 3
@@ -21945,7 +21945,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * @example <caption>Skip the last 2 values of an Observable with many values</caption>
      * var many = Rx.Observable.range(1, 5);
      * var skipLastTwo = many.skipLast(2);
-     * skipLastTwo.subscribe(x => console.log(x));
+     * skipLastTwo.subscribe(x => // console.log(x));
      *
      * // Results in:
      * // 1 2 3
@@ -22683,8 +22683,8 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      *
      * @example <caption>Compare async and asap scheduler</caption>
      *
-     * Rx.Scheduler.async.schedule(() => console.log('async')); // scheduling 'async' first...
-     * Rx.Scheduler.asap.schedule(() => console.log('asap'));
+     * Rx.Scheduler.async.schedule(() => // console.log('async')); // scheduling 'async' first...
+     * Rx.Scheduler.asap.schedule(() => // console.log('asap'));
      *
      * // Logs:
      * // "asap"
@@ -22883,7 +22883,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * @example <caption>Rerun an interval Observable on every click event</caption>
      * var clicks = Rx.Observable.fromEvent(document, 'click');
      * var result = clicks.switchMap((ev) => Rx.Observable.interval(1000));
-     * result.subscribe(x => console.log(x));
+     * result.subscribe(x => // console.log(x));
      *
      * @see {@link concatMap}
      * @see {@link exhaustMap}
@@ -23058,7 +23058,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * // The outcome is that `switched` is essentially a timer that restarts
      * // on every click. The interval Observables from older clicks do not merge
      * // with the current interval Observable.
-     * switched.subscribe(x => console.log(x));
+     * switched.subscribe(x => // console.log(x));
      *
      * @see {@link combineAll}
      * @see {@link concatAll}
@@ -23108,7 +23108,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * @example <caption>Rerun an interval Observable on every click event</caption>
      * var clicks = Rx.Observable.fromEvent(document, 'click');
      * var result = clicks.switchMap((ev) => Rx.Observable.interval(1000));
-     * result.subscribe(x => console.log(x));
+     * result.subscribe(x => // console.log(x));
      *
      * @see {@link concatMap}
      * @see {@link exhaustMap}
@@ -23176,7 +23176,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * @example <caption>Rerun an interval Observable on every click event</caption>
      * var clicks = Rx.Observable.fromEvent(document, 'click');
      * var result = clicks.switchMapTo(Rx.Observable.interval(1000));
-     * result.subscribe(x => console.log(x));
+     * result.subscribe(x => // console.log(x));
      *
      * @see {@link concatMapTo}
      * @see {@link switch}
@@ -23328,7 +23328,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * @example <caption>Rerun an interval Observable on every click event</caption>
      * var clicks = Rx.Observable.fromEvent(document, 'click');
      * var result = clicks.switchMapTo(Rx.Observable.interval(1000));
-     * result.subscribe(x => console.log(x));
+     * result.subscribe(x => // console.log(x));
      *
      * @see {@link concatMapTo}
      * @see {@link switch}
@@ -23390,7 +23390,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * @example <caption>Take the first 5 seconds of an infinite 1-second interval Observable</caption>
      * var interval = Rx.Observable.interval(1000);
      * var five = interval.take(5);
-     * five.subscribe(x => console.log(x));
+     * five.subscribe(x => // console.log(x));
      *
      * @see {@link takeLast}
      * @see {@link takeUntil}
@@ -23489,7 +23489,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * @example <caption>Take the first 5 seconds of an infinite 1-second interval Observable</caption>
      * var interval = Rx.Observable.interval(1000);
      * var five = interval.take(5);
-     * five.subscribe(x => console.log(x));
+     * five.subscribe(x => // console.log(x));
      *
      * @see {@link takeLast}
      * @see {@link takeUntil}
@@ -23535,7 +23535,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * @example <caption>Take the last 3 values of an Observable with many values</caption>
      * var many = Rx.Observable.range(1, 100);
      * var lastThree = many.takeLast(3);
-     * lastThree.subscribe(x => console.log(x));
+     * lastThree.subscribe(x => // console.log(x));
      *
      * @see {@link take}
      * @see {@link takeUntil}
@@ -23592,7 +23592,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * var interval = Rx.Observable.interval(1000);
      * var clicks = Rx.Observable.fromEvent(document, 'click');
      * var result = interval.takeUntil(clicks);
-     * result.subscribe(x => console.log(x));
+     * result.subscribe(x => // console.log(x));
      *
      * @see {@link take}
      * @see {@link takeLast}
@@ -23676,7 +23676,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * var interval = Rx.Observable.interval(1000);
      * var clicks = Rx.Observable.fromEvent(document, 'click');
      * var result = interval.takeUntil(clicks);
-     * result.subscribe(x => console.log(x));
+     * result.subscribe(x => // console.log(x));
      *
      * @see {@link take}
      * @see {@link takeLast}
@@ -23733,7 +23733,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * @example <caption>Emit click events only while the clientX property is greater than 200</caption>
      * var clicks = Rx.Observable.fromEvent(document, 'click');
      * var result = clicks.takeWhile(ev => ev.clientX > 200);
-     * result.subscribe(x => console.log(x));
+     * result.subscribe(x => // console.log(x));
      *
      * @see {@link take}
      * @see {@link takeLast}
@@ -23837,7 +23837,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * @example <caption>Emit click events only while the clientX property is greater than 200</caption>
      * var clicks = Rx.Observable.fromEvent(document, 'click');
      * var result = clicks.takeWhile(ev => ev.clientX > 200);
-     * result.subscribe(x => console.log(x));
+     * result.subscribe(x => // console.log(x));
      *
      * @see {@link take}
      * @see {@link takeLast}
@@ -23902,7 +23902,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
        * @example <caption>Emit clicks at a rate of at most one click per second</caption>
        * var clicks = Rx.Observable.fromEvent(document, 'click');
        * var result = clicks.throttle(ev => Rx.Observable.interval(1000));
-       * result.subscribe(x => console.log(x));
+       * result.subscribe(x => // console.log(x));
        *
        * @see {@link audit}
        * @see {@link debounce}
@@ -24072,7 +24072,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * @example <caption>Emit clicks at a rate of at most one click per second</caption>
      * var clicks = Rx.Observable.fromEvent(document, 'click');
      * var result = clicks.throttle(ev => Rx.Observable.interval(1000));
-     * result.subscribe(x => console.log(x));
+     * result.subscribe(x => // console.log(x));
      *
      * @see {@link audit}
      * @see {@link debounce}
@@ -24137,7 +24137,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * @example <caption>Emit clicks at a rate of at most one click per second</caption>
      * var clicks = Rx.Observable.fromEvent(document, 'click');
      * var result = clicks.throttleTime(1000);
-     * result.subscribe(x => console.log(x));
+     * result.subscribe(x => // console.log(x));
      *
      * @see {@link auditTime}
      * @see {@link debounceTime}
@@ -24273,7 +24273,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * @example <caption>Emit clicks at a rate of at most one click per second</caption>
      * var clicks = Rx.Observable.fromEvent(document, 'click');
      * var result = clicks.throttleTime(1000);
-     * result.subscribe(x => console.log(x));
+     * result.subscribe(x => // console.log(x));
      *
      * @see {@link auditTime}
      * @see {@link debounceTime}
@@ -24496,13 +24496,13 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * seconds.timeout(1100) // Let's use bigger timespan to be safe,
      *                       // since `interval` might fire a bit later then scheduled.
      * .subscribe(
-     *     value => console.log(value), // Will emit numbers just as regular `interval` would.
-     *     err => console.log(err) // Will never be called.
+     *     value => // console.log(value), // Will emit numbers just as regular `interval` would.
+     *     err => // console.log(err) // Will never be called.
      * );
      *
      * seconds.timeout(900).subscribe(
-     *     value => console.log(value), // Will never be called.
-     *     err => console.log(err) // Will emit error before even first value is emitted,
+     *     value => // console.log(value), // Will never be called.
+     *     err => // console.log(err) // Will emit error before even first value is emitted,
      *                             // since it did not arrive within 900ms period.
      * );
      *
@@ -24511,9 +24511,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      *
      * seconds.timeout(new Date("December 17, 2020 03:24:00"))
      * .subscribe(
-     *     value => console.log(value), // Will emit values as regular `interval` would
+     *     value => // console.log(value), // Will emit values as regular `interval` would
      *                                  // until December 17, 2020 at 03:24:00.
-     *     err => console.log(err) // On December 17, 2020 at 03:24:00 it will emit an error,
+     *     err => // console.log(err) // On December 17, 2020 at 03:24:00 it will emit an error,
      *                             // since Observable did not complete by then.
      * );
      *
@@ -24653,13 +24653,13 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * seconds.timeout(1100) // Let's use bigger timespan to be safe,
      *                       // since `interval` might fire a bit later then scheduled.
      * .subscribe(
-     *     value => console.log(value), // Will emit numbers just as regular `interval` would.
-     *     err => console.log(err) // Will never be called.
+     *     value => // console.log(value), // Will emit numbers just as regular `interval` would.
+     *     err => // console.log(err) // Will never be called.
      * );
      *
      * seconds.timeout(900).subscribe(
-     *     value => console.log(value), // Will never be called.
-     *     err => console.log(err) // Will emit error before even first value is emitted,
+     *     value => // console.log(value), // Will never be called.
+     *     err => // console.log(err) // Will emit error before even first value is emitted,
      *                             // since it did not arrive within 900ms period.
      * );
      *
@@ -24668,9 +24668,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      *
      * seconds.timeout(new Date("December 17, 2020 03:24:00"))
      * .subscribe(
-     *     value => console.log(value), // Will emit values as regular `interval` would
+     *     value => // console.log(value), // Will emit values as regular `interval` would
      *                                  // until December 17, 2020 at 03:24:00.
-     *     err => console.log(err) // On December 17, 2020 at 03:24:00 it will emit an error,
+     *     err => // console.log(err) // On December 17, 2020 at 03:24:00 it will emit an error,
      *                             // since Observable did not complete by then.
      * );
      *
@@ -24743,9 +24743,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      *
      * seconds.timeoutWith(900, minutes)
      *     .subscribe(
-     *         value => console.log(value), // After 900ms, will start emitting `minutes`,
+     *         value => // console.log(value), // After 900ms, will start emitting `minutes`,
      *                                      // since first value of `seconds` will not arrive fast enough.
-     *         err => console.log(err) // Would be called after 900ms in case of `timeout`,
+     *         err => // console.log(err) // Would be called after 900ms in case of `timeout`,
      *                                 // but here will never be called.
      *     );
      *
@@ -24888,9 +24888,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      *
      * seconds.timeoutWith(900, minutes)
      *     .subscribe(
-     *         value => console.log(value), // After 900ms, will start emitting `minutes`,
+     *         value => // console.log(value), // After 900ms, will start emitting `minutes`,
      *                                      // since first value of `seconds` will not arrive fast enough.
-     *         err => console.log(err) // Would be called after 900ms in case of `timeout`,
+     *         err => // console.log(err) // Would be called after 900ms in case of `timeout`,
      *                                 // but here will never be called.
      *     );
      *
@@ -25003,7 +25003,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * const input = Rx.Observable.interval(100).take(4);
      *
      * input.toArray()
-     *   .subscribe(arr => console.log(arr)); // [0,1,2,3]
+     *   .subscribe(arr => // console.log(arr)); // [0,1,2,3]
      *
      * @see {@link buffer}
      *
@@ -25055,7 +25055,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * var result = clicks.window(interval)
      *   .map(win => win.take(2)) // each window has at most 2 emissions
      *   .mergeAll(); // flatten the Observable-of-Observables
-     * result.subscribe(x => console.log(x));
+     * result.subscribe(x => // console.log(x));
      *
      * @see {@link windowCount}
      * @see {@link windowTime}
@@ -25186,7 +25186,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * var result = clicks.window(interval)
      *   .map(win => win.take(2)) // each window has at most 2 emissions
      *   .mergeAll(); // flatten the Observable-of-Observables
-     * result.subscribe(x => console.log(x));
+     * result.subscribe(x => // console.log(x));
      *
      * @see {@link windowCount}
      * @see {@link windowTime}
@@ -25246,13 +25246,13 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * var result = clicks.windowCount(3)
      *   .map(win => win.skip(1)) // skip first of every 3 clicks
      *   .mergeAll(); // flatten the Observable-of-Observables
-     * result.subscribe(x => console.log(x));
+     * result.subscribe(x => // console.log(x));
      *
      * @example <caption>Ignore every 3rd click event, starting from the third one</caption>
      * var clicks = Rx.Observable.fromEvent(document, 'click');
      * var result = clicks.windowCount(2, 3)
      *   .mergeAll(); // flatten the Observable-of-Observables
-     * result.subscribe(x => console.log(x));
+     * result.subscribe(x => // console.log(x));
      *
      * @see {@link window}
      * @see {@link windowTime}
@@ -25402,13 +25402,13 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * var result = clicks.windowCount(3)
      *   .map(win => win.skip(1)) // skip first of every 3 clicks
      *   .mergeAll(); // flatten the Observable-of-Observables
-     * result.subscribe(x => console.log(x));
+     * result.subscribe(x => // console.log(x));
      *
      * @example <caption>Ignore every 3rd click event, starting from the third one</caption>
      * var clicks = Rx.Observable.fromEvent(document, 'click');
      * var result = clicks.windowCount(2, 3)
      *   .mergeAll(); // flatten the Observable-of-Observables
-     * result.subscribe(x => console.log(x));
+     * result.subscribe(x => // console.log(x));
      *
      * @see {@link window}
      * @see {@link windowTime}
@@ -25737,7 +25737,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * var result = clicks.windowToggle(openings, i =>
      *   i % 2 ? Rx.Observable.interval(500) : Rx.Observable.empty()
      * ).mergeAll();
-     * result.subscribe(x => console.log(x));
+     * result.subscribe(x => // console.log(x));
      *
      * @see {@link window}
      * @see {@link windowCount}
@@ -25946,7 +25946,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * var result = clicks.windowToggle(openings, i =>
      *   i % 2 ? Rx.Observable.interval(500) : Rx.Observable.empty()
      * ).mergeAll();
-     * result.subscribe(x => console.log(x));
+     * result.subscribe(x => // console.log(x));
      *
      * @see {@link window}
      * @see {@link windowCount}
@@ -26009,7 +26009,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      *   .windowWhen(() => Rx.Observable.interval(1000 + Math.random() * 4000))
      *   .map(win => win.take(2)) // each window has at most 2 emissions
      *   .mergeAll(); // flatten the Observable-of-Observables
-     * result.subscribe(x => console.log(x));
+     * result.subscribe(x => // console.log(x));
      *
      * @see {@link window}
      * @see {@link windowCount}
@@ -26155,7 +26155,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      *   .windowWhen(() => Rx.Observable.interval(1000 + Math.random() * 4000))
      *   .map(win => win.take(2)) // each window has at most 2 emissions
      *   .mergeAll(); // flatten the Observable-of-Observables
-     * result.subscribe(x => console.log(x));
+     * result.subscribe(x => // console.log(x));
      *
      * @see {@link window}
      * @see {@link windowCount}
@@ -26216,7 +26216,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * var clicks = Rx.Observable.fromEvent(document, 'click');
      * var timer = Rx.Observable.interval(1000);
      * var result = clicks.withLatestFrom(timer);
-     * result.subscribe(x => console.log(x));
+     * result.subscribe(x => // console.log(x));
      *
      * @see {@link combineLatest}
      *
@@ -26367,7 +26367,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
      * var clicks = Rx.Observable.fromEvent(document, 'click');
      * var timer = Rx.Observable.interval(1000);
      * var result = clicks.withLatestFrom(timer);
-     * result.subscribe(x => console.log(x));
+     * result.subscribe(x => // console.log(x));
      *
      * @see {@link combineLatest}
      *

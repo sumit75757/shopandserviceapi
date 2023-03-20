@@ -18,8 +18,8 @@ const emailservice = {
 
       lowerCaseAlphabets: false,
     });
-    //console.log("otp is", otp);
-    //console.log(otpdata);
+    //// console.log("otp is", otp);
+    //// console.log(otpdata);
     const html: string =
       `<div style="font-family: Helvetica,Arial,sans-serif;min-width:1000px;overflow:auto;line-height:2"><div style="margin:50px auto;width:70%;padding:20px 0"><div style="border-bottom:1px solid #eee"><a href="" style="font-size:1.4em;color: #00466a;text-decoration:none;font-weight:600">Your Brand</a></div><p style="font-size:1.1em">Hi,</p><p>Thank you for choosing Your Brand. Use the following OTP to complete your Sign Up procedures. OTP is valid for 5 minutes</p><h2 style="background: #00466a;margin: 0 auto;width: max-content;padding: 0 10px;color: #fff;border-radius: 4px;">` +
       otp +
@@ -45,10 +45,10 @@ const emailservice = {
         setInterval(() => {
           let time = Date.now();
           ecpire = otpdata.filter(function (item) {
-            console.log(item.time + 5000 * 60);
+            // console.log(item.time + 5000 * 60);
             return time < item.time + 5000 * 60;
           });
-          console.log(ecpire);
+          // console.log(ecpire);
         }, 500);
       })
       .catch((Err) => {
@@ -237,13 +237,13 @@ export default emailservice;
 
 // function deleteOtp() {
 //   otpdata.forEach((element) => {
-//     //console.log("asdgasdf", element);
+//     //// console.log("asdgasdf", element);
 //     if (new Date().getTime() > element.time) {
 //       let deletedata = otpdata.filter((item) => item.email !== element.email);
-//       //console.log("asdgaasdfasdf", deletedata);
+//       //// console.log("asdgaasdfasdf", deletedata);
 //     } else {
-//       //console.log("not done");
+//       //// console.log("not done");
 //     }
-//     //console.log(new Date().getTime());
+//     //// console.log(new Date().getTime());
 //   });
 // }

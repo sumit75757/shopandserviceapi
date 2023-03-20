@@ -316,7 +316,7 @@ class UserComponent {
             this.getseller();
         }
         this.counts();
-        console.log(this.next);
+        // console.log(this.next);
     }
     nexts() {
         let l = this.limit;
@@ -324,7 +324,7 @@ class UserComponent {
         this.skip = s + l;
         this.next = this.skip;
         this.getseller();
-        console.log(this.next);
+        // console.log(this.next);
         this.counts();
     }
     counts() {
@@ -344,15 +344,15 @@ class UserComponent {
             this.spiner.show();
         }
         this.api.getUser(this.skip, this.limit, this.serch).subscribe((res) => {
-            console.log(this.skip);
+            // console.log(this.skip);
             if (res.response == 'success') {
-                console.log(res);
+                // console.log(res);
                 if (this.serch != '' && res.users.length == 0) {
                     this.toastr.error('Search result not found!');
                 }
                 this.count = res.count;
                 this.tableData = res;
-                console.log(this.tableData.count);
+                // console.log(this.tableData.count);
                 this.spiner.hide();
             }
             else {
@@ -366,14 +366,14 @@ class UserComponent {
         });
     }
     statusHandel(e) {
-        console.log(e.target.checked);
-        console.log(e.target.id);
+        // console.log(e.target.checked);
+        // console.log(e.target.id);
         let obj = {
             satate: e.target.checked
         };
         this.api.updateSeller(obj, e.target.id).subscribe((res) => {
             if (res.response = 'success') {
-                console.log(res);
+                // console.log(res);
                 this.spiner.hide();
                 this.toastr.success('Seller Update!');
                 this.getseller();

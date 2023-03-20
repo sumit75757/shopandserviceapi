@@ -1838,13 +1838,13 @@ var Observable$1 = (function () {
      * const sumObserver = {
      *   sum: 0,
      *   next(value) {
-     *     console.log('Adding: ' + value);
+     *     // console.log('Adding: ' + value);
      *     this.sum = this.sum + value;
      *   },
      *   error() { // We actually could just remove this method,
      *   },        // since we do not really care about errors right now.
      *   complete() {
-     *     console.log('Sum equals: ' + this.sum);
+     *     // console.log('Sum equals: ' + this.sum);
      *   }
      * };
      *
@@ -1864,12 +1864,12 @@ var Observable$1 = (function () {
      * Rx.Observable.of(1, 2, 3)
      * .subscribe(
      *   function(value) {
-     *     console.log('Adding: ' + value);
+     *     // console.log('Adding: ' + value);
      *     sum = sum + value;
      *   },
      *   undefined,
      *   function() {
-     *     console.log('Sum equals: ' + sum);
+     *     // console.log('Sum equals: ' + sum);
      *   }
      * );
      *
@@ -1882,15 +1882,15 @@ var Observable$1 = (function () {
      *
      * @example <caption>Cancel a subscription</caption>
      * const subscription = Rx.Observable.interval(1000).subscribe(
-     *   num => console.log(num),
+     *   num => // console.log(num),
      *   undefined,
-     *   () => console.log('completed!') // Will not be called, even
+     *   () => // console.log('completed!') // Will not be called, even
      * );                                // when cancelling subscription
      *
      *
      * setTimeout(() => {
      *   subscription.unsubscribe();
-     *   console.log('unsubscribed!');
+     *   // console.log('unsubscribed!');
      * }, 2500);
      *
      * // Logs:
@@ -2013,7 +2013,7 @@ var Observable$1 = (function () {
      *     map(x => x + x),
      *     scan((acc, x) => acc + x)
      *   )
-     *   .subscribe(x => console.log(x))
+     *   .subscribe(x => // console.log(x))
      */
     Observable.prototype.pipe = function () {
         var operations = [];
@@ -2464,32 +2464,32 @@ var BoundCallbackObservable = (function (_super) {
      * // Suppose we have jQuery.getJSON('/my/url', callback)
      * var getJSONAsObservable = Rx.Observable.bindCallback(jQuery.getJSON);
      * var result = getJSONAsObservable('/my/url');
-     * result.subscribe(x => console.log(x), e => console.error(e));
+     * result.subscribe(x => // console.log(x), e => // console.error(e));
      *
      *
      * @example <caption>Receive an array of arguments passed to a callback</caption>
      * someFunction((a, b, c) => {
-     *   console.log(a); // 5
-     *   console.log(b); // 'some string'
-     *   console.log(c); // {someProperty: 'someValue'}
+     *   // console.log(a); // 5
+     *   // console.log(b); // 'some string'
+     *   // console.log(c); // {someProperty: 'someValue'}
      * });
      *
      * const boundSomeFunction = Rx.Observable.bindCallback(someFunction);
      * boundSomeFunction().subscribe(values => {
-     *   console.log(values) // [5, 'some string', {someProperty: 'someValue'}]
+     *   // console.log(values) // [5, 'some string', {someProperty: 'someValue'}]
      * });
      *
      *
      * @example <caption>Use bindCallback with a selector function</caption>
      * someFunction((a, b, c) => {
-     *   console.log(a); // 'a'
-     *   console.log(b); // 'b'
-     *   console.log(c); // 'c'
+     *   // console.log(a); // 'a'
+     *   // console.log(b); // 'b'
+     *   // console.log(c); // 'c'
      * });
      *
      * const boundSomeFunction = Rx.Observable.bindCallback(someFunction, (a, b, c) => a + b + c);
      * boundSomeFunction().subscribe(value => {
-     *   console.log(value) // 'abc'
+     *   // console.log(value) // 'abc'
      * });
      *
      *
@@ -2501,9 +2501,9 @@ var BoundCallbackObservable = (function (_super) {
      * const boundSyncFn = Rx.Observable.bindCallback(iCallMyCallbackSynchronously);
      * const boundAsyncFn = Rx.Observable.bindCallback(iCallMyCallbackSynchronously, null, Rx.Scheduler.async);
      *
-     * boundSyncFn().subscribe(() => console.log('I was sync!'));
-     * boundAsyncFn().subscribe(() => console.log('I was async!'));
-     * console.log('This happened...');
+     * boundSyncFn().subscribe(() => // console.log('I was sync!'));
+     * boundAsyncFn().subscribe(() => // console.log('I was async!'));
+     * // console.log('This happened...');
      *
      * // Logs:
      * // I was sync!
@@ -2742,44 +2742,44 @@ var BoundNodeCallbackObservable = (function (_super) {
      * import * as fs from 'fs';
      * var readFileAsObservable = Rx.Observable.bindNodeCallback(fs.readFile);
      * var result = readFileAsObservable('./roadNames.txt', 'utf8');
-     * result.subscribe(x => console.log(x), e => console.error(e));
+     * result.subscribe(x => // console.log(x), e => // console.error(e));
      *
      *
      * @example <caption>Use on function calling callback with multiple arguments</caption>
      * someFunction((err, a, b) => {
-     *   console.log(err); // null
-     *   console.log(a); // 5
-     *   console.log(b); // "some string"
+     *   // console.log(err); // null
+     *   // console.log(a); // 5
+     *   // console.log(b); // "some string"
      * });
      * var boundSomeFunction = Rx.Observable.bindNodeCallback(someFunction);
      * boundSomeFunction()
      * .subscribe(value => {
-     *   console.log(value); // [5, "some string"]
+     *   // console.log(value); // [5, "some string"]
      * });
      *
      *
      * @example <caption>Use with selector function</caption>
      * someFunction((err, a, b) => {
-     *   console.log(err); // undefined
-     *   console.log(a); // "abc"
-     *   console.log(b); // "DEF"
+     *   // console.log(err); // undefined
+     *   // console.log(a); // "abc"
+     *   // console.log(b); // "DEF"
      * });
      * var boundSomeFunction = Rx.Observable.bindNodeCallback(someFunction, (a, b) => a + b);
      * boundSomeFunction()
      * .subscribe(value => {
-     *   console.log(value); // "abcDEF"
+     *   // console.log(value); // "abcDEF"
      * });
      *
      *
      * @example <caption>Use on function calling callback in regular style</caption>
      * someFunction(a => {
-     *   console.log(a); // 5
+     *   // console.log(a); // 5
      * });
      * var boundSomeFunction = Rx.Observable.bindNodeCallback(someFunction);
      * boundSomeFunction()
      * .subscribe(
      *   value => {}             // never gets called
-     *   err => console.log(err) // 5
+     *   err => // console.log(err) // 5
      *);
      *
      *
@@ -3029,16 +3029,16 @@ var EmptyObservable = (function (_super) {
      *
      * @example <caption>Emit the number 7, then complete.</caption>
      * var result = Rx.Observable.empty().startWith(7);
-     * result.subscribe(x => console.log(x));
+     * result.subscribe(x => // console.log(x));
      *
      * @example <caption>Map and flatten only odd numbers to the sequence 'a', 'b', 'c'</caption>
      * var interval = Rx.Observable.interval(1000);
      * var result = interval.mergeMap(x =>
      *   x % 2 === 1 ? Rx.Observable.of('a', 'b', 'c') : Rx.Observable.empty()
      * );
-     * result.subscribe(x => console.log(x));
+     * result.subscribe(x => // console.log(x));
      *
-     * // Results in the following to the console:
+     * // Results in the following to the // console:
      * // x is equal to the count on the interval eg(0,1,2,3,...)
      * // x will occur every 1000ms
      * // if x % 2 is equal to 1 print abc
@@ -3131,7 +3131,7 @@ var ArrayObservable = (function (_super) {
      * var letters = Rx.Observable.of('a', 'b', 'c');
      * var interval = Rx.Observable.interval(1000);
      * var result = numbers.concat(letters).concat(interval);
-     * result.subscribe(x => console.log(x));
+     * result.subscribe(x => // console.log(x));
      *
      * @see {@link create}
      * @see {@link empty}
@@ -3450,9 +3450,9 @@ var none = {};
  * var weight = Rx.Observable.of(70, 72, 76, 79, 75);
  * var height = Rx.Observable.of(1.76, 1.77, 1.78);
  * var bmi = weight.combineLatest(height, (w, h) => w / (h * h));
- * bmi.subscribe(x => console.log('BMI is ' + x));
+ * bmi.subscribe(x => // console.log('BMI is ' + x));
  *
- * // With output to console:
+ * // With output to // console:
  * // BMI is 24.212293388429753
  * // BMI is 23.93948099205209
  * // BMI is 23.671253629592222
@@ -3631,7 +3631,7 @@ var combineLatest_1 = {
  * const firstTimer = Rx.Observable.timer(0, 1000); // emit 0, 1, 2... after every second, starting from now
  * const secondTimer = Rx.Observable.timer(500, 1000); // emit 0, 1, 2... after every second, starting 0,5s from now
  * const combinedTimers = Rx.Observable.combineLatest(firstTimer, secondTimer);
- * combinedTimers.subscribe(value => console.log(value));
+ * combinedTimers.subscribe(value => // console.log(value));
  * // Logs
  * // [0, 0] after 0.5s
  * // [1, 0] after 1s
@@ -3644,7 +3644,7 @@ var combineLatest_1 = {
  *   n => Rx.Observable.of(n).delay(n * 1000).startWith(0) // emit 0 and then emit n after n seconds
  * );
  * const combined = Rx.Observable.combineLatest(observables);
- * combined.subscribe(value => console.log(value));
+ * combined.subscribe(value => // console.log(value));
  * // Logs
  * // [0, 0, 0] immediately
  * // [1, 0, 0] after 1s
@@ -3656,9 +3656,9 @@ var combineLatest_1 = {
  * var weight = Rx.Observable.of(70, 72, 76, 79, 75);
  * var height = Rx.Observable.of(1.76, 1.77, 1.78);
  * var bmi = Rx.Observable.combineLatest(weight, height, (w, h) => w / (h * h));
- * bmi.subscribe(x => console.log('BMI is ' + x));
+ * bmi.subscribe(x => // console.log('BMI is ' + x));
  *
- * // With output to console:
+ * // With output to // console:
  * // BMI is 24.212293388429753
  * // BMI is 23.93948099205209
  * // BMI is 23.671253629592222
@@ -3751,7 +3751,7 @@ var PromiseObservable = (function (_super) {
      *
      * @example <caption>Convert the Promise returned by Fetch to an Observable</caption>
      * var result = Rx.Observable.fromPromise(fetch('http://myserver.com/'));
-     * result.subscribe(x => console.log(x), e => console.error(e));
+     * result.subscribe(x => // console.log(x), e => // console.error(e));
      *
      * @see {@link bindCallback}
      * @see {@link from}
@@ -4384,7 +4384,7 @@ var FromObservable = (function (_super) {
      * @example <caption>Converts an array to an Observable</caption>
      * var array = [10, 20, 30];
      * var result = Rx.Observable.from(array);
-     * result.subscribe(x => console.log(x));
+     * result.subscribe(x => // console.log(x));
      *
      * // Results in the following:
      * // 10 20 30
@@ -4400,7 +4400,7 @@ var FromObservable = (function (_super) {
      *
      * var iterator = generateDoubles(3);
      * var result = Rx.Observable.from(iterator).take(10);
-     * result.subscribe(x => console.log(x));
+     * result.subscribe(x => // console.log(x));
      *
      * // Results in the following:
      * // 3 6 12 24 48 96 192 384 768 1536
@@ -4497,7 +4497,7 @@ var __extends$19 = (commonjsGlobal && commonjsGlobal.__extends) || function (d, 
  * var result = letters.mergeMap(x =>
  *   Rx.Observable.interval(1000).map(i => x+i)
  * );
- * result.subscribe(x => console.log(x));
+ * result.subscribe(x => // console.log(x));
  *
  * // Results in the following:
  * // a0
@@ -4678,13 +4678,13 @@ var identity_1 = {
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var higherOrder = clicks.map((ev) => Rx.Observable.interval(1000));
  * var firstOrder = higherOrder.mergeAll();
- * firstOrder.subscribe(x => console.log(x));
+ * firstOrder.subscribe(x => // console.log(x));
  *
  * @example <caption>Count from 0 to 9 every second for each click, but only allow 2 concurrent timers</caption>
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var higherOrder = clicks.map((ev) => Rx.Observable.interval(1000).take(10));
  * var firstOrder = higherOrder.mergeAll(2);
- * firstOrder.subscribe(x => console.log(x));
+ * firstOrder.subscribe(x => // console.log(x));
  *
  * @see {@link combineAll}
  * @see {@link concatAll}
@@ -4740,7 +4740,7 @@ var mergeAll_1 = {
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var higherOrder = clicks.map(ev => Rx.Observable.interval(1000).take(4));
  * var firstOrder = higherOrder.concatAll();
- * firstOrder.subscribe(x => console.log(x));
+ * firstOrder.subscribe(x => // console.log(x));
  *
  * // Results in the following:
  * // (results are not concurrent)
@@ -4814,7 +4814,7 @@ var concatAll_1 = {
  * var timer = Rx.Observable.interval(1000).take(4);
  * var sequence = Rx.Observable.range(1, 10);
  * var result = Rx.Observable.concat(timer, sequence);
- * result.subscribe(x => console.log(x));
+ * result.subscribe(x => // console.log(x));
  *
  * // results in:
  * // 0 -1000ms-> 1 -1000ms-> 2 -1000ms-> 3 -immediate-> 1 ... 10
@@ -4825,10 +4825,10 @@ var concatAll_1 = {
  * var timer2 = Rx.Observable.interval(2000).take(6);
  * var timer3 = Rx.Observable.interval(500).take(10);
  * var result = Rx.Observable.concat([timer1, timer2, timer3]); // note that array is passed
- * result.subscribe(x => console.log(x));
+ * result.subscribe(x => // console.log(x));
  *
  * // results in the following:
- * // (Prints to console sequentially)
+ * // (Prints to // console sequentially)
  * // -1000ms-> 0 -1000ms-> 1 -1000ms-> ... 9
  * // -2000ms-> 0 -2000ms-> 1 -2000ms-> ... 5
  * // -500ms-> 0 -500ms-> 1 -500ms-> ... 9
@@ -4839,9 +4839,9 @@ var concatAll_1 = {
  *
  * Rx.Observable.concat(timer, timer) // concating the same Observable!
  * .subscribe(
- *   value => console.log(value),
+ *   value => // console.log(value),
  *   err => {},
- *   () => console.log('...and it is done!')
+ *   () => // console.log('...and it is done!')
  * );
  *
  * // Logs:
@@ -4930,12 +4930,12 @@ var DeferObservable = (function (_super) {
      *     return Rx.Observable.interval(1000);
      *   }
      * });
-     * clicksOrInterval.subscribe(x => console.log(x));
+     * clicksOrInterval.subscribe(x => // console.log(x));
      *
      * // Results in the following behavior:
      * // If the result of Math.random() is greater than 0.5 it will listen
      * // for clicks anywhere on the "document"; when document is clicked it
-     * // will log a MouseEvent object to the console. If the result is less
+     * // will log a MouseEvent object to the // console. If the result is less
      * // than 0.5 it will emit ascending numbers, one every second(1000ms).
      *
      * @see {@link create}
@@ -5071,9 +5071,9 @@ var ForkJoinObservable = (function (_super) {
      *   Rx.Observable.of(5, 6, 7, 8)
      * );
      * observable.subscribe(
-     *   value => console.log(value),
+     *   value => // console.log(value),
      *   err => {},
-     *   () => console.log('This is how it ends!')
+     *   () => // console.log('This is how it ends!')
      * );
      *
      * // Logs:
@@ -5087,9 +5087,9 @@ var ForkJoinObservable = (function (_super) {
      *   Rx.Observable.interval(500).take(4) // emit 0, 1, 2, 3 every half a second and complete
      * );
      * observable.subscribe(
-     *   value => console.log(value),
+     *   value => // console.log(value),
      *   err => {},
-     *   () => console.log('This is how it ends!')
+     *   () => // console.log('This is how it ends!')
      * );
      *
      * // Logs:
@@ -5104,9 +5104,9 @@ var ForkJoinObservable = (function (_super) {
      *   (n, m) => n + m
      * );
      * observable.subscribe(
-     *   value => console.log(value),
+     *   value => // console.log(value),
      *   err => {},
-     *   () => console.log('This is how it ends!')
+     *   () => // console.log('This is how it ends!')
      * );
      *
      * // Logs:
@@ -5341,10 +5341,10 @@ var FromEventObservable = (function (_super) {
      *
      * @example <caption>Emits clicks happening on the DOM document</caption>
      * var clicks = Rx.Observable.fromEvent(document, 'click');
-     * clicks.subscribe(x => console.log(x));
+     * clicks.subscribe(x => // console.log(x));
      *
      * // Results in:
-     * // MouseEvent object logged to console every time a click
+     * // MouseEvent object logged to // console every time a click
      * // occurs on the document.
      *
      *
@@ -5353,14 +5353,14 @@ var FromEventObservable = (function (_super) {
      *                                                                          // which will be passed to addEventListener
      * var clicksInDiv = Rx.Observable.fromEvent(someDivInDocument, 'click');
      *
-     * clicksInDocument.subscribe(() => console.log('document'));
-     * clicksInDiv.subscribe(() => console.log('div'));
+     * clicksInDocument.subscribe(() => // console.log('document'));
+     * clicksInDiv.subscribe(() => // console.log('div'));
      *
      * // By default events bubble UP in DOM tree, so normally
      * // when we would click on div in document
      * // "div" would be logged first and then "document".
      * // Since we specified optional `capture` option, document
-     * // will catch event when it goes DOWN DOM tree, so console
+     * // will catch event when it goes DOWN DOM tree, so // console
      * // will log "document" and then "div".
      *
      * @see {@link bindCallback}
@@ -5501,7 +5501,7 @@ var FromEventPatternObservable = (function (_super) {
      *   addClickHandler,
      *   removeClickHandler
      * );
-     * clicks.subscribe(x => console.log(x));
+     * clicks.subscribe(x => // console.log(x));
      *
      * @see {@link from}
      * @see {@link fromEvent}
@@ -6141,7 +6141,7 @@ var AsyncScheduler_1 = {
  * better choice will be the {@link asap} scheduler.
  *
  * @example <caption>Use async scheduler to delay task</caption>
- * const task = () => console.log('it works!');
+ * const task = () => // console.log('it works!');
  *
  * Rx.Scheduler.async.schedule(task, 2000);
  *
@@ -6151,7 +6151,7 @@ var AsyncScheduler_1 = {
  *
  * @example <caption>Use async scheduler to repeat task in intervals</caption>
  * function task(state) {
- *   console.log(state);
+ *   // console.log(state);
  *   this.schedule(state + 1, 1000); // `this` references currently executing Action,
  *                                   // which we reschedule with new state and delay
  * }
@@ -6221,7 +6221,7 @@ var IntervalObservable = (function (_super) {
      *
      * @example <caption>Emits ascending numbers, one every second (1000ms)</caption>
      * var numbers = Rx.Observable.interval(1000);
-     * numbers.subscribe(x => console.log(x));
+     * numbers.subscribe(x => // console.log(x));
      *
      * @see {@link timer}
      * @see {@link delay}
@@ -6296,11 +6296,11 @@ Observable_1.Observable.interval = interval$2.interval;
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var timer = Rx.Observable.interval(1000);
  * var clicksOrTimer = Rx.Observable.merge(clicks, timer);
- * clicksOrTimer.subscribe(x => console.log(x));
+ * clicksOrTimer.subscribe(x => // console.log(x));
  *
  * // Results in the following:
- * // timer will emit ascending values, one every second(1000ms) to console
- * // clicks logs MouseEvents to console everytime the "document" is clicked
+ * // timer will emit ascending values, one every second(1000ms) to // console
+ * // clicks logs MouseEvents to // console everytime the "document" is clicked
  * // Since the two streams are merged you see these happening
  * // as they occur.
  *
@@ -6310,7 +6310,7 @@ Observable_1.Observable.interval = interval$2.interval;
  * var timer3 = Rx.Observable.interval(500).take(10);
  * var concurrent = 2; // the argument
  * var merged = Rx.Observable.merge(timer1, timer2, timer3, concurrent);
- * merged.subscribe(x => console.log(x));
+ * merged.subscribe(x => // console.log(x));
  *
  * // Results in the following:
  * // - First timer1 and timer2 will run concurrently
@@ -6498,10 +6498,10 @@ var NeverObservable = (function (_super) {
      *
      * @example <caption>Emit the number 7, then never emit anything else (not even complete).</caption>
      * function info() {
-     *   console.log('Will not be called');
+     *   // console.log('Will not be called');
      * }
      * var result = Rx.Observable.never().startWith(7);
-     * result.subscribe(x => console.log(x), info, info);
+     * result.subscribe(x => // console.log(x), info, info);
      *
      * @see {@link create}
      * @see {@link empty}
@@ -6587,9 +6587,9 @@ var __extends$32 = (commonjsGlobal && commonjsGlobal.__extends) || function (d, 
  *   })
  *   .onErrorResumeNext(Rx.Observable.of(1, 2, 3))
  *   .subscribe(
- *     val => console.log(val),
- *     err => console.log(err),          // Will never be called.
- *     () => console.log('that\'s it!')
+ *     val => // console.log(val),
+ *     err => // console.log(err),          // Will never be called.
+ *     () => // console.log('that\'s it!')
  *   );
  *
  * // Logs:
@@ -6735,13 +6735,13 @@ var PairsObservable = (function (_super) {
      *
      * var subscription = source.subscribe(
      *   function (x) {
-     *     console.log('Next: %s', x);
+     *     // console.log('Next: %s', x);
      *   },
      *   function (err) {
-     *     console.log('Error: %s', err);
+     *     // console.log('Error: %s', err);
      *   },
      *   function () {
-     *     console.log('Completed');
+     *     // console.log('Completed');
      *   });
      *
      * @param {Object} obj The object to inspect and turn into an
@@ -6822,7 +6822,7 @@ var RangeObservable = (function (_super) {
      *
      * @example <caption>Emits the numbers 1 to 10</caption>
      * var numbers = Rx.Observable.range(1, 10);
-     * numbers.subscribe(x => console.log(x));
+     * numbers.subscribe(x => // console.log(x));
      *
      * @see {@link timer}
      * @see {@link interval}
@@ -7004,7 +7004,7 @@ var ErrorObservable = (function (_super) {
      *
      * @example <caption>Emit the number 7, then emit an error.</caption>
      * var result = Rx.Observable.throw(new Error('oops!')).startWith(7);
-     * result.subscribe(x => console.log(x), e => console.error(e));
+     * result.subscribe(x => // console.log(x), e => // console.error(e));
      *
      * @example <caption>Map and flatten numbers to the sequence 'a', 'b', 'c', but throw an error for 13</caption>
      * var interval = Rx.Observable.interval(1000);
@@ -7013,7 +7013,7 @@ var ErrorObservable = (function (_super) {
      *     Rx.Observable.throw('Thirteens are bad') :
      *     Rx.Observable.of('a', 'b', 'c')
      * );
-     * result.subscribe(x => console.log(x), e => console.error(e));
+     * result.subscribe(x => // console.log(x), e => // console.error(e));
      *
      * @see {@link create}
      * @see {@link empty}
@@ -7133,11 +7133,11 @@ var TimerObservable = (function (_super) {
      *
      * @example <caption>Emits ascending numbers, one every second (1000ms), starting after 3 seconds</caption>
      * var numbers = Rx.Observable.timer(3000, 1000);
-     * numbers.subscribe(x => console.log(x));
+     * numbers.subscribe(x => // console.log(x));
      *
      * @example <caption>Emits one number after five seconds</caption>
      * var numbers = Rx.Observable.timer(5000);
-     * numbers.subscribe(x => console.log(x));
+     * numbers.subscribe(x => // console.log(x));
      *
      * @see {@link interval}
      * @see {@link delay}
@@ -7244,7 +7244,7 @@ var zip_2$1 = zip$4;
  *          name$,
  *          isDev$,
  *          (age: number, name: string, isDev: boolean) => ({ age, name, isDev }))
- *     .subscribe(x => console.log(x));
+ *     .subscribe(x => // console.log(x));
  *
  * // outputs
  * // { age: 27, name: 'Foo', isDev: true }
@@ -7517,7 +7517,7 @@ var __extends$40 = (commonjsGlobal && commonjsGlobal.__extends) || function (d, 
  * @example <caption>Map every click to the clientX position of that click</caption>
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var positions = clicks.map(ev => ev.clientX);
- * positions.subscribe(x => console.log(x));
+ * positions.subscribe(x => // console.log(x));
  *
  * @see {@link mapTo}
  * @see {@link pluck}
@@ -8129,9 +8129,9 @@ var QueueScheduler_1 = {
  * @examples <caption>Schedule recursively first, then do something</caption>
  *
  * Rx.Scheduler.queue.schedule(() => {
- *   Rx.Scheduler.queue.schedule(() => console.log('second')); // will not happen now, but will be put on a queue
+ *   Rx.Scheduler.queue.schedule(() => // console.log('second')); // will not happen now, but will be put on a queue
  *
- *   console.log('first');
+ *   // console.log('first');
  * });
  *
  * // Logs:
@@ -8143,10 +8143,10 @@ var QueueScheduler_1 = {
  *
  * Rx.Scheduler.queue.schedule(function(state) {
  *   if (state !== 0) {
- *     console.log('before', state);
+ *     // console.log('before', state);
  *     this.schedule(state - 1); // `this` references currently executing Action,
  *                               // which we reschedule with new state
- *     console.log('after', state);
+ *     // console.log('after', state);
  *   }
  * }, 0, 3);
  *
@@ -8368,9 +8368,9 @@ var WebSocketSubject = (function (_super) {
      * let socket$ = Observable.webSocket('ws://localhost:8081');
      *
      * socket$.subscribe(
-     *    (msg) => console.log('message received: ' + msg),
-     *    (err) => console.log(err),
-     *    () => console.log('complete')
+     *    (msg) => // console.log('message received: ' + msg),
+     *    (err) => // console.log(err),
+     *    () => // console.log('complete')
      *  );
      *
      * socket$.next(JSON.stringify({ op: 'hello' }));
@@ -8385,9 +8385,9 @@ var WebSocketSubject = (function (_super) {
      * });
      *
      * socket$.subscribe(
-     *    (msg) => console.log('message received: ' + msg),
-     *    (err) => console.log(err),
-     *    () => console.log('complete')
+     *    (msg) => // console.log('message received: ' + msg),
+     *    (err) => // console.log(err),
+     *    () => // console.log('complete')
      *  );
      *
      * socket$.next(JSON.stringify({ op: 'hello' }));
@@ -8602,7 +8602,7 @@ var __extends$45 = (commonjsGlobal && commonjsGlobal.__extends) || function (d, 
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var interval = Rx.Observable.interval(1000);
  * var buffered = interval.buffer(clicks);
- * buffered.subscribe(x => console.log(x));
+ * buffered.subscribe(x => // console.log(x));
  *
  * @see {@link bufferCount}
  * @see {@link bufferTime}
@@ -8677,7 +8677,7 @@ var buffer_1 = {
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var interval = Rx.Observable.interval(1000);
  * var buffered = interval.buffer(clicks);
- * buffered.subscribe(x => console.log(x));
+ * buffered.subscribe(x => // console.log(x));
  *
  * @see {@link bufferCount}
  * @see {@link bufferTime}
@@ -8728,12 +8728,12 @@ var __extends$46 = (commonjsGlobal && commonjsGlobal.__extends) || function (d, 
  * @example <caption>Emit the last two click events as an array</caption>
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var buffered = clicks.bufferCount(2);
- * buffered.subscribe(x => console.log(x));
+ * buffered.subscribe(x => // console.log(x));
  *
  * @example <caption>On every click, emit the last two click events as an array</caption>
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var buffered = clicks.bufferCount(2, 1);
- * buffered.subscribe(x => console.log(x));
+ * buffered.subscribe(x => // console.log(x));
  *
  * @see {@link buffer}
  * @see {@link bufferTime}
@@ -8868,12 +8868,12 @@ var bufferCount_1 = {
  * @example <caption>Emit the last two click events as an array</caption>
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var buffered = clicks.bufferCount(2);
- * buffered.subscribe(x => console.log(x));
+ * buffered.subscribe(x => // console.log(x));
  *
  * @example <caption>On every click, emit the last two click events as an array</caption>
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var buffered = clicks.bufferCount(2, 1);
- * buffered.subscribe(x => console.log(x));
+ * buffered.subscribe(x => // console.log(x));
  *
  * @see {@link buffer}
  * @see {@link bufferTime}
@@ -8933,12 +8933,12 @@ var __extends$47 = (commonjsGlobal && commonjsGlobal.__extends) || function (d, 
  * @example <caption>Every second, emit an array of the recent click events</caption>
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var buffered = clicks.bufferTime(1000);
- * buffered.subscribe(x => console.log(x));
+ * buffered.subscribe(x => // console.log(x));
  *
  * @example <caption>Every 5 seconds, emit the click events from the next 2 seconds</caption>
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var buffered = clicks.bufferTime(2000, 5000);
- * buffered.subscribe(x => console.log(x));
+ * buffered.subscribe(x => // console.log(x));
  *
  * @see {@link buffer}
  * @see {@link bufferCount}
@@ -9130,12 +9130,12 @@ var bufferTime_1 = {
  * @example <caption>Every second, emit an array of the recent click events</caption>
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var buffered = clicks.bufferTime(1000);
- * buffered.subscribe(x => console.log(x));
+ * buffered.subscribe(x => // console.log(x));
  *
  * @example <caption>Every 5 seconds, emit the click events from the next 2 seconds</caption>
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var buffered = clicks.bufferTime(2000, 5000);
- * buffered.subscribe(x => console.log(x));
+ * buffered.subscribe(x => // console.log(x));
  *
  * @see {@link buffer}
  * @see {@link bufferCount}
@@ -9207,7 +9207,7 @@ var __extends$48 = (commonjsGlobal && commonjsGlobal.__extends) || function (d, 
  * var buffered = clicks.bufferToggle(openings, i =>
  *   i % 2 ? Rx.Observable.interval(500) : Rx.Observable.empty()
  * );
- * buffered.subscribe(x => console.log(x));
+ * buffered.subscribe(x => // console.log(x));
  *
  * @see {@link buffer}
  * @see {@link bufferCount}
@@ -9357,7 +9357,7 @@ var bufferToggle_1 = {
  * var buffered = clicks.bufferToggle(openings, i =>
  *   i % 2 ? Rx.Observable.interval(500) : Rx.Observable.empty()
  * );
- * buffered.subscribe(x => console.log(x));
+ * buffered.subscribe(x => // console.log(x));
  *
  * @see {@link buffer}
  * @see {@link bufferCount}
@@ -9416,7 +9416,7 @@ var __extends$49 = (commonjsGlobal && commonjsGlobal.__extends) || function (d, 
  * var buffered = clicks.bufferWhen(() =>
  *   Rx.Observable.interval(1000 + Math.random() * 4000)
  * );
- * buffered.subscribe(x => console.log(x));
+ * buffered.subscribe(x => // console.log(x));
  *
  * @see {@link buffer}
  * @see {@link bufferCount}
@@ -9534,7 +9534,7 @@ var bufferWhen_1 = {
  * var buffered = clicks.bufferWhen(() =>
  *   Rx.Observable.interval(1000 + Math.random() * 4000)
  * );
- * buffered.subscribe(x => console.log(x));
+ * buffered.subscribe(x => // console.log(x));
  *
  * @see {@link buffer}
  * @see {@link bufferCount}
@@ -9582,7 +9582,7 @@ var __extends$50 = (commonjsGlobal && commonjsGlobal.__extends) || function (d, 
  *	   return n;
  *   })
  *   .catch(err => Observable.of('I', 'II', 'III', 'IV', 'V'))
- *   .subscribe(x => console.log(x));
+ *   .subscribe(x => // console.log(x));
  *   // 1, 2, 3, I, II, III, IV, V
  *
  * @example <caption>Retries the caught source Observable again in case of error, similar to retry() operator</caption>
@@ -9596,7 +9596,7 @@ var __extends$50 = (commonjsGlobal && commonjsGlobal.__extends) || function (d, 
  *   })
  *   .catch((err, caught) => caught)
  *   .take(30)
- *   .subscribe(x => console.log(x));
+ *   .subscribe(x => // console.log(x));
  *   // 1, 2, 3, 1, 2, 3, ...
  *
  * @example <caption>Throws a new error when the source Observable throws an error</caption>
@@ -9612,8 +9612,8 @@ var __extends$50 = (commonjsGlobal && commonjsGlobal.__extends) || function (d, 
  *     throw 'error in source. Details: ' + err;
  *   })
  *   .subscribe(
- *     x => console.log(x),
- *     err => console.log(err)
+ *     x => // console.log(x),
+ *     err => // console.log(err)
  *   );
  *   // 1, 2, 3, error in source. Details: four!
  *
@@ -9695,7 +9695,7 @@ var catchError_1 = {
  *	   return n;
  *   })
  *   .catch(err => Observable.of('I', 'II', 'III', 'IV', 'V'))
- *   .subscribe(x => console.log(x));
+ *   .subscribe(x => // console.log(x));
  *   // 1, 2, 3, I, II, III, IV, V
  *
  * @example <caption>Retries the caught source Observable again in case of error, similar to retry() operator</caption>
@@ -9709,7 +9709,7 @@ var catchError_1 = {
  *   })
  *   .catch((err, caught) => caught)
  *   .take(30)
- *   .subscribe(x => console.log(x));
+ *   .subscribe(x => // console.log(x));
  *   // 1, 2, 3, 1, 2, 3, ...
  *
  * @example <caption>Throws a new error when the source Observable throws an error</caption>
@@ -9725,8 +9725,8 @@ var catchError_1 = {
  *     throw 'error in source. Details: ' + err;
  *   })
  *   .subscribe(
- *     x => console.log(x),
- *     err => console.log(err)
+ *     x => // console.log(x),
+ *     err => // console.log(err)
  *   );
  *   // 1, 2, 3, error in source. Details: four!
  *
@@ -9789,7 +9789,7 @@ var combineAll_1 = {
  *   Rx.Observable.interval(Math.random()*2000).take(3)
  * ).take(2);
  * var result = higherOrder.combineAll();
- * result.subscribe(x => console.log(x));
+ * result.subscribe(x => // console.log(x));
  *
  * @see {@link combineLatest}
  * @see {@link mergeAll}
@@ -9837,9 +9837,9 @@ Observable_1.Observable.prototype.combineAll = combineAll_2.combineAll;
  * var weight = Rx.Observable.of(70, 72, 76, 79, 75);
  * var height = Rx.Observable.of(1.76, 1.77, 1.78);
  * var bmi = weight.combineLatest(height, (w, h) => w / (h * h));
- * bmi.subscribe(x => console.log('BMI is ' + x));
+ * bmi.subscribe(x => // console.log('BMI is ' + x));
  *
- * // With output to console:
+ * // With output to // console:
  * // BMI is 24.212293388429753
  * // BMI is 23.93948099205209
  * // BMI is 23.671253629592222
@@ -9895,7 +9895,7 @@ var concatStatic$1 = concat_2$1.concat;
  * var timer = Rx.Observable.interval(1000).take(4);
  * var sequence = Rx.Observable.range(1, 10);
  * var result = timer.concat(sequence);
- * result.subscribe(x => console.log(x));
+ * result.subscribe(x => // console.log(x));
  *
  * // results in:
  * // 1000ms-> 0 -1000ms-> 1 -1000ms-> 2 -1000ms-> 3 -immediate-> 1 ... 10
@@ -9905,10 +9905,10 @@ var concatStatic$1 = concat_2$1.concat;
  * var timer2 = Rx.Observable.interval(2000).take(6);
  * var timer3 = Rx.Observable.interval(500).take(10);
  * var result = timer1.concat(timer2, timer3);
- * result.subscribe(x => console.log(x));
+ * result.subscribe(x => // console.log(x));
  *
  * // results in the following:
- * // (Prints to console sequentially)
+ * // (Prints to // console sequentially)
  * // -1000ms-> 0 -1000ms-> 1 -1000ms-> ... 9
  * // -2000ms-> 0 -2000ms-> 1 -2000ms-> ... 5
  * // -500ms-> 0 -500ms-> 1 -500ms-> ... 9
@@ -9961,7 +9961,7 @@ var concatStatic = concat_1.concat;
  * var timer = Rx.Observable.interval(1000).take(4);
  * var sequence = Rx.Observable.range(1, 10);
  * var result = timer.concat(sequence);
- * result.subscribe(x => console.log(x));
+ * result.subscribe(x => // console.log(x));
  *
  * // results in:
  * // 1000ms-> 0 -1000ms-> 1 -1000ms-> 2 -1000ms-> 3 -immediate-> 1 ... 10
@@ -9971,10 +9971,10 @@ var concatStatic = concat_1.concat;
  * var timer2 = Rx.Observable.interval(2000).take(6);
  * var timer3 = Rx.Observable.interval(500).take(10);
  * var result = timer1.concat(timer2, timer3);
- * result.subscribe(x => console.log(x));
+ * result.subscribe(x => // console.log(x));
  *
  * // results in the following:
- * // (Prints to console sequentially)
+ * // (Prints to // console sequentially)
  * // -1000ms-> 0 -1000ms-> 1 -1000ms-> ... 9
  * // -2000ms-> 0 -2000ms-> 1 -2000ms-> ... 5
  * // -500ms-> 0 -500ms-> 1 -500ms-> ... 9
@@ -10036,7 +10036,7 @@ Observable_1.Observable.prototype.concat = concat_3.concat;
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var higherOrder = clicks.map(ev => Rx.Observable.interval(1000).take(4));
  * var firstOrder = higherOrder.concatAll();
- * firstOrder.subscribe(x => console.log(x));
+ * firstOrder.subscribe(x => // console.log(x));
  *
  * // Results in the following:
  * // (results are not concurrent)
@@ -10097,7 +10097,7 @@ Observable_1.Observable.prototype.concatAll = concatAll_2$1.concatAll;
  * @example <caption>For each click event, tick every second from 0 to 3, with no concurrency</caption>
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var result = clicks.concatMap(ev => Rx.Observable.interval(1000).take(4));
- * result.subscribe(x => console.log(x));
+ * result.subscribe(x => // console.log(x));
  *
  * // Results in the following:
  * // (results are not concurrent)
@@ -10167,7 +10167,7 @@ var concatMap_1 = {
  * @example <caption>For each click event, tick every second from 0 to 3, with no concurrency</caption>
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var result = clicks.concatMap(ev => Rx.Observable.interval(1000).take(4));
- * result.subscribe(x => console.log(x));
+ * result.subscribe(x => // console.log(x));
  *
  * // Results in the following:
  * // (results are not concurrent)
@@ -10239,7 +10239,7 @@ Observable_1.Observable.prototype.concatMap = concatMap_2.concatMap;
  * @example <caption>For each click event, tick every second from 0 to 3, with no concurrency</caption>
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var result = clicks.concatMapTo(Rx.Observable.interval(1000).take(4));
- * result.subscribe(x => console.log(x));
+ * result.subscribe(x => // console.log(x));
  *
  * // Results in the following:
  * // (results are not concurrent)
@@ -10306,7 +10306,7 @@ var concatMapTo_1 = {
  * @example <caption>For each click event, tick every second from 0 to 3, with no concurrency</caption>
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var result = clicks.concatMapTo(Rx.Observable.interval(1000).take(4));
- * result.subscribe(x => console.log(x));
+ * result.subscribe(x => // console.log(x));
  *
  * // Results in the following:
  * // (results are not concurrent)
@@ -10377,12 +10377,12 @@ var __extends$51 = (commonjsGlobal && commonjsGlobal.__extends) || function (d, 
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var secondsBeforeClick = seconds.takeUntil(clicks);
  * var result = secondsBeforeClick.count();
- * result.subscribe(x => console.log(x));
+ * result.subscribe(x => // console.log(x));
  *
  * @example <caption>Counts how many odd numbers are there between 1 and 7</caption>
  * var numbers = Rx.Observable.range(1, 7);
  * var result = numbers.count(i => i % 2 === 1);
- * result.subscribe(x => console.log(x));
+ * result.subscribe(x => // console.log(x));
  *
  * // Results in:
  * // 4
@@ -10486,12 +10486,12 @@ var count_1 = {
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var secondsBeforeClick = seconds.takeUntil(clicks);
  * var result = secondsBeforeClick.count();
- * result.subscribe(x => console.log(x));
+ * result.subscribe(x => // console.log(x));
  *
  * @example <caption>Counts how many odd numbers are there between 1 and 7</caption>
  * var numbers = Rx.Observable.range(1, 7);
  * var result = numbers.count(i => i % 2 === 1);
- * result.subscribe(x => console.log(x));
+ * result.subscribe(x => // console.log(x));
  *
  * // Results in:
  * // 4
@@ -10554,7 +10554,7 @@ var __extends$52 = (commonjsGlobal && commonjsGlobal.__extends) || function (d, 
  * );
  * var materialized = Rx.Observable.of(notifA, notifB, notifE);
  * var upperCase = materialized.dematerialize();
- * upperCase.subscribe(x => console.log(x), e => console.error(e));
+ * upperCase.subscribe(x => // console.log(x), e => // console.error(e));
  *
  * // Results in:
  * // A
@@ -10629,7 +10629,7 @@ var dematerialize_1 = {
  * );
  * var materialized = Rx.Observable.of(notifA, notifB, notifE);
  * var upperCase = materialized.dematerialize();
- * upperCase.subscribe(x => console.log(x), e => console.error(e));
+ * upperCase.subscribe(x => // console.log(x), e => // console.error(e));
  *
  * // Results in:
  * // A
@@ -10689,7 +10689,7 @@ var __extends$53 = (commonjsGlobal && commonjsGlobal.__extends) || function (d, 
  * @example <caption>Emit the most recent click after a burst of clicks</caption>
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var result = clicks.debounce(() => Rx.Observable.interval(1000));
- * result.subscribe(x => console.log(x));
+ * result.subscribe(x => // console.log(x));
  *
  * @see {@link audit}
  * @see {@link debounceTime}
@@ -10813,7 +10813,7 @@ var debounce_1 = {
  * @example <caption>Emit the most recent click after a burst of clicks</caption>
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var result = clicks.debounce(() => Rx.Observable.interval(1000));
- * result.subscribe(x => console.log(x));
+ * result.subscribe(x => // console.log(x));
  *
  * @see {@link audit}
  * @see {@link debounceTime}
@@ -10874,7 +10874,7 @@ var __extends$54 = (commonjsGlobal && commonjsGlobal.__extends) || function (d, 
  * @example <caption>Emit the most recent click after a burst of clicks</caption>
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var result = clicks.debounceTime(1000);
- * result.subscribe(x => console.log(x));
+ * result.subscribe(x => // console.log(x));
  *
  * @see {@link auditTime}
  * @see {@link debounce}
@@ -10987,7 +10987,7 @@ var debounceTime_1 = {
  * @example <caption>Emit the most recent click after a burst of clicks</caption>
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var result = clicks.debounceTime(1000);
- * result.subscribe(x => console.log(x));
+ * result.subscribe(x => // console.log(x));
  *
  * @see {@link auditTime}
  * @see {@link debounce}
@@ -11044,7 +11044,7 @@ var __extends$55 = (commonjsGlobal && commonjsGlobal.__extends) || function (d, 
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var clicksBeforeFive = clicks.takeUntil(Rx.Observable.interval(5000));
  * var result = clicksBeforeFive.defaultIfEmpty('no clicks');
- * result.subscribe(x => console.log(x));
+ * result.subscribe(x => // console.log(x));
  *
  * @see {@link empty}
  * @see {@link last}
@@ -11119,7 +11119,7 @@ var defaultIfEmpty_1 = {
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var clicksBeforeFive = clicks.takeUntil(Rx.Observable.interval(5000));
  * var result = clicksBeforeFive.defaultIfEmpty('no clicks');
- * result.subscribe(x => console.log(x));
+ * result.subscribe(x => // console.log(x));
  *
  * @see {@link empty}
  * @see {@link last}
@@ -11173,13 +11173,13 @@ var __extends$56 = (commonjsGlobal && commonjsGlobal.__extends) || function (d, 
  * @example <caption>Delay each click by one second</caption>
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var delayedClicks = clicks.delay(1000); // each click emitted after 1 second
- * delayedClicks.subscribe(x => console.log(x));
+ * delayedClicks.subscribe(x => // console.log(x));
  *
  * @example <caption>Delay all clicks until a future date happens</caption>
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var date = new Date('March 15, 2050 12:00:00'); // in the future
  * var delayedClicks = clicks.delay(date); // click emitted only after that date
- * delayedClicks.subscribe(x => console.log(x));
+ * delayedClicks.subscribe(x => // console.log(x));
  *
  * @see {@link debounceTime}
  * @see {@link delayWhen}
@@ -11304,13 +11304,13 @@ var delay_1 = {
  * @example <caption>Delay each click by one second</caption>
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var delayedClicks = clicks.delay(1000); // each click emitted after 1 second
- * delayedClicks.subscribe(x => console.log(x));
+ * delayedClicks.subscribe(x => // console.log(x));
  *
  * @example <caption>Delay all clicks until a future date happens</caption>
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var date = new Date('March 15, 2050 12:00:00'); // in the future
  * var delayedClicks = clicks.delay(date); // click emitted only after that date
- * delayedClicks.subscribe(x => console.log(x));
+ * delayedClicks.subscribe(x => // console.log(x));
  *
  * @see {@link debounceTime}
  * @see {@link delayWhen}
@@ -11374,7 +11374,7 @@ var __extends$57 = (commonjsGlobal && commonjsGlobal.__extends) || function (d, 
  * var delayedClicks = clicks.delayWhen(event =>
  *   Rx.Observable.interval(Math.random() * 5000)
  * );
- * delayedClicks.subscribe(x => console.log(x));
+ * delayedClicks.subscribe(x => // console.log(x));
  *
  * @see {@link debounce}
  * @see {@link delay}
@@ -11563,7 +11563,7 @@ var delayWhen_1 = {
  * var delayedClicks = clicks.delayWhen(event =>
  *   Rx.Observable.interval(Math.random() * 5000)
  * );
- * delayedClicks.subscribe(x => console.log(x));
+ * delayedClicks.subscribe(x => // console.log(x));
  *
  * @see {@link debounce}
  * @see {@link delay}
@@ -11654,7 +11654,7 @@ var __extends$58 = (commonjsGlobal && commonjsGlobal.__extends) || function (d, 
  * @example <caption>A simple example with numbers</caption>
  * Observable.of(1, 1, 2, 2, 2, 1, 2, 3, 4, 3, 2, 1)
  *   .distinct()
- *   .subscribe(x => console.log(x)); // 1, 2, 3, 4
+ *   .subscribe(x => // console.log(x)); // 1, 2, 3, 4
  *
  * @example <caption>An example using a keySelector function</caption>
  * interface Person {
@@ -11667,7 +11667,7 @@ var __extends$58 = (commonjsGlobal && commonjsGlobal.__extends) || function (d, 
  *     { age: 7, name: 'Bar'},
  *     { age: 5, name: 'Foo'})
  *     .distinct((p: Person) => p.name)
- *     .subscribe(x => console.log(x));
+ *     .subscribe(x => // console.log(x));
  *
  * // displays:
  * // { age: 4, name: 'Foo' }
@@ -11771,7 +11771,7 @@ var distinct_1 = {
  * @example <caption>A simple example with numbers</caption>
  * Observable.of(1, 1, 2, 2, 2, 1, 2, 3, 4, 3, 2, 1)
  *   .distinct()
- *   .subscribe(x => console.log(x)); // 1, 2, 3, 4
+ *   .subscribe(x => // console.log(x)); // 1, 2, 3, 4
  *
  * @example <caption>An example using a keySelector function</caption>
  * interface Person {
@@ -11784,7 +11784,7 @@ var distinct_1 = {
  *     { age: 7, name: 'Bar'},
  *     { age: 5, name: 'Foo'})
  *     .distinct((p: Person) => p.name)
- *     .subscribe(x => console.log(x));
+ *     .subscribe(x => // console.log(x));
  *
  * // displays:
  * // { age: 4, name: 'Foo' }
@@ -11830,7 +11830,7 @@ var __extends$59 = (commonjsGlobal && commonjsGlobal.__extends) || function (d, 
  * @example <caption>A simple example with numbers</caption>
  * Observable.of(1, 1, 2, 2, 2, 1, 1, 2, 3, 3, 4)
  *   .distinctUntilChanged()
- *   .subscribe(x => console.log(x)); // 1, 2, 1, 2, 3, 4
+ *   .subscribe(x => // console.log(x)); // 1, 2, 1, 2, 3, 4
  *
  * @example <caption>An example using a compare function</caption>
  * interface Person {
@@ -11844,7 +11844,7 @@ var __extends$59 = (commonjsGlobal && commonjsGlobal.__extends) || function (d, 
  *     { age: 5, name: 'Foo'})
  *     { age: 6, name: 'Foo'})
  *     .distinctUntilChanged((p: Person, q: Person) => p.name === q.name)
- *     .subscribe(x => console.log(x));
+ *     .subscribe(x => // console.log(x));
  *
  * // displays:
  * // { age: 4, name: 'Foo' }
@@ -11934,7 +11934,7 @@ var distinctUntilChanged_1 = {
  * @example <caption>A simple example with numbers</caption>
  * Observable.of(1, 1, 2, 2, 2, 1, 1, 2, 3, 3, 4)
  *   .distinctUntilChanged()
- *   .subscribe(x => console.log(x)); // 1, 2, 1, 2, 3, 4
+ *   .subscribe(x => // console.log(x)); // 1, 2, 1, 2, 3, 4
  *
  * @example <caption>An example using a compare function</caption>
  * interface Person {
@@ -11948,7 +11948,7 @@ var distinctUntilChanged_1 = {
  *     { age: 5, name: 'Foo'})
  *     { age: 6, name: 'Foo'})
  *     .distinctUntilChanged((p: Person, q: Person) => p.name === q.name)
- *     .subscribe(x => console.log(x));
+ *     .subscribe(x => // console.log(x));
  *
  * // displays:
  * // { age: 4, name: 'Foo' }
@@ -11997,7 +11997,7 @@ Observable_1.Observable.prototype.distinctUntilChanged = distinctUntilChanged_2.
  *     { age: 5, name: 'Foo'},
  *     { age: 6, name: 'Foo'})
  *     .distinctUntilKeyChanged('name')
- *     .subscribe(x => console.log(x));
+ *     .subscribe(x => // console.log(x));
  *
  * // displays:
  * // { age: 4, name: 'Foo' }
@@ -12017,7 +12017,7 @@ Observable_1.Observable.prototype.distinctUntilChanged = distinctUntilChanged_2.
  *     { age: 5, name: 'Foo2'},
  *     { age: 6, name: 'Foo3'})
  *     .distinctUntilKeyChanged('name', (x: string, y: string) => x.substring(0, 3) === y.substring(0, 3))
- *     .subscribe(x => console.log(x));
+ *     .subscribe(x => // console.log(x));
  *
  * // displays:
  * // { age: 4, name: 'Foo1' }
@@ -12065,7 +12065,7 @@ var distinctUntilKeyChanged_1 = {
  *     { age: 5, name: 'Foo'},
  *     { age: 6, name: 'Foo'})
  *     .distinctUntilKeyChanged('name')
- *     .subscribe(x => console.log(x));
+ *     .subscribe(x => // console.log(x));
  *
  * // displays:
  * // { age: 4, name: 'Foo' }
@@ -12085,7 +12085,7 @@ var distinctUntilKeyChanged_1 = {
  *     { age: 5, name: 'Foo2'},
  *     { age: 6, name: 'Foo3'})
  *     .distinctUntilKeyChanged('name', (x: string, y: string) => x.substring(0, 3) === y.substring(0, 3))
- *     .subscribe(x => console.log(x));
+ *     .subscribe(x => // console.log(x));
  *
  * // displays:
  * // { age: 4, name: 'Foo1' }
@@ -12146,9 +12146,9 @@ var __extends$60 = (commonjsGlobal && commonjsGlobal.__extends) || function (d, 
  * @example <caption>Map every click to the clientX position of that click, while also logging the click event</caption>
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var positions = clicks
- *   .do(ev => console.log(ev))
+ *   .do(ev => // console.log(ev))
  *   .map(ev => ev.clientX);
- * positions.subscribe(x => console.log(x));
+ * positions.subscribe(x => // console.log(x));
  *
  * @see {@link map}
  * @see {@link subscribe}
@@ -12257,9 +12257,9 @@ var tap_1 = {
  * @example <caption>Map every click to the clientX position of that click, while also logging the click event</caption>
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var positions = clicks
- *   .do(ev => console.log(ev))
+ *   .do(ev => // console.log(ev))
  *   .map(ev => ev.clientX);
- * positions.subscribe(x => console.log(x));
+ * positions.subscribe(x => // console.log(x));
  *
  * @see {@link map}
  * @see {@link subscribe}
@@ -12315,7 +12315,7 @@ var __extends$61 = (commonjsGlobal && commonjsGlobal.__extends) || function (d, 
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var higherOrder = clicks.map((ev) => Rx.Observable.interval(1000).take(5));
  * var result = higherOrder.exhaust();
- * result.subscribe(x => console.log(x));
+ * result.subscribe(x => // console.log(x));
  *
  * @see {@link combineAll}
  * @see {@link concatAll}
@@ -12401,7 +12401,7 @@ var exhaust_1 = {
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var higherOrder = clicks.map((ev) => Rx.Observable.interval(1000).take(5));
  * var result = higherOrder.exhaust();
- * result.subscribe(x => console.log(x));
+ * result.subscribe(x => // console.log(x));
  *
  * @see {@link combineAll}
  * @see {@link concatAll}
@@ -12456,7 +12456,7 @@ var __extends$62 = (commonjsGlobal && commonjsGlobal.__extends) || function (d, 
  * @example <caption>Run a finite timer for each click, only if there is no currently active timer</caption>
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var result = clicks.exhaustMap((ev) => Rx.Observable.interval(1000).take(5));
- * result.subscribe(x => console.log(x));
+ * result.subscribe(x => // console.log(x));
  *
  * @see {@link concatMap}
  * @see {@link exhaust}
@@ -12591,7 +12591,7 @@ var exhaustMap_1 = {
  * @example <caption>Run a finite timer for each click, only if there is no currently active timer</caption>
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var result = clicks.exhaustMap((ev) => Rx.Observable.interval(1000).take(5));
- * result.subscribe(x => console.log(x));
+ * result.subscribe(x => // console.log(x));
  *
  * @see {@link concatMap}
  * @see {@link exhaust}
@@ -12663,7 +12663,7 @@ var __extends$63 = (commonjsGlobal && commonjsGlobal.__extends) || function (d, 
  *   .mapTo(1)
  *   .expand(x => Rx.Observable.of(2 * x).delay(1000))
  *   .take(10);
- * powersOfTwo.subscribe(x => console.log(x));
+ * powersOfTwo.subscribe(x => // console.log(x));
  *
  * @see {@link mergeMap}
  * @see {@link mergeScan}
@@ -12811,7 +12811,7 @@ var expand_1 = {
  *   .mapTo(1)
  *   .expand(x => Rx.Observable.of(2 * x).delay(1000))
  *   .take(10);
- * powersOfTwo.subscribe(x => console.log(x));
+ * powersOfTwo.subscribe(x => // console.log(x));
  *
  * @see {@link mergeMap}
  * @see {@link mergeScan}
@@ -12901,12 +12901,12 @@ var __extends$64 = (commonjsGlobal && commonjsGlobal.__extends) || function (d, 
  * @example <caption>Emit only the third click event</caption>
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var result = clicks.elementAt(2);
- * result.subscribe(x => console.log(x));
+ * result.subscribe(x => // console.log(x));
  *
  * // Results in:
  * // click 1 = nothing
  * // click 2 = nothing
- * // click 3 = MouseEvent object logged to console
+ * // click 3 = MouseEvent object logged to // console
  *
  * @see {@link first}
  * @see {@link last}
@@ -12998,12 +12998,12 @@ var elementAt_1 = {
  * @example <caption>Emit only the third click event</caption>
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var result = clicks.elementAt(2);
- * result.subscribe(x => console.log(x));
+ * result.subscribe(x => // console.log(x));
  *
  * // Results in:
  * // click 1 = nothing
  * // click 2 = nothing
- * // click 3 = MouseEvent object logged to console
+ * // click 3 = MouseEvent object logged to // console
  *
  * @see {@link first}
  * @see {@link last}
@@ -13059,7 +13059,7 @@ var __extends$66 = (commonjsGlobal && commonjsGlobal.__extends) || function (d, 
  * @example <caption>Emit only click events whose target was a DIV element</caption>
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var clicksOnDivs = clicks.filter(ev => ev.target.tagName === 'DIV');
- * clicksOnDivs.subscribe(x => console.log(x));
+ * clicksOnDivs.subscribe(x => // console.log(x));
  *
  * @see {@link distinct}
  * @see {@link distinctUntilChanged}
@@ -13151,7 +13151,7 @@ var filter_1 = {
  * @example <caption>Emit only click events whose target was a DIV element</caption>
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var clicksOnDivs = clicks.filter(ev => ev.target.tagName === 'DIV');
- * clicksOnDivs.subscribe(x => console.log(x));
+ * clicksOnDivs.subscribe(x => // console.log(x));
  *
  * @see {@link distinct}
  * @see {@link distinctUntilChanged}
@@ -13276,7 +13276,7 @@ var __extends$68 = (commonjsGlobal && commonjsGlobal.__extends) || function (d, 
  * @example <caption>Find and emit the first click that happens on a DIV element</caption>
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var result = clicks.find(ev => ev.target.tagName === 'DIV');
- * result.subscribe(x => console.log(x));
+ * result.subscribe(x => // console.log(x));
  *
  * @see {@link filter}
  * @see {@link first}
@@ -13377,7 +13377,7 @@ var find_1 = {
  * @example <caption>Find and emit the first click that happens on a DIV element</caption>
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var result = clicks.find(ev => ev.target.tagName === 'DIV');
- * result.subscribe(x => console.log(x));
+ * result.subscribe(x => // console.log(x));
  *
  * @see {@link filter}
  * @see {@link first}
@@ -13423,7 +13423,7 @@ Observable_1.Observable.prototype.find = find_2.find;
  * @example <caption>Emit the index of first click that happens on a DIV element</caption>
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var result = clicks.findIndex(ev => ev.target.tagName === 'DIV');
- * result.subscribe(x => console.log(x));
+ * result.subscribe(x => // console.log(x));
  *
  * @see {@link filter}
  * @see {@link find}
@@ -13467,7 +13467,7 @@ var findIndex_1 = {
  * @example <caption>Emit the index of first click that happens on a DIV element</caption>
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var result = clicks.findIndex(ev => ev.target.tagName === 'DIV');
- * result.subscribe(x => console.log(x));
+ * result.subscribe(x => // console.log(x));
  *
  * @see {@link filter}
  * @see {@link find}
@@ -13554,12 +13554,12 @@ var __extends$69 = (commonjsGlobal && commonjsGlobal.__extends) || function (d, 
  * @example <caption>Emit only the first click that happens on the DOM</caption>
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var result = clicks.first();
- * result.subscribe(x => console.log(x));
+ * result.subscribe(x => // console.log(x));
  *
  * @example <caption>Emits the first click that happens on a DIV</caption>
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var result = clicks.first(ev => ev.target.tagName === 'DIV');
- * result.subscribe(x => console.log(x));
+ * result.subscribe(x => // console.log(x));
  *
  * @see {@link filter}
  * @see {@link find}
@@ -13703,12 +13703,12 @@ var first_1 = {
  * @example <caption>Emit only the first click that happens on the DOM</caption>
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var result = clicks.first();
- * result.subscribe(x => console.log(x));
+ * result.subscribe(x => // console.log(x));
  *
  * @example <caption>Emits the first click that happens on a DIV</caption>
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var result = clicks.first(ev => ev.target.tagName === 'DIV');
- * result.subscribe(x => console.log(x));
+ * result.subscribe(x => // console.log(x));
  *
  * @see {@link filter}
  * @see {@link find}
@@ -13868,7 +13868,7 @@ var __extends$71 = (commonjsGlobal && commonjsGlobal.__extends) || function (d, 
  *     )
  *     .groupBy(p => p.id)
  *     .flatMap( (group$) => group$.reduce((acc, cur) => [...acc, cur], []))
- *     .subscribe(p => console.log(p));
+ *     .subscribe(p => // console.log(p));
  *
  * // displays:
  * // [ { id: 1, name: 'aze1' },
@@ -13895,7 +13895,7 @@ var __extends$71 = (commonjsGlobal && commonjsGlobal.__extends) || function (d, 
  *     .groupBy(p => p.id, p => p.name)
  *     .flatMap( (group$) => group$.reduce((acc, cur) => [...acc, cur], ["" + group$.key]))
  *     .map(arr => ({'id': parseInt(arr[0]), 'values': arr.slice(1)}))
- *     .subscribe(p => console.log(p));
+ *     .subscribe(p => // console.log(p));
  *
  * // displays:
  * // { id: 1, values: [ 'aze1', 'erg1', 'df1' ] }
@@ -14139,7 +14139,7 @@ var GroupedObservable = groupBy_1.GroupedObservable;
  *     )
  *     .groupBy(p => p.id)
  *     .flatMap( (group$) => group$.reduce((acc, cur) => [...acc, cur], []))
- *     .subscribe(p => console.log(p));
+ *     .subscribe(p => // console.log(p));
  *
  * // displays:
  * // [ { id: 1, name: 'aze1' },
@@ -14166,7 +14166,7 @@ var GroupedObservable = groupBy_1.GroupedObservable;
  *     .groupBy(p => p.id, p => p.name)
  *     .flatMap( (group$) => group$.reduce((acc, cur) => [...acc, cur], ["" + group$.key]))
  *     .map(arr => ({'id': parseInt(arr[0]), 'values': arr.slice(1)}))
- *     .subscribe(p => console.log(p));
+ *     .subscribe(p => // console.log(p));
  *
  * // displays:
  * // { id: 1, values: [ 'aze1', 'erg1', 'df1' ] }
@@ -14376,7 +14376,7 @@ var __extends$74 = (commonjsGlobal && commonjsGlobal.__extends) || function (d, 
  * @example <caption>Emit clicks at a rate of at most one click per second</caption>
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var result = clicks.audit(ev => Rx.Observable.interval(1000));
- * result.subscribe(x => console.log(x));
+ * result.subscribe(x => // console.log(x));
  *
  * @see {@link auditTime}
  * @see {@link debounce}
@@ -14489,7 +14489,7 @@ var audit_1 = {
  * @example <caption>Emit clicks at a rate of at most one click per second</caption>
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var result = clicks.audit(ev => Rx.Observable.interval(1000));
- * result.subscribe(x => console.log(x));
+ * result.subscribe(x => // console.log(x));
  *
  * @see {@link auditTime}
  * @see {@link debounce}
@@ -14541,7 +14541,7 @@ Observable_1.Observable.prototype.audit = audit_2.audit;
  * @example <caption>Emit clicks at a rate of at most one click per second</caption>
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var result = clicks.auditTime(1000);
- * result.subscribe(x => console.log(x));
+ * result.subscribe(x => // console.log(x));
  *
  * @see {@link audit}
  * @see {@link debounceTime}
@@ -14594,7 +14594,7 @@ var auditTime_1 = {
  * @example <caption>Emit clicks at a rate of at most one click per second</caption>
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var result = clicks.auditTime(1000);
- * result.subscribe(x => console.log(x));
+ * result.subscribe(x => // console.log(x));
  *
  * @see {@link audit}
  * @see {@link debounceTime}
@@ -14809,7 +14809,7 @@ var __extends$76 = (commonjsGlobal && commonjsGlobal.__extends) || function (d, 
  * @example <caption>A simple example emitting true if all elements are less than 5, false otherwise</caption>
  *  Observable.of(1, 2, 3, 4, 5, 6)
  *     .every(x => x < 5)
- *     .subscribe(x => console.log(x)); // -> false
+ *     .subscribe(x => // console.log(x)); // -> false
  *
  * @param {function} predicate A function for determining if an item meets a specified condition.
  * @param {any} [thisArg] Optional object to use for `this` in the callback.
@@ -14881,7 +14881,7 @@ var every_1 = {
  * @example <caption>A simple example emitting true if all elements are less than 5, false otherwise</caption>
  *  Observable.of(1, 2, 3, 4, 5, 6)
  *     .every(x => x < 5)
- *     .subscribe(x => console.log(x)); // -> false
+ *     .subscribe(x => // console.log(x)); // -> false
  *
  * @param {function} predicate A function for determining if an item meets a specified condition.
  * @param {any} [thisArg] Optional object to use for `this` in the callback.
@@ -14918,7 +14918,7 @@ Observable_1.Observable.prototype.every = every_2.every;
  * @example <caption>Map every click to the clientX position of that click</caption>
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var positions = clicks.map(ev => ev.clientX);
- * positions.subscribe(x => console.log(x));
+ * positions.subscribe(x => // console.log(x));
  *
  * @see {@link mapTo}
  * @see {@link pluck}
@@ -14968,7 +14968,7 @@ var __extends$77 = (commonjsGlobal && commonjsGlobal.__extends) || function (d, 
  * @example <caption>Map every click to the string 'Hi'</caption>
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var greetings = clicks.mapTo('Hi');
- * greetings.subscribe(x => console.log(x));
+ * greetings.subscribe(x => // console.log(x));
  *
  * @see {@link map}
  *
@@ -15029,7 +15029,7 @@ var mapTo_1 = {
  * @example <caption>Map every click to the string 'Hi'</caption>
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var greetings = clicks.mapTo('Hi');
- * greetings.subscribe(x => console.log(x));
+ * greetings.subscribe(x => // console.log(x));
  *
  * @see {@link map}
  *
@@ -15084,7 +15084,7 @@ var __extends$78 = (commonjsGlobal && commonjsGlobal.__extends) || function (d, 
  * var letters = Rx.Observable.of('a', 'b', 13, 'd');
  * var upperCase = letters.map(x => x.toUpperCase());
  * var materialized = upperCase.materialize();
- * materialized.subscribe(x => console.log(x));
+ * materialized.subscribe(x => // console.log(x));
  *
  * // Results in the following:
  * // - Notification {kind: "N", value: "A", error: undefined, hasValue: true}
@@ -15173,7 +15173,7 @@ var materialize_1 = {
  * var letters = Rx.Observable.of('a', 'b', 13, 'd');
  * var upperCase = letters.map(x => x.toUpperCase());
  * var materialized = upperCase.materialize();
- * materialized.subscribe(x => console.log(x));
+ * materialized.subscribe(x => // console.log(x));
  *
  * // Results in the following:
  * // - Notification {kind: "N", value: "A", error: undefined, hasValue: true}
@@ -15234,7 +15234,7 @@ var __extends$79 = (commonjsGlobal && commonjsGlobal.__extends) || function (d, 
  * var ones = clicks.mapTo(1);
  * var seed = 0;
  * var count = ones.scan((acc, one) => acc + one, seed);
- * count.subscribe(x => console.log(x));
+ * count.subscribe(x => // console.log(x));
  *
  * @see {@link expand}
  * @see {@link mergeScan}
@@ -15355,7 +15355,7 @@ var __extends$80 = (commonjsGlobal && commonjsGlobal.__extends) || function (d, 
  * @example <caption>Take the last 3 values of an Observable with many values</caption>
  * var many = Rx.Observable.range(1, 100);
  * var lastThree = many.takeLast(3);
- * lastThree.subscribe(x => console.log(x));
+ * lastThree.subscribe(x => // console.log(x));
  *
  * @see {@link take}
  * @see {@link takeUntil}
@@ -15471,7 +15471,7 @@ var takeLast_1 = {
  * var ones = clicksInFiveSeconds.mapTo(1);
  * var seed = 0;
  * var count = ones.reduce((acc, one) => acc + one, seed);
- * count.subscribe(x => console.log(x));
+ * count.subscribe(x => // console.log(x));
  *
  * @see {@link count}
  * @see {@link expand}
@@ -15519,7 +15519,7 @@ var reduce_1 = {
  * @example <caption>Get the maximal value of a series of numbers</caption>
  * Rx.Observable.of(5, 4, 7, 2, 8)
  *   .max()
- *   .subscribe(x => console.log(x)); // -> 8
+ *   .subscribe(x => // console.log(x)); // -> 8
  *
  * @example <caption>Use a comparer function to get the maximal item</caption>
  * interface Person {
@@ -15530,7 +15530,7 @@ var reduce_1 = {
  *                       {age: 5, name: 'Bar'},
  *                       {age: 9, name: 'Beer'})
  *           .max<Person>((a: Person, b: Person) => a.age < b.age ? -1 : 1)
- *           .subscribe((x: Person) => console.log(x.name)); // -> 'Beer'
+ *           .subscribe((x: Person) => // console.log(x.name)); // -> 'Beer'
  * }
  *
  * @see {@link min}
@@ -15563,7 +15563,7 @@ var max_1 = {
  * @example <caption>Get the maximal value of a series of numbers</caption>
  * Rx.Observable.of(5, 4, 7, 2, 8)
  *   .max()
- *   .subscribe(x => console.log(x)); // -> 8
+ *   .subscribe(x => // console.log(x)); // -> 8
  *
  * @example <caption>Use a comparer function to get the maximal item</caption>
  * interface Person {
@@ -15574,7 +15574,7 @@ var max_1 = {
  *                       {age: 5, name: 'Bar'},
  *                       {age: 9, name: 'Beer'})
  *           .max<Person>((a: Person, b: Person) => a.age < b.age ? -1 : 1)
- *           .subscribe((x: Person) => console.log(x.name)); // -> 'Beer'
+ *           .subscribe((x: Person) => // console.log(x.name)); // -> 'Beer'
  * }
  *
  * @see {@link min}
@@ -15620,7 +15620,7 @@ var mergeStatic$1 = merge_2$1.merge;
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var timer = Rx.Observable.interval(1000);
  * var clicksOrTimer = clicks.merge(timer);
- * clicksOrTimer.subscribe(x => console.log(x));
+ * clicksOrTimer.subscribe(x => // console.log(x));
  *
  * @example <caption>Merge together 3 Observables, but only 2 run concurrently</caption>
  * var timer1 = Rx.Observable.interval(1000).take(10);
@@ -15628,7 +15628,7 @@ var mergeStatic$1 = merge_2$1.merge;
  * var timer3 = Rx.Observable.interval(500).take(10);
  * var concurrent = 2; // the argument
  * var merged = timer1.merge(timer2, timer3, concurrent);
- * merged.subscribe(x => console.log(x));
+ * merged.subscribe(x => // console.log(x));
  *
  * @see {@link mergeAll}
  * @see {@link mergeMap}
@@ -15683,7 +15683,7 @@ var mergeStatic = merge_1.merge;
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var timer = Rx.Observable.interval(1000);
  * var clicksOrTimer = clicks.merge(timer);
- * clicksOrTimer.subscribe(x => console.log(x));
+ * clicksOrTimer.subscribe(x => // console.log(x));
  *
  * @example <caption>Merge together 3 Observables, but only 2 run concurrently</caption>
  * var timer1 = Rx.Observable.interval(1000).take(10);
@@ -15691,7 +15691,7 @@ var mergeStatic = merge_1.merge;
  * var timer3 = Rx.Observable.interval(500).take(10);
  * var concurrent = 2; // the argument
  * var merged = timer1.merge(timer2, timer3, concurrent);
- * merged.subscribe(x => console.log(x));
+ * merged.subscribe(x => // console.log(x));
  *
  * @see {@link mergeAll}
  * @see {@link mergeMap}
@@ -15745,13 +15745,13 @@ Observable_1.Observable.prototype.merge = merge_3.merge;
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var higherOrder = clicks.map((ev) => Rx.Observable.interval(1000));
  * var firstOrder = higherOrder.mergeAll();
- * firstOrder.subscribe(x => console.log(x));
+ * firstOrder.subscribe(x => // console.log(x));
  *
  * @example <caption>Count from 0 to 9 every second for each click, but only allow 2 concurrent timers</caption>
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var higherOrder = clicks.map((ev) => Rx.Observable.interval(1000).take(10));
  * var firstOrder = higherOrder.mergeAll(2);
- * firstOrder.subscribe(x => console.log(x));
+ * firstOrder.subscribe(x => // console.log(x));
  *
  * @see {@link combineAll}
  * @see {@link concatAll}
@@ -15803,7 +15803,7 @@ Observable_1.Observable.prototype.mergeAll = mergeAll_2$1.mergeAll;
  * var result = letters.mergeMap(x =>
  *   Rx.Observable.interval(1000).map(i => x+i)
  * );
- * result.subscribe(x => console.log(x));
+ * result.subscribe(x => // console.log(x));
  *
  * // Results in the following:
  * // a0
@@ -15880,7 +15880,7 @@ var __extends$81 = (commonjsGlobal && commonjsGlobal.__extends) || function (d, 
  * @example <caption>For each click event, start an interval Observable ticking every 1 second</caption>
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var result = clicks.mergeMapTo(Rx.Observable.interval(1000));
- * result.subscribe(x => console.log(x));
+ * result.subscribe(x => // console.log(x));
  *
  * @see {@link concatMapTo}
  * @see {@link merge}
@@ -16034,7 +16034,7 @@ var mergeMapTo_1 = {
  * @example <caption>For each click event, start an interval Observable ticking every 1 second</caption>
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var result = clicks.mergeMapTo(Rx.Observable.interval(1000));
- * result.subscribe(x => console.log(x));
+ * result.subscribe(x => // console.log(x));
  *
  * @see {@link concatMapTo}
  * @see {@link merge}
@@ -16097,7 +16097,7 @@ var __extends$82 = (commonjsGlobal && commonjsGlobal.__extends) || function (d, 
  * const one$ = click$.mapTo(1);
  * const seed = 0;
  * const count$ = one$.mergeScan((acc, one) => Rx.Observable.of(acc + one), seed);
- * count$.subscribe(x => console.log(x));
+ * count$.subscribe(x => // console.log(x));
  *
  * // Results:
  * 1
@@ -16223,7 +16223,7 @@ var mergeScan_1 = {
  * const one$ = click$.mapTo(1);
  * const seed = 0;
  * const count$ = one$.mergeScan((acc, one) => Rx.Observable.of(acc + one), seed);
- * count$.subscribe(x => console.log(x));
+ * count$.subscribe(x => // console.log(x));
  *
  * // Results:
  * 1
@@ -16263,7 +16263,7 @@ Observable_1.Observable.prototype.mergeScan = mergeScan_2.mergeScan;
  * @example <caption>Get the minimal value of a series of numbers</caption>
  * Rx.Observable.of(5, 4, 7, 2, 8)
  *   .min()
- *   .subscribe(x => console.log(x)); // -> 2
+ *   .subscribe(x => // console.log(x)); // -> 2
  *
  * @example <caption>Use a comparer function to get the minimal item</caption>
  * interface Person {
@@ -16274,7 +16274,7 @@ Observable_1.Observable.prototype.mergeScan = mergeScan_2.mergeScan;
  *                       {age: 5, name: 'Bar'},
  *                       {age: 9, name: 'Beer'})
  *           .min<Person>( (a: Person, b: Person) => a.age < b.age ? -1 : 1)
- *           .subscribe((x: Person) => console.log(x.name)); // -> 'Bar'
+ *           .subscribe((x: Person) => // console.log(x.name)); // -> 'Bar'
  * }
  *
  * @see {@link max}
@@ -16307,7 +16307,7 @@ var min_1 = {
  * @example <caption>Get the minimal value of a series of numbers</caption>
  * Rx.Observable.of(5, 4, 7, 2, 8)
  *   .min()
- *   .subscribe(x => console.log(x)); // -> 2
+ *   .subscribe(x => // console.log(x)); // -> 2
  *
  * @example <caption>Use a comparer function to get the minimal item</caption>
  * interface Person {
@@ -16318,7 +16318,7 @@ var min_1 = {
  *                       {age: 5, name: 'Bar'},
  *                       {age: 9, name: 'Beer'})
  *           .min<Person>( (a: Person, b: Person) => a.age < b.age ? -1 : 1)
- *           .subscribe((x: Person) => console.log(x.name)); // -> 'Bar'
+ *           .subscribe((x: Person) => // console.log(x.name)); // -> 'Bar'
  * }
  *
  * @see {@link max}
@@ -16706,14 +16706,14 @@ var multicast_1 = {
  * const seconds = Rx.Observable.interval(1000);
  * const connectableSeconds = seconds.multicast(new Subject());
  *
- * connectableSeconds.subscribe(value => console.log('first: ' + value));
- * connectableSeconds.subscribe(value => console.log('second: ' + value));
+ * connectableSeconds.subscribe(value => // console.log('first: ' + value));
+ * connectableSeconds.subscribe(value => // console.log('second: ' + value));
  *
  * // At this point still nothing happens, even though we subscribed twice.
  *
  * connectableSeconds.connect();
  *
- * // From now on `seconds` are being logged to the console,
+ * // From now on `seconds` are being logged to the // console,
  * // twice per every second. `seconds` Observable was however only subscribed once,
  * // so under the hood Observable.interval had only one clock started.
  *
@@ -16858,9 +16858,9 @@ Observable_1.Observable.prototype.observeOn = observeOn_2$1.observeOn;
  *   })
  *   .onErrorResumeNext(Rx.Observable.of(1, 2, 3))
  *   .subscribe(
- *     val => console.log(val),
- *     err => console.log(err),          // Will never be called.
- *     () => console.log('that\'s it!')
+ *     val => // console.log(val),
+ *     err => // console.log(err),          // Will never be called.
+ *     () => // console.log('that\'s it!')
  *   );
  *
  * // Logs:
@@ -16928,7 +16928,7 @@ var __extends$85 = (commonjsGlobal && commonjsGlobal.__extends) || function (d, 
  *   var y1 = pair[1].clientY;
  *   return Math.sqrt(Math.pow(x0 - x1, 2) + Math.pow(y0 - y1, 2));
  * });
- * distance.subscribe(x => console.log(x));
+ * distance.subscribe(x => // console.log(x));
  *
  * @see {@link buffer}
  * @see {@link bufferCount}
@@ -17003,7 +17003,7 @@ var pairwise_1 = {
  *   var y1 = pair[1].clientY;
  *   return Math.sqrt(Math.pow(x0 - x1, 2) + Math.pow(y0 - y1, 2));
  * });
- * distance.subscribe(x => console.log(x));
+ * distance.subscribe(x => // console.log(x));
  *
  * @see {@link buffer}
  * @see {@link bufferCount}
@@ -17062,8 +17062,8 @@ var not_1 = {
  * var parts = clicks.partition(ev => ev.target.tagName === 'DIV');
  * var clicksOnDivs = parts[0];
  * var clicksElsewhere = parts[1];
- * clicksOnDivs.subscribe(x => console.log('DIV clicked: ', x));
- * clicksElsewhere.subscribe(x => console.log('Other clicked: ', x));
+ * clicksOnDivs.subscribe(x => // console.log('DIV clicked: ', x));
+ * clicksElsewhere.subscribe(x => // console.log('Other clicked: ', x));
  *
  * @see {@link filter}
  *
@@ -17116,8 +17116,8 @@ var partition_1 = {
  * var parts = clicks.partition(ev => ev.target.tagName === 'DIV');
  * var clicksOnDivs = parts[0];
  * var clicksElsewhere = parts[1];
- * clicksOnDivs.subscribe(x => console.log('DIV clicked: ', x));
- * clicksElsewhere.subscribe(x => console.log('Other clicked: ', x));
+ * clicksOnDivs.subscribe(x => // console.log('DIV clicked: ', x));
+ * clicksElsewhere.subscribe(x => // console.log('Other clicked: ', x));
  *
  * @see {@link filter}
  *
@@ -17163,7 +17163,7 @@ Observable_1.Observable.prototype.partition = partition_2.partition;
  * @example <caption>Map every click to the tagName of the clicked target element</caption>
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var tagNames = clicks.pluck('target', 'tagName');
- * tagNames.subscribe(x => console.log(x));
+ * tagNames.subscribe(x => // console.log(x));
  *
  * @see {@link map}
  *
@@ -17223,7 +17223,7 @@ var pluck_1 = {
  * @example <caption>Map every click to the tagName of the clicked target element</caption>
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var tagNames = clicks.pluck('target', 'tagName');
- * tagNames.subscribe(x => console.log(x));
+ * tagNames.subscribe(x => // console.log(x));
  *
  * @see {@link map}
  *
@@ -17543,7 +17543,7 @@ Observable_1.Observable.prototype.race = race_3.race;
  * var ones = clicksInFiveSeconds.mapTo(1);
  * var seed = 0;
  * var count = ones.reduce((acc, one) => acc + one, seed);
- * count.subscribe(x => console.log(x));
+ * count.subscribe(x => // console.log(x));
  *
  * @see {@link count}
  * @see {@link expand}
@@ -18072,7 +18072,7 @@ var __extends$91 = (commonjsGlobal && commonjsGlobal.__extends) || function (d, 
  * var seconds = Rx.Observable.interval(1000);
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var result = seconds.sample(clicks);
- * result.subscribe(x => console.log(x));
+ * result.subscribe(x => // console.log(x));
  *
  * @see {@link audit}
  * @see {@link debounce}
@@ -18157,7 +18157,7 @@ var sample_1 = {
  * var seconds = Rx.Observable.interval(1000);
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var result = seconds.sample(clicks);
- * result.subscribe(x => console.log(x));
+ * result.subscribe(x => // console.log(x));
  *
  * @see {@link audit}
  * @see {@link debounce}
@@ -18210,7 +18210,7 @@ var __extends$92 = (commonjsGlobal && commonjsGlobal.__extends) || function (d, 
  * @example <caption>Every second, emit the most recent click at most once</caption>
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var result = clicks.sampleTime(1000);
- * result.subscribe(x => console.log(x));
+ * result.subscribe(x => // console.log(x));
  *
  * @see {@link auditTime}
  * @see {@link debounceTime}
@@ -18298,7 +18298,7 @@ var sampleTime_1 = {
  * @example <caption>Every second, emit the most recent click at most once</caption>
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var result = clicks.sampleTime(1000);
- * result.subscribe(x => console.log(x));
+ * result.subscribe(x => // console.log(x));
  *
  * @see {@link auditTime}
  * @see {@link debounceTime}
@@ -18353,7 +18353,7 @@ Observable_1.Observable.prototype.sampleTime = sampleTime_2.sampleTime;
  * var ones = clicks.mapTo(1);
  * var seed = 0;
  * var count = ones.scan((acc, one) => acc + one, seed);
- * count.subscribe(x => console.log(x));
+ * count.subscribe(x => // console.log(x));
  *
  * @see {@link expand}
  * @see {@link mergeScan}
@@ -18428,7 +18428,7 @@ var __extends$93 = (commonjsGlobal && commonjsGlobal.__extends) || function (d, 
  *      Rx.Observable.from(last11)
  *        .sequenceEqual(code)
  *   );
- * matches.subscribe(matched => console.log('Successful cheat at Contra? ', matched));
+ * matches.subscribe(matched => // console.log('Successful cheat at Contra? ', matched));
  *
  * @see {@link combineLatest}
  * @see {@link zip}
@@ -18590,7 +18590,7 @@ var sequenceEqual_1 = {
  *      Rx.Observable.from(last11)
  *        .sequenceEqual(code)
  *   );
- * matches.subscribe(matched => console.log('Successful cheat at Contra? ', matched));
+ * matches.subscribe(matched => // console.log('Successful cheat at Contra? ', matched));
  *
  * @see {@link combineLatest}
  * @see {@link zip}
@@ -18958,7 +18958,7 @@ var __extends$96 = (commonjsGlobal && commonjsGlobal.__extends) || function (d, 
  * @example <caption>Skip the last 2 values of an Observable with many values</caption>
  * var many = Rx.Observable.range(1, 5);
  * var skipLastTwo = many.skipLast(2);
- * skipLastTwo.subscribe(x => console.log(x));
+ * skipLastTwo.subscribe(x => // console.log(x));
  *
  * // Results in:
  * // 1 2 3
@@ -19048,7 +19048,7 @@ var skipLast_1 = {
  * @example <caption>Skip the last 2 values of an Observable with many values</caption>
  * var many = Rx.Observable.range(1, 5);
  * var skipLastTwo = many.skipLast(2);
- * skipLastTwo.subscribe(x => console.log(x));
+ * skipLastTwo.subscribe(x => // console.log(x));
  *
  * // Results in:
  * // 1 2 3
@@ -19682,8 +19682,8 @@ var AsapScheduler_1 = {
  *
  * @example <caption>Compare async and asap scheduler</caption>
  *
- * Rx.Scheduler.async.schedule(() => console.log('async')); // scheduling 'async' first...
- * Rx.Scheduler.asap.schedule(() => console.log('asap'));
+ * Rx.Scheduler.async.schedule(() => // console.log('async')); // scheduling 'async' first...
+ * Rx.Scheduler.asap.schedule(() => // console.log('asap'));
  *
  * // Logs:
  * // "asap"
@@ -19843,7 +19843,7 @@ var __extends$102 = (commonjsGlobal && commonjsGlobal.__extends) || function (d,
  * @example <caption>Rerun an interval Observable on every click event</caption>
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var result = clicks.switchMap((ev) => Rx.Observable.interval(1000));
- * result.subscribe(x => console.log(x));
+ * result.subscribe(x => // console.log(x));
  *
  * @see {@link concatMap}
  * @see {@link exhaustMap}
@@ -19996,7 +19996,7 @@ var switchAll_1 = {
  * // The outcome is that `switched` is essentially a timer that restarts
  * // on every click. The interval Observables from older clicks do not merge
  * // with the current interval Observable.
- * switched.subscribe(x => console.log(x));
+ * switched.subscribe(x => // console.log(x));
  *
  * @see {@link combineAll}
  * @see {@link concatAll}
@@ -20047,7 +20047,7 @@ Observable_1.Observable.prototype._switch = _switch_1._switch;
  * @example <caption>Rerun an interval Observable on every click event</caption>
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var result = clicks.switchMap((ev) => Rx.Observable.interval(1000));
- * result.subscribe(x => console.log(x));
+ * result.subscribe(x => // console.log(x));
  *
  * @see {@link concatMap}
  * @see {@link exhaustMap}
@@ -20111,7 +20111,7 @@ var __extends$103 = (commonjsGlobal && commonjsGlobal.__extends) || function (d,
  * @example <caption>Rerun an interval Observable on every click event</caption>
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var result = clicks.switchMapTo(Rx.Observable.interval(1000));
- * result.subscribe(x => console.log(x));
+ * result.subscribe(x => // console.log(x));
  *
  * @see {@link concatMapTo}
  * @see {@link switch}
@@ -20233,7 +20233,7 @@ var switchMapTo_1 = {
  * @example <caption>Rerun an interval Observable on every click event</caption>
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var result = clicks.switchMapTo(Rx.Observable.interval(1000));
- * result.subscribe(x => console.log(x));
+ * result.subscribe(x => // console.log(x));
  *
  * @see {@link concatMapTo}
  * @see {@link switch}
@@ -20293,7 +20293,7 @@ var __extends$104 = (commonjsGlobal && commonjsGlobal.__extends) || function (d,
  * @example <caption>Take the first 5 seconds of an infinite 1-second interval Observable</caption>
  * var interval = Rx.Observable.interval(1000);
  * var five = interval.take(5);
- * five.subscribe(x => console.log(x));
+ * five.subscribe(x => // console.log(x));
  *
  * @see {@link takeLast}
  * @see {@link takeUntil}
@@ -20380,7 +20380,7 @@ var take_1 = {
  * @example <caption>Take the first 5 seconds of an infinite 1-second interval Observable</caption>
  * var interval = Rx.Observable.interval(1000);
  * var five = interval.take(5);
- * five.subscribe(x => console.log(x));
+ * five.subscribe(x => // console.log(x));
  *
  * @see {@link takeLast}
  * @see {@link takeUntil}
@@ -20428,7 +20428,7 @@ Observable_1.Observable.prototype.take = take_2.take;
  * @example <caption>Take the last 3 values of an Observable with many values</caption>
  * var many = Rx.Observable.range(1, 100);
  * var lastThree = many.takeLast(3);
- * lastThree.subscribe(x => console.log(x));
+ * lastThree.subscribe(x => // console.log(x));
  *
  * @see {@link take}
  * @see {@link takeUntil}
@@ -20482,7 +20482,7 @@ var __extends$105 = (commonjsGlobal && commonjsGlobal.__extends) || function (d,
  * var interval = Rx.Observable.interval(1000);
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var result = interval.takeUntil(clicks);
- * result.subscribe(x => console.log(x));
+ * result.subscribe(x => // console.log(x));
  *
  * @see {@link take}
  * @see {@link takeLast}
@@ -20554,7 +20554,7 @@ var takeUntil_1 = {
  * var interval = Rx.Observable.interval(1000);
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var result = interval.takeUntil(clicks);
- * result.subscribe(x => console.log(x));
+ * result.subscribe(x => // console.log(x));
  *
  * @see {@link take}
  * @see {@link takeLast}
@@ -20607,7 +20607,7 @@ var __extends$106 = (commonjsGlobal && commonjsGlobal.__extends) || function (d,
  * @example <caption>Emit click events only while the clientX property is greater than 200</caption>
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var result = clicks.takeWhile(ev => ev.clientX > 200);
- * result.subscribe(x => console.log(x));
+ * result.subscribe(x => // console.log(x));
  *
  * @see {@link take}
  * @see {@link takeLast}
@@ -20697,7 +20697,7 @@ var takeWhile_1 = {
  * @example <caption>Emit click events only while the clientX property is greater than 200</caption>
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var result = clicks.takeWhile(ev => ev.clientX > 200);
- * result.subscribe(x => console.log(x));
+ * result.subscribe(x => // console.log(x));
  *
  * @see {@link take}
  * @see {@link takeLast}
@@ -20759,7 +20759,7 @@ exports.defaultThrottleConfig = {
  * @example <caption>Emit clicks at a rate of at most one click per second</caption>
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var result = clicks.throttle(ev => Rx.Observable.interval(1000));
- * result.subscribe(x => console.log(x));
+ * result.subscribe(x => // console.log(x));
  *
  * @see {@link audit}
  * @see {@link debounce}
@@ -20894,7 +20894,7 @@ var throttle_3$1 = throttle_1.throttle;
  * @example <caption>Emit clicks at a rate of at most one click per second</caption>
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var result = clicks.throttle(ev => Rx.Observable.interval(1000));
- * result.subscribe(x => console.log(x));
+ * result.subscribe(x => // console.log(x));
  *
  * @see {@link audit}
  * @see {@link debounce}
@@ -20954,7 +20954,7 @@ var __extends$107 = (commonjsGlobal && commonjsGlobal.__extends) || function (d,
  * @example <caption>Emit clicks at a rate of at most one click per second</caption>
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var result = clicks.throttleTime(1000);
- * result.subscribe(x => console.log(x));
+ * result.subscribe(x => // console.log(x));
  *
  * @see {@link auditTime}
  * @see {@link debounceTime}
@@ -21066,7 +21066,7 @@ var throttleTime_1 = {
  * @example <caption>Emit clicks at a rate of at most one click per second</caption>
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var result = clicks.throttleTime(1000);
- * result.subscribe(x => console.log(x));
+ * result.subscribe(x => // console.log(x));
  *
  * @see {@link auditTime}
  * @see {@link debounceTime}
@@ -21250,13 +21250,13 @@ var __extends$109 = (commonjsGlobal && commonjsGlobal.__extends) || function (d,
  * seconds.timeout(1100) // Let's use bigger timespan to be safe,
  *                       // since `interval` might fire a bit later then scheduled.
  * .subscribe(
- *     value => console.log(value), // Will emit numbers just as regular `interval` would.
- *     err => console.log(err) // Will never be called.
+ *     value => // console.log(value), // Will emit numbers just as regular `interval` would.
+ *     err => // console.log(err) // Will never be called.
  * );
  *
  * seconds.timeout(900).subscribe(
- *     value => console.log(value), // Will never be called.
- *     err => console.log(err) // Will emit error before even first value is emitted,
+ *     value => // console.log(value), // Will never be called.
+ *     err => // console.log(err) // Will emit error before even first value is emitted,
  *                             // since it did not arrive within 900ms period.
  * );
  *
@@ -21265,9 +21265,9 @@ var __extends$109 = (commonjsGlobal && commonjsGlobal.__extends) || function (d,
  *
  * seconds.timeout(new Date("December 17, 2020 03:24:00"))
  * .subscribe(
- *     value => console.log(value), // Will emit values as regular `interval` would
+ *     value => // console.log(value), // Will emit values as regular `interval` would
  *                                  // until December 17, 2020 at 03:24:00.
- *     err => console.log(err) // On December 17, 2020 at 03:24:00 it will emit an error,
+ *     err => // console.log(err) // On December 17, 2020 at 03:24:00 it will emit an error,
  *                             // since Observable did not complete by then.
  * );
  *
@@ -21386,13 +21386,13 @@ var timeout_1 = {
  * seconds.timeout(1100) // Let's use bigger timespan to be safe,
  *                       // since `interval` might fire a bit later then scheduled.
  * .subscribe(
- *     value => console.log(value), // Will emit numbers just as regular `interval` would.
- *     err => console.log(err) // Will never be called.
+ *     value => // console.log(value), // Will emit numbers just as regular `interval` would.
+ *     err => // console.log(err) // Will never be called.
  * );
  *
  * seconds.timeout(900).subscribe(
- *     value => console.log(value), // Will never be called.
- *     err => console.log(err) // Will emit error before even first value is emitted,
+ *     value => // console.log(value), // Will never be called.
+ *     err => // console.log(err) // Will emit error before even first value is emitted,
  *                             // since it did not arrive within 900ms period.
  * );
  *
@@ -21401,9 +21401,9 @@ var timeout_1 = {
  *
  * seconds.timeout(new Date("December 17, 2020 03:24:00"))
  * .subscribe(
- *     value => console.log(value), // Will emit values as regular `interval` would
+ *     value => // console.log(value), // Will emit values as regular `interval` would
  *                                  // until December 17, 2020 at 03:24:00.
- *     err => console.log(err) // On December 17, 2020 at 03:24:00 it will emit an error,
+ *     err => // console.log(err) // On December 17, 2020 at 03:24:00 it will emit an error,
  *                             // since Observable did not complete by then.
  * );
  *
@@ -21471,9 +21471,9 @@ var __extends$111 = (commonjsGlobal && commonjsGlobal.__extends) || function (d,
  *
  * seconds.timeoutWith(900, minutes)
  *     .subscribe(
- *         value => console.log(value), // After 900ms, will start emitting `minutes`,
+ *         value => // console.log(value), // After 900ms, will start emitting `minutes`,
  *                                      // since first value of `seconds` will not arrive fast enough.
- *         err => console.log(err) // Would be called after 900ms in case of `timeout`,
+ *         err => // console.log(err) // Would be called after 900ms in case of `timeout`,
  *                                 // but here will never be called.
  *     );
  *
@@ -21594,9 +21594,9 @@ var timeoutWith_1 = {
  *
  * seconds.timeoutWith(900, minutes)
  *     .subscribe(
- *         value => console.log(value), // After 900ms, will start emitting `minutes`,
+ *         value => // console.log(value), // After 900ms, will start emitting `minutes`,
  *                                      // since first value of `seconds` will not arrive fast enough.
- *         err => console.log(err) // Would be called after 900ms in case of `timeout`,
+ *         err => // console.log(err) // Would be called after 900ms in case of `timeout`,
  *                                 // but here will never be called.
  *     );
  *
@@ -21701,7 +21701,7 @@ var toArray_1 = {
  * const input = Rx.Observable.interval(100).take(4);
  *
  * input.toArray()
- *   .subscribe(arr => console.log(arr)); // [0,1,2,3]
+ *   .subscribe(arr => // console.log(arr)); // [0,1,2,3]
  *
  * @see {@link buffer}
  *
@@ -21753,7 +21753,7 @@ var __extends$112 = (commonjsGlobal && commonjsGlobal.__extends) || function (d,
  * var result = clicks.window(interval)
  *   .map(win => win.take(2)) // each window has at most 2 emissions
  *   .mergeAll(); // flatten the Observable-of-Observables
- * result.subscribe(x => console.log(x));
+ * result.subscribe(x => // console.log(x));
  *
  * @see {@link windowCount}
  * @see {@link windowTime}
@@ -21861,7 +21861,7 @@ var window_1 = {
  * var result = clicks.window(interval)
  *   .map(win => win.take(2)) // each window has at most 2 emissions
  *   .mergeAll(); // flatten the Observable-of-Observables
- * result.subscribe(x => console.log(x));
+ * result.subscribe(x => // console.log(x));
  *
  * @see {@link windowCount}
  * @see {@link windowTime}
@@ -21918,13 +21918,13 @@ var __extends$113 = (commonjsGlobal && commonjsGlobal.__extends) || function (d,
  * var result = clicks.windowCount(3)
  *   .map(win => win.skip(1)) // skip first of every 3 clicks
  *   .mergeAll(); // flatten the Observable-of-Observables
- * result.subscribe(x => console.log(x));
+ * result.subscribe(x => // console.log(x));
  *
  * @example <caption>Ignore every 3rd click event, starting from the third one</caption>
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var result = clicks.windowCount(2, 3)
  *   .mergeAll(); // flatten the Observable-of-Observables
- * result.subscribe(x => console.log(x));
+ * result.subscribe(x => // console.log(x));
  *
  * @see {@link window}
  * @see {@link windowTime}
@@ -22048,13 +22048,13 @@ var windowCount_1 = {
  * var result = clicks.windowCount(3)
  *   .map(win => win.skip(1)) // skip first of every 3 clicks
  *   .mergeAll(); // flatten the Observable-of-Observables
- * result.subscribe(x => console.log(x));
+ * result.subscribe(x => // console.log(x));
  *
  * @example <caption>Ignore every 3rd click event, starting from the third one</caption>
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var result = clicks.windowCount(2, 3)
  *   .mergeAll(); // flatten the Observable-of-Observables
- * result.subscribe(x => console.log(x));
+ * result.subscribe(x => // console.log(x));
  *
  * @see {@link window}
  * @see {@link windowTime}
@@ -22316,7 +22316,7 @@ var __extends$115 = (commonjsGlobal && commonjsGlobal.__extends) || function (d,
  * var result = clicks.windowToggle(openings, i =>
  *   i % 2 ? Rx.Observable.interval(500) : Rx.Observable.empty()
  * ).mergeAll();
- * result.subscribe(x => console.log(x));
+ * result.subscribe(x => // console.log(x));
  *
  * @see {@link window}
  * @see {@link windowCount}
@@ -22489,7 +22489,7 @@ var windowToggle_1 = {
  * var result = clicks.windowToggle(openings, i =>
  *   i % 2 ? Rx.Observable.interval(500) : Rx.Observable.empty()
  * ).mergeAll();
- * result.subscribe(x => console.log(x));
+ * result.subscribe(x => // console.log(x));
  *
  * @see {@link window}
  * @see {@link windowCount}
@@ -22552,7 +22552,7 @@ var __extends$116 = (commonjsGlobal && commonjsGlobal.__extends) || function (d,
  *   .windowWhen(() => Rx.Observable.interval(1000 + Math.random() * 4000))
  *   .map(win => win.take(2)) // each window has at most 2 emissions
  *   .mergeAll(); // flatten the Observable-of-Observables
- * result.subscribe(x => console.log(x));
+ * result.subscribe(x => // console.log(x));
  *
  * @see {@link window}
  * @see {@link windowCount}
@@ -22675,7 +22675,7 @@ var windowWhen_1 = {
  *   .windowWhen(() => Rx.Observable.interval(1000 + Math.random() * 4000))
  *   .map(win => win.take(2)) // each window has at most 2 emissions
  *   .mergeAll(); // flatten the Observable-of-Observables
- * result.subscribe(x => console.log(x));
+ * result.subscribe(x => // console.log(x));
  *
  * @see {@link window}
  * @see {@link windowCount}
@@ -22732,7 +22732,7 @@ var __extends$117 = (commonjsGlobal && commonjsGlobal.__extends) || function (d,
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var timer = Rx.Observable.interval(1000);
  * var result = clicks.withLatestFrom(timer);
- * result.subscribe(x => console.log(x));
+ * result.subscribe(x => // console.log(x));
  *
  * @see {@link combineLatest}
  *
@@ -22861,7 +22861,7 @@ var withLatestFrom_1 = {
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var timer = Rx.Observable.interval(1000);
  * var result = clicks.withLatestFrom(timer);
- * result.subscribe(x => console.log(x));
+ * result.subscribe(x => // console.log(x));
  *
  * @see {@link combineLatest}
  *

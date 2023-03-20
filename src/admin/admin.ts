@@ -8,15 +8,15 @@ const route = express();
 require("dotenv").config();
 // import email from "./otp/email";
 const jWT_SECRET: string | any = process.env.JWT_SECRET
-// //console.log("dfasdF", jWT_SECRET);
+// //// console.log("dfasdF", jWT_SECRET);
 
 route.post('/singup', (req: any, res: any, next: any) => {
     auth.find({
         email: req.body.email
     }).exec().then(
         (result: string | any[]) => {
-            // tslint:disable-next-line: no-console
-            //console.log(result);
+            // tslint:disable-next-line: no-// console
+            //// console.log(result);
             if (result.length >= 1) {
                 return res.status(409).json({
                     code: '409',
@@ -31,7 +31,7 @@ route.post('/singup', (req: any, res: any, next: any) => {
                             message: err,
                         })
                     } else {
-                        //console.log(hase);
+                        //// console.log(hase);
 
                         const data = new auth({
                             _id: new mongooss.Types.ObjectId(),
@@ -45,7 +45,7 @@ route.post('/singup', (req: any, res: any, next: any) => {
                         })
                         data.save().then((result: any) => {
                             bcrypt.compare(req.body.password, hase, (err: any, logUSer: any) => {
-                                //console.log(logUSer);
+                                //// console.log(logUSer);
                                 if (err) {
                                     return err.status(401).json({
                                         message: 'Anauthorais user'
@@ -83,11 +83,11 @@ route.post('/singup', (req: any, res: any, next: any) => {
                                     message: 'unauthorais user'
                                 })
                             })
-                            // //console.log(result);
+                            // //// console.log(result);
                         }).catch(
                             (err: any) => {
 
-                                //console.log(err);
+                                //// console.log(err);
                             }
                         )
 
@@ -106,7 +106,7 @@ route.post('/singin', (req: any, res: any, next: any) => {
         email: req.body.email
     }).exec().then(
         (result: any[]) => {
-            //console.log("fasdfasdfasd", result);
+            //// console.log("fasdfasdfasd", result);
             if (result.length < 1) {
                 return res.status(401).json({
                     message: 'Anauthorais user'
@@ -148,9 +148,9 @@ route.post('/singin', (req: any, res: any, next: any) => {
                         }, {
                             $set: obj
                         }).exec().then((final: any) => {
-                            //console.log("FasdfasdfAS", final);
+                            //// console.log("FasdfasdfAS", final);
                         }).catch((err: any) => {
-                            //console.log(err);
+                            //// console.log(err);
                         })
                         data = {
                             response: {

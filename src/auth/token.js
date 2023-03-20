@@ -24,7 +24,7 @@ oAuth2Client.getToken(code).then(({
 }) => {
   const tokenPath = path.join(__dirname, "token.json");
   fs.writeFileSync(tokenPath, JSON.stringify(tokens));
-  //console.log("Access token and refresh token stored to token.json");
+  //// console.log("Access token and refresh token stored to token.json");
 }).catch(err => {
-  console.log(err.message);
+  // console.log(err.message);
 });

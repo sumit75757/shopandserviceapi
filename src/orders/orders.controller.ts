@@ -17,16 +17,16 @@ const orders = {
         },
       ])
       .then((result: any[]) => {
-        // console.log(result);
+        // // console.log(result);
         
         let total :any
         let prodArr: any[] = [];
         let data = result.filter((d) => d.userId == id);
-        console.log("#############################",data);
+        // console.log("#############################",data);
 
         data.forEach((element) => {
           
-          // console.log(element._id);
+          // // console.log(element._id);
           // delete element.prod;
           element.prod[0]['productId'] = element.prod[0]['_id']
           element.prod[0]._id =element._id
@@ -42,7 +42,7 @@ const orders = {
           //  element.prod[0].price + total
           
           
-          // console.log( );
+          // // console.log( );
         });
         
         let obj = {
@@ -52,7 +52,7 @@ const orders = {
           
         };
 
-        // console.log(prodArr);
+        // // console.log(prodArr);
         
         res.status(200).json(obj);
       })

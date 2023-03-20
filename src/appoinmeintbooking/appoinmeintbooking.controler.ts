@@ -58,14 +58,14 @@ const apobooking = {
         },
       ])
       .then((result: any[]) => {
-        console.log(result);
+        // console.log(result);
         
         let total :any
         let serveArr: any[] = [];
         let data = result.filter((d) => d.userId == id);
         data.forEach((element) => {
          
-          console.log(element);
+          // console.log(element);
           // delete element.serve;
           element.service[0]['serviceId'] = element.service[0]['_id']
           element.service[0]._id =element._id
@@ -75,7 +75,7 @@ const apobooking = {
           //  element.serve[0].price + total
           
           
-          // console.log( );
+          // // console.log( );
         });
         let obj = {
           count: data.length, 
@@ -83,12 +83,12 @@ const apobooking = {
           data: serveArr,
           
         };
-        // console.log(serveArr);
+        // // console.log(serveArr);
         
         res.status(200).json(obj);
       })
       .catch((err: any) => {
-        console.log("ERROR", err);
+        // console.log("ERROR", err);
         // res.status(400).send(err);
 
       });
@@ -102,7 +102,7 @@ const apobooking = {
       userdata:req.body.userdata,
       crreatAt: Date(),
     });
-    //console.log(apobookingss);
+    //// console.log(apobookingss);
     apobookingss
       .save()
       .then((result: any) => {

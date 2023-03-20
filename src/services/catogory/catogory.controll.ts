@@ -6,7 +6,7 @@ const catagory = {
   getCatagory(req: any, res: any) {
     caetogory.find()
       .then((result: any) => {
-        //console.log(result);
+        //// console.log(result);
         let obj = {
           count: result.length,
           response: "sucsess",
@@ -15,14 +15,14 @@ const catagory = {
         res.status(200).json(obj);
       })
       .catch((err: any) => {
-        //console.log("ERROR", err);
+        //// console.log("ERROR", err);
       });
   },
 
   //////getCatogory//////////
 
   addCatagory(req: any, res: any) {
-    //console.log(req.body);
+    //// console.log(req.body);
     const catogory = new caetogory({
       _id: new mongoose.Types.ObjectId(),
       catgory: req.body.catgory,
@@ -46,7 +46,7 @@ const catagory = {
       name: req.body.name,
       updateAt: Date(),
     };
-    //console.log(catogory, id);
+    //// console.log(catogory, id);
 
     caetogory
       .findOneAndUpdate(
@@ -79,9 +79,9 @@ const catagory = {
   },
 
   removeCatagory(req: any, res: any) {
-    //console.log(req.body);
+    //// console.log(req.body);
     const id = req.params.id;
-    //console.log(id);
+    //// console.log(id);
 
     caetogory
       .remove({

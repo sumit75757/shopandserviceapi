@@ -248,7 +248,7 @@ class ServiceComponent {
             // }
             this.sta = res;
             this.states = Object.keys(res);
-            console.log(this.states);
+            // console.log(this.states);
         });
         this.serviceForm = this.fb.group({
             // sellerId: new FormControl("", [Validators.required]),
@@ -274,9 +274,9 @@ class ServiceComponent {
     getcatogory() {
         this.api.getServiceCategory().subscribe((res) => {
             if (res.response == 'sucsess') {
-                console.log(res);
+                // console.log(res);
                 this.category = res.data;
-                console.log(this.category);
+                // console.log(this.category);
             }
             if (res.count == 0) {
                 this.toastr.error('Catogory Not Found!');
@@ -332,7 +332,7 @@ class ServiceComponent {
     setState(e) {
         const state = e.target.value;
         this.city = this.sta[state];
-        console.log(this.city);
+        // console.log(this.city);
     }
     addService() {
         const formdata = new FormData();
@@ -357,14 +357,14 @@ class ServiceComponent {
         if (this.updateId) {
             this.api.Updatesrvice(formdata, this.updateId).subscribe((res) => {
                 if (res) {
-                    console.log(res);
+                    // console.log(res);
                 }
             });
         }
         else {
             this.api.addservice(formdata).subscribe((res) => {
                 if (res) {
-                    console.log(res);
+                    // console.log(res);
                 }
             });
         }
