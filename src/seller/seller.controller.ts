@@ -58,5 +58,6 @@ const sellers = {
         res.status(400).json(err);
       });
   },
+
 };
 export default sellers;

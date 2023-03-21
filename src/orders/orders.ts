@@ -5,6 +5,8 @@ import order from "./orders.controller";
 const route = express();
 
 route.get("/:id", authChack, order.getOrder);
+route.get("/", authChack, order.getallorders);
+
 route.post("/", authChack, order.order);
 route.put("/:id", authChack, order.update);
 

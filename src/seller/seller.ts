@@ -6,4 +6,5 @@ const route = express();
 
 route.get("/", authChack, sellers.getseller);
 
+
 export default route

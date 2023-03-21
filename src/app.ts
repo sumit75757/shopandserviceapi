@@ -17,7 +17,6 @@ import service from "./services/createservice/service";
 import servicecat from "./services/catogory/catogory";
 import offers from "./offers/offers";
 import render from "./templet/render";
-import path from "path";
 import search from "./search/search";
 import apobooking from "./appoinmeintbooking/appoinmeintbooking";
 const app = express();

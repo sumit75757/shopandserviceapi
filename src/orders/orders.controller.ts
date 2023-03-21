@@ -3,6 +3,26 @@ import productModel from "../product/product.model";
 const mongoos = require("mongoose");
 var Razorpay = require("razorpay");
 const orders = {
+  getallorders(req: any, res: any){
+    orderes
+    .find()
+    .exec()
+    .then((result: any[]) => {
+      let obj = {
+        count: result.length, 
+        response: "sucsess",
+        data: result,
+      };
+      res.status(200).json(obj);
+    })
+    .catch((err: any) => {
+      res.status(400).json(
+        {
+          erro :err,
+          response: "error",
+        });
+    });
+  },
   getOrder(req: any, res: any) {
     const id = req.params.id;
     orderes
@@ -25,26 +45,13 @@ const orders = {
         // console.log("#############################",data);
 
         data.forEach((element) => {
-          
-          // // console.log(element._id);
-          // delete element.prod;
           element.prod[0]['productId'] = element.prod[0]['_id']
           element.prod[0]._id =element._id
           element.prod[0].qty =element.quantity
           element.prod[0].payment =element.payment
           element.prod[0].cancel =element.cancel
-
-          
-
-          
           prodArr.push(element.prod[0])
-          
-          //  element.prod[0].price + total
-          
-          
-          // // console.log( );
         });
-        
         let obj = {
           count: data.length, 
           response: "sucsess",
