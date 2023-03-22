@@ -18,6 +18,8 @@ import servicecat from "./services/catogory/catogory";
 import offers from "./offers/offers";
 import render from "./templet/render";
 import search from "./search/search";
+import feedback from "./feedback/feedback";
+
 import apobooking from "./appoinmeintbooking/appoinmeintbooking";
 const app = express();
 require("dotenv").config();
@@ -79,6 +81,9 @@ app.use("/api/servicecat", servicecat);
 app.use("/api/offers", offers);
 app.use("/api/serche", search);
 app.use("/api/bookapoinment", apobooking);
+app.use("/api/feeback", feedback);
+
+
 
 
 
