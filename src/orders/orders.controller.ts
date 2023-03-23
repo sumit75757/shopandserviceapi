@@ -74,21 +74,21 @@ const orders = {
 
   async order(req: any, res: any) {
     let prod: any;
-    await productModel
-      .findById(req.body.productId)
-      .exec()
-      .then((result: any) => {
-        prod = result;
-      })
-      .catch((err: any) => {
-        res.status(500).json(err.errors);
-      });
+    // await productModel
+    //   .findById(req.body.productId)
+    //   .exec()
+    //   .then((result: any) => {
+    //     prod = result;
+    //   })
+    //   .catch((err: any) => {
+    //     res.status(500).json(err.errors);
+    //   });
     const ordders = new orderes({
       _id: new mongoos.Types.ObjectId(),
       userId: req.body.userId,
       productId: req.body.productId,
       quantity: req.body.quantity,
-      price: prod.price * req.body.quantity,
+      price: req.body.price * req.body.quantity,
       address: req.body.address,
       city: req.body.city,
       state: req.body.state,
